@@ -8,7 +8,6 @@ includes:
   - general
   - api_guideline
   - streampipe_api
-  - return
 
 search: true
 ---

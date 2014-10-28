@@ -399,3 +399,15 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/play?starttime=1409926345158
 ----|----|----|-------
 starttime|时移开始时间|timestamp，microsecond|必选
 endtime|时移结束时间|timestamp，microsecond|可选
+
+错误返回
+=======
+
+```json
+{
+    "error": 100001,
+    "message": "no auth"
+}
+```
+
+`error`为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。`message`主要用于客户端记录log，最好不用于输出。
