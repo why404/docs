@@ -1,0 +1,26 @@
+msc {
+    u[label="User"], d[label="Device"], qc[label="QCasting"], s[label="Streamer"];
+
+    --- [label="Device push stream process"];
+    d -> qc [label="request push url[id]"];
+         qc -> s [label="request push url[sid]"];
+         qc <- s [label="push url"];
+    d <- qc [label="push url"];
+    d -> d [label="generate key"];
+    d -> s [label="push stream[push url with key]"];
+         s -> qc [label="check[sid, push url with key, action]"];
+         s <- qc [label="result"];
+    d box s [label="pushing stream"];
+         s -> s [label="generate ts file"];
+         s -> qc [label="upload[sid, file url]"];
+         s <- qc [label="result"];
+
+    --- [label="User play"];
+    u -> qc [label="get play url"];
+    u <- qc [label="play url"];
+    u -> u [label="generate key"];
+    u -> s [label="play[url with key]"];
+         s -> qc [label="check[sid, url with key, action]"];
+         s <- qc [label="result"];
+    u box s [label="play data"];
+}
