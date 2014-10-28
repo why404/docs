@@ -1,21 +1,37 @@
 # 授权凭证
 
-## 管理凭证
+## 接口访问凭证
 
-API使用七牛[管理凭证](http://developer.qiniu.com/docs/v6/api/reference/security/access-token.html)作为检验请求合法性的机制。建议仅在设备管理服务器端使用这一类凭证，避免意外授权导致滥用。
+ 1. 生成待签名的原始字符串：
 
-## 设备凭证
+    抽取请求URL中`{path}`或`{path}?{query}`的部分与请求内容部分（即HTTP Body），用`\n`连接起来。如无请求内容，该部分必须为空字符串。
 
-设备利用在注册时自己生成的ukey，和从设备服务器请求到的推流地址，来生成设备凭证。
+    `str = "{path}?{query}\n"`
+
+    或
+
+    `str = "{path}?{query}\n{body}"`
+
+ 2. 使用`{secert_key}`对上一步生成的原始字符串计算HMAC-SHA1签名：
+
+    `sign = hmac_sha1(str, "{secret_key}")`
+
+ 3. 对签名进行URL安全的Base64编码，生成`encoded_sign`：
+
+    `encoded_sign = urlsafe_base64_encode(sign)`
+
+## 流授权凭证
+
+设备利用在注册时自己生成的`stream_key`，和从设备服务器请求到的推流地址，来生成流授权凭证。
 
 凭证算法：
 
- 1. 使用ukey对推流地址进行HMAC-SHA1签名
+ 1. 使用`{stream_key}`对推流地址进行HMAC-SHA1签名
 
-    `sign = hmac_sha1(push_url, "<ukey>")`
+    `sign = hmac_sha1(url, "{stream_key}")`
 
- 2. 对签名进行URL安全的Base64编码，生成key
+ 2. 对签名进行URL安全的Base64编码，生成`stream_token`
 
-    `pkey = urlsafe_base64_encode(sign)`
+    `stream_token = urlsafe_base64_encode(sign)`
 
-之后设备推流时，将设备凭证加入到推流地址的query里，比如设备获得的推流地址是`rtmp://domain:port/path`，那么实际使用`rtmp://domain:port/path?key={key}`的请求进行推流。
+之后设备推流或者直播时，将流授权凭证加入到url地址的query里，比如设备获得的推流地址是`rtmp://domain:port/path`，那么实际使用`rtmp://domain:port/path?token={stream_token}`的请求进行推流。

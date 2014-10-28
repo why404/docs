@@ -6,10 +6,9 @@ language_tabs:
   - c
 
 includes:
-  - general
   - client_auth
   - stream_api
-  - errors
+  - return
 
 search: true
 ---

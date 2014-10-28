@@ -25,9 +25,9 @@ msc {
     sh <- qc [label="ok"];
 
     --- [label="Device init process"];
-    d -> d [label="generate ukey"];
-    d -> sh [label="init(login Stream Hub with ukey)"];
-         sh -> qc [label="register stream[ukey, qiniu ak/sk, bucket]"];
+    d -> d [label="generate stream_key"];
+    d -> sh [label="init(login Stream Hub with stream_key)"];
+         sh -> qc [label="register stream[stream_key, qiniu ak/sk, bucket]"];
                qc -> s [label="register"];
                qc <- s [label="sid"];
                qc -> s [label="get push url[sid]"];

@@ -5,14 +5,14 @@
 -----
 
 ```shell
-$ curl "http://api.pili.io/v1/streams" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
     "name": "stream name",
     "is_private": true,
-    "skey": "random_skey",
+    "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP"
 }'
@@ -25,13 +25,13 @@ $ curl "http://api.pili.io/v1/streams" \
     "id": "54068a9063b906000d000001",
     "name": "stream name",
     "is_private": true,
-    "skey": "random_skey",
+    "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
-        "HLS": "http://115.238.155.183:3001/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://115.238.155.183:49169/livestream/4q5cdgn2"
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
     }
 }
 ```
@@ -44,17 +44,17 @@ $ curl "http://api.pili.io/v1/streams" \
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
 参数|描述|是否可选
 ----|----|------
 name|名字|非可选
-is_private|视频直播和回放是否可以被公开访问。值为true时，只有推流需要[设备凭证](#she-bei-ping-zheng)，值为false时，推流，直播，回放都需要[设备凭证](#she-bei-ping-zheng)|可选，默认为false
-skey|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则qcasting会随机生成一串skey
+is_private|视频直播和回放是否可以被公开访问。值为false时，只有推流需要[流授权凭证](#liu-shou-quan-ping-zheng)，值为true时，推流，直播，回放都需要[流授权凭证](#liu-shou-quan-ping-zheng)|可选，默认为false
+stream_key|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 storage_period|存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数|可选，默认为0
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
@@ -62,8 +62,8 @@ protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 ---------
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -74,13 +74,13 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001" \
 {
     "id": "54068a9063b906000d000001",
     "name": "stream name",
-    "skey": "random_skey",
+    "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
-        "HLS": "http://115.238.155.183:3001/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://115.238.155.183:49169/livestream/4q5cdgn2"
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
     }
 }
 ```
@@ -91,16 +91,16 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001" \
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 获取流列表
 ---------
 
 ```shell
-$ curl "http://api.pili.io/v1/streams?page=1&size=10" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -115,39 +115,39 @@ $ curl "http://api.pili.io/v1/streams?page=1&size=10" \
             "id": "54068a9063b906000d000001",
             "name": "stream name",
             "is_private": false,
-            "skey": "random_skey",
+            "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
             "play_url": {
-                "HLS": "http://115.238.155.183:3001/api/v1/hls/4q5cdgn2.m3u8",
-                "RTMP": "rtmp://115.238.155.183:49169/livestream/4q5cdgn2"
+                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
             }
         },
         {
             "id": "54068a9063b906000d000002",
             "name": "stream name",
             "is_private": false,
-            "skey": "random_skey",
+            "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn4",
             "play_url": {
-                "HLS": "http://115.238.155.183:3001/api/v1/hls/4q5cdgn4.m3u8",
-                "RTMP": "rtmp://115.238.155.183:49169/livestream/4q5cdgn4"
+                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8",
+                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn4"
             }
         },
         {
             "id": "54068a9063b906000d000003",
             "name": "stream name",
             "is_private": ture,
-            "skey": "random_skey",
+            "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn7",
             "play_url": {
-                "HLS": "http://115.238.155.183:3001/api/v1/hls/4q5cdgn7.m3u8",
-                "RTMP": "rtmp://115.238.155.183:49169/livestream/4q5cdgn7"
+                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8",
+                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn7"
             }
         }
     ]
@@ -162,9 +162,9 @@ $ curl "http://api.pili.io/v1/streams?page=1&size=10" \
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -177,14 +177,14 @@ size|一页大小多大，默认为10，最大100
 -----
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
     "name": "stream name",
     "is_private": false,
-    "skey": "random_skey",
+    "stream_key": "random_stream_key",
     "protocol": "RTMP"
 }'
 ```
@@ -196,13 +196,13 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001" \
     "id": "54068a9063b906000d000001",
     "name": "stream name",
     "is_private": false,
-    "skey": "random_skey",
+    "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
-        "HLS": "http://115.238.155.183:3001/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://115.238.155.183:49169/livestream/4q5cdgn2"
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
     }
 }
 ```
@@ -215,25 +215,25 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001" \
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
 参数|描述|是否可选
 ----|----|------
 name|名字|非可选
-is_private|视频直播和回放是否可以被公开访问。值为true时，只有推流需要[设备凭证](#she-bei-ping-zheng)，值为false时，推流，直播，回放都需要[设备凭证](#she-bei-ping-zheng)|可选，默认为false
-skey|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则qcasting会随机生成一串skey
+is_private|视频直播和回放是否可以被公开访问。值为false时，只有推流需要[流授权凭证](#liu-shou-quan-ping-zheng)，值为true时，推流，直播，回放都需要[流授权凭证](#liu-shou-quan-ping-zheng)|可选，默认为false
+stream_key|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 删除流
 -----
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/actions/delete" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/actions/delete" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST
 ```
@@ -246,9 +246,9 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/actions/delete" \
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -258,8 +258,8 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/actions/delete" \
 ------------
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/status?ping=30" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?ping=30" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -274,7 +274,7 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/status?ping=30" \
 ...
 ```
 
-此请求为一个长链接接口，请求后会从qcasting服务器推送相应流的推送状态。
+此请求为一个长链接接口，请求后会从服务器推送相应流的推送状态。
 
 每个状态为一行json格式的文本，以`\n`结束。每次连接后，会返回流当前的推送状态，之后如果状态有变更，会再次推送变更后的状态。
 
@@ -288,9 +288,9 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/status?ping=30" \
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -302,8 +302,8 @@ ping|发送ping命令的时间间隔，单位秒|可选，如果不给出ping，
 --------------
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -334,9 +334,9 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/segments?starttim
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -349,8 +349,8 @@ endtime|列表结束时间|可选|millisecond unix timestamp
 --------------
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -371,9 +371,9 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/segments/play?sta
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -386,13 +386,13 @@ endtime|结束时间|可选|millisecond unix timestamp
 -------
 
 ```shell
-$ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/segments/actions/delete?starttime=1409926345158" \
--H "Authorization: bearer access_key:encoded_sign" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/actions/delete?starttime=1409926345158" \
+-H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST
 ```
 
-> 没有返回结果
+> 返回结果为空
 
 此接口删除指定时间内的回放片段。
 
@@ -402,9 +402,9 @@ $ curl "http://api.pili.io/v1/streams/54068a9063b906000d000001/segments/actions/
 
 ### 认证方法
 
-使用[管理凭证](#guan-li-ping-zheng)进行认证
+使用[接口访问凭证](#jie-kou-fang-wen-ping-zheng)进行认证
 
-`Authorization: bearer {access_key:encoded_sign}`
+`Authorization: bearer {access_key}:{encoded_sign}`
 
 ### 请求参数
 

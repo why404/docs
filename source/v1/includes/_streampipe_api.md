@@ -9,7 +9,7 @@ Stream Gateway接口
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check" \
 -d '{
-    "url": "http://115.238.155.183:3001/api/v2/hls/3jo78i11/timeshift/play/aaif4meq.m3u8?key=rejwkq432jk4",
+    "url": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11/timeshift/play/aaif4meq.m3u8?token=rejwkq432jk4",
     "protocol": "HLS",
     "action": "push"
 }'
@@ -36,9 +36,9 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check" 
 
 此接口为Stream Gateway内部提供给Streamer检验推流有效性使用，不对外公开。
 
-[申请上推流接口](#shen-qing-shang-tui-liu-jie-kou)，[直播接口](#zhi-bo-jie-kou)和[时移播放接口](#shi-yi-bo-fang-jie-kou)返回的相关url中是不包含key参数的。设备拿到url后，需要自己算出权限key，然后将这个key放在url参数里，再做相应请求。比如设备拿到的推流地址是`rtmp://115.238.155.183:49170/livestream/3jo78i11`，自己计算出的推流key是`rejwkq432jk4`，那么设备会使用`rtmp://115.238.155.183:49170/livestream/3jo78i11?key=rejwkq432jk4`做上传推流。参见[流程](#liu-cheng)描述。
+[申请上推流接口](#shen-qing-shang-tui-liu-jie-kou)，[直播接口](#zhi-bo-jie-kou)和[时移播放接口](#shi-yi-bo-fang-jie-kou)返回的相关url中是不包含token参数的。设备拿到url后，需要自己算出权限token，然后将这个token放在url参数里，再做相应请求。比如设备拿到的推流地址是`rtmp://115.238.155.183:49170/livestream/3jo78i11`，自己计算出的推流token是`rejwkq432jk4`，那么设备会使用`rtmp://115.238.155.183:49170/livestream/3jo78i11?token=rejwkq432jk4`做上传推流。参见[流程](#liu-cheng)描述。
 
-Streamer接到上传请求，直播请求，时移播放请求后，将地址中的推流key作为参数，请求Stream Gateway的本接口，进行验证。
+Streamer接到上传请求，直播请求，时移播放请求后，将地址中的推流token作为参数，请求Stream Gateway的本接口，进行验证。
 
 ### HTTP请求
 
@@ -48,7 +48,7 @@ Streamer接到上传请求，直播请求，时移播放请求后，将地址中
 
 参数|描述
 ----|----
-url|如果用户请求HLS地址，就是发送到streamer的原始url，如果是RTMP，只需要填写key部分就可以
+url|如果用户请求HLS地址，就是发送到streamer的原始url，如果是RTMP，只需要填写token部分就可以
 protocol|用户请求的协议，RTMP或者是HLS
 action|对url的请求操作，如果是推流，为push，如果是直播或者时移回放，使用play
 
@@ -165,8 +165,8 @@ $ curl "http://api.streamer/v1/livestreams" \
     "id": "3jo78i11",
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
-        "RTMP": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
-        "HLS": "http://115.238.155.183:3001/api/v2/hls/3jo78i11.m3u8"
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
+        "HLS": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -232,8 +232,8 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11" \
 {
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
-        "RTMP": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
-        "HLS": "http://115.238.155.183:3001/api/v2/hls/3jo78i11.m3u8"
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
+        "HLS": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -265,8 +265,8 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11"
     "id": "3jo78i11",
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
-        "RTMP": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
-        "HLS": "http://115.238.155.183:3001/api/v2/hls/3jo78i11.m3u8"
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
+        "HLS": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -383,7 +383,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/play?starttime=1409926345158
 
 ```json
 {
-    "url": "http://115.238.155.183:3001/api/v2/hls/3jo78i11/timeshift/play/aaif4meq.m3u8"
+    "url": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11/timeshift/play/aaif4meq.m3u8"
 }
 ```
 

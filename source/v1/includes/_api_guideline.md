@@ -17,7 +17,7 @@ API版本号作为HTTP Path的前缀：`https://api.domain.com/v1`
 
 每个路径代表一种资源，一般资源都是一个名词，集合或者集合下某个元素：`https://api.domain.com/v1/objects`或者`https://api.domain.com/v1/objects/0001`。
 
-按照从左到右的顺序，资源应当是依次包含的关系：｀https://api.domain.com/v1/bookshelves/1/book/2`
+按照从左到右的顺序，资源应当是依次包含的关系：`https://api.domain.com/v1/bookshelves/1/book/2`
 
 资源可以包含动作，但是动作不能包含资源：`https://api.domain.com/v1/users/actions/login`或者`https://api.domain.com/v1/book/1/actions/delete`
 
