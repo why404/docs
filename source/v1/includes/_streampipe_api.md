@@ -9,7 +9,7 @@ Stream Gateway接口
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check" \
 -d '{
-    "url": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11/timeshift/play/aaif4meq.m3u8?token=rejwkq432jk4",
+    "url": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11/timeshift/play/aaif4meq.m3u8?token=rejwkq432jk4",
     "protocol": "HLS",
     "action": "push"
 }'
@@ -42,7 +42,7 @@ Streamer接到上传请求，直播请求，时移播放请求后，将地址中
 
 ### HTTP请求
 
-`POST /api/v2/_inner/livestreams/{id}/actions/check`
+`POST /api/v1/_inner/livestreams/{id}/actions/check`
 
 ### 请求参数
 
@@ -74,7 +74,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/upload"
 
 ### HTTP请求
 
-`POST /api/v2/_inner/livestreams/{id}/actions/upload`
+`POST /api/v1/_inner/livestreams/{id}/actions/upload`
 
 ### 请求参数
 
@@ -105,7 +105,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/delete"
 
 ### HTTP请求
 
-`POST /api/v2/_inner/livestreams/{id}/actions/delete`
+`POST /api/v1/_inner/livestreams/{id}/actions/delete`
 
 ### 请求参数
 
@@ -135,7 +135,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/status" \
 
 ### HTTP请求
 
-`POST /api/v2/_inner/livestreams/{id}/status`
+`POST /api/v1/_inner/livestreams/{id}/status`
 
 ### 请求参数
 
@@ -166,7 +166,7 @@ $ curl "http://api.streamer/v1/livestreams" \
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
-        "HLS": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11.m3u8"
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -175,7 +175,7 @@ $ curl "http://api.streamer/v1/livestreams" \
 
 ### HTTP请求
 
-`POST /api/v2/livestreams`
+`POST /api/v1/livestreams`
 
 ### 请求参数
 
@@ -207,7 +207,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11" \
 
 ### HTTP请求
 
-`POST /api/v2/livestreams/{id}`
+`POST /api/v1/livestreams/{id}`
 
 ### 请求参数
 
@@ -233,7 +233,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11" \
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
-        "HLS": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11.m3u8"
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -242,7 +242,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11" \
 
 ### HTTP请求
 
-`POST /api/v2/livestreams/{id}`
+`POST /api/v1/livestreams/{id}`
 
 ### 请求参数
 
@@ -266,7 +266,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11"
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
-        "HLS": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11.m3u8"
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -275,7 +275,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11"
 
 ### HTTP请求
 
-`GET /api/v2/livestreams/{id}`
+`GET /api/v1/livestreams/{id}`
 
 ### 请求参数
 
@@ -306,7 +306,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/status"
 
 ### HTTP请求
 
-`GET /api/v2/livestreams/{id}/status`
+`GET /api/v1/livestreams/{id}/status`
 
 时移列表接口
 ----------
@@ -330,7 +330,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/list"
 
 ### HTTP请求
 
-`GET /api/v2/livestreams/{id}/timeshift/list?starttime={starttime}&endtime={endtime}`
+`GET /api/v1/livestreams/{id}/timeshift/list?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
@@ -363,7 +363,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/list" \
 
 ### HTTP请求
 
-`POST /api/v2/livestreams/{id}/list`
+`POST /api/v1/livestreams/{id}/list`
 
 ### 请求参数
 
@@ -383,7 +383,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/play?starttime=1409926345158
 
 ```json
 {
-    "url": "http://cdn-ts.qbox.me/api/v2/hls/3jo78i11/timeshift/play/aaif4meq.m3u8"
+    "url": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11/timeshift/play/aaif4meq.m3u8"
 }
 ```
 
@@ -391,7 +391,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/play?starttime=1409926345158
 
 ### HTTP请求
 
-`GET /api/v2/livestreams/{id}/timeshift/play?starttime={starttime}&endtime={endtime}`
+`GET /api/v1/livestreams/{id}/timeshift/play?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
