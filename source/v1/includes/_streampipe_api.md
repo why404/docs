@@ -89,7 +89,11 @@ url|待保存文件地址
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/delete" \
 -d '{
-    "url": "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxP"
+    "url": [
+        "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxP",
+        "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxZ",
+        "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxD"
+    ]
 }'
 ```
 
