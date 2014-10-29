@@ -292,7 +292,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/status"
 
 ```json
 {
-    "state": "connect"
+    "status": "connect"
 }
 ```
 
