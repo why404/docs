@@ -153,7 +153,7 @@ Livestream接口
 $ curl "http://api.streamer/v1/livestreams" \
 -d '{
     "encrypt": 0,
-    "hls_live_storage": "local",
+    "live_storage": "local",
     "protocol": "RTMP"
 }'
 ```
@@ -182,7 +182,7 @@ $ curl "http://api.streamer/v1/livestreams" \
 参数|描述
 ----|----
 encrypt|0表示不加密，1表示加密，默认为0
-hls_live_storage|local表示hls直播时使用streamer的上传作为直播地址，cloud表示hls直播时使用用户的云上传做直播地址，默认为local
+live_storage|local表示直播时使用streamer的上传作为直播地址，cloud表示直播时使用用户的云上传做直播地址，默认为local
 protocol|直播推流协议，默认为RTMP
 
 注销接口
