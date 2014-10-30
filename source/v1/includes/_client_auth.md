@@ -22,19 +22,19 @@
 
 ## 推流权鉴
 
-客户在进行推流前，要先计算推流凭证，作为认证信息拼入推流地址，进行推流。客户利用流信息里的`stream_key`，请求次数`n`和从设备服务器请求到的推流地址，来生成推流凭证。
+客户在进行推流前，要先计算推流凭证，作为认证信息拼入推流地址，进行推流。客户利用流信息里的`stream_key`，请求次数`request_count`和从设备服务器请求到的推流地址，来生成推流凭证。
 
 凭证算法：
 
  1. 将请求次数递增拼入上推地址
 
-    假设当前流的请求次数`n`为`1`，首先将请求次数递增为`2`，推流地址为`rtmp://115.238.155.183:49166/livestream/4q5cdgn2`，拼接后的推流地址是`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?n=2`
+    假设当前流的请求次数`request_count`为`1`，首先将请求次数递增为`2`，推流地址为`rtmp://115.238.155.183:49166/livestream/4q5cdgn2`，拼接后的推流地址是`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?request_count=2`
 
     请求次数务必在每次进行推流请求时都增加，为了保证推流地址不被盗用，已经用过的请求次数将不再接受推流。
 
  2. 使用`{stream_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
-    `sign = hmac_sha1("rtmp://115.238.155.183:49166/livestream/4q5cdgn2?n=2", "{stream_key}")`
+    `sign = hmac_sha1("rtmp://115.238.155.183:49166/livestream/4q5cdgn2?request_count=2", "{stream_key}")`
 
  3. 对签名进行URL安全的Base64编码，生成`push_token`
 
@@ -42,7 +42,7 @@
 
  4. 推流
 
-    之后客户推流时，将推流凭证加入到url地址的query里，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?n=2&token={push_token}`的请求进行推流。
+    之后客户推流时，将推流凭证加入到url地址的query里，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?request_count=2&token={push_token}`的请求进行推流。
 
 ## 播放权鉴
 

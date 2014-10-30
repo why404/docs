@@ -26,6 +26,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
+    "request_count": 0,
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
@@ -74,6 +75,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
+    "request_count": 0,
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
@@ -114,6 +116,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
+            "request_count": 0,
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
             "play_url": {
                 "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
@@ -126,6 +129,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
+            "request_count": 2,
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn4",
             "play_url": {
                 "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8",
@@ -138,6 +142,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
+            "request_count": 10,
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn7",
             "play_url": {
                 "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8",
@@ -191,6 +196,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
+    "request_count": 0,
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
@@ -238,6 +244,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
+    "request_count": 0,
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
     "play_url": {
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
