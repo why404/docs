@@ -6,7 +6,7 @@
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -45,14 +45,14 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
 参数|描述|是否可选
 ----|----|------
 name|名字|非可选
-stream_key|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
+stream_key|由设备生成的字符串，标示设备，可以使用设备的QBox地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 storage_period|存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数|可选，默认为0
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
@@ -61,7 +61,7 @@ protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -92,14 +92,14 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 获取流列表
 ---------
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -163,7 +163,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -177,7 +177,7 @@ size|一页大小多大，默认为10，最大100
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -215,14 +215,14 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
 参数|描述|是否可选
 ----|----|------
 name|名字|非可选
-stream_key|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
+stream_key|由设备生成的字符串，标示设备，可以使用设备的QBox地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 删除流
@@ -230,7 +230,7 @@ protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -261,7 +261,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -272,7 +272,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?ping=30" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -303,7 +303,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?pin
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -316,7 +316,7 @@ ping|发送ping命令的时间间隔，单位秒|可选，如果不给出ping，
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -349,7 +349,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -363,7 +363,7 @@ endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -386,7 +386,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/p
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -400,7 +400,7 @@ endtime|结束时间|可选|millisecond unix timestamp
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: mac {access_key}:{encoded_sign}" \
+-H "Authorization: QBox {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -417,7 +417,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 使用[接口权鉴](#jie-kou-quan-jian)进行认证
 
-`Authorization: mac {access_key}:{encoded_sign}`
+`Authorization: QBox {access_key}:{encoded_sign}`
 
 ### 请求参数
 
