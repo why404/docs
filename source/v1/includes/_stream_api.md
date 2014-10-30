@@ -11,7 +11,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 -X POST \
 --data-binary '{
     "name": "stream name",
-    "is_private": true,
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP"
@@ -24,7 +23,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 {
     "id": "54068a9063b906000d000001",
     "name": "stream name",
-    "is_private": true,
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
@@ -53,7 +51,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 参数|描述|是否可选
 ----|----|------
 name|名字|非可选
-is_private|视频直播和回放是否可以被公开访问。值为false时，只有推流需要[流授权凭证](#liu-shou-quan-ping-zheng)，值为true时，推流，直播，回放都需要[流授权凭证](#liu-shou-quan-ping-zheng)|可选，默认为false
 stream_key|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 storage_period|存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数|可选，默认为0
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
@@ -114,7 +111,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
         {
             "id": "54068a9063b906000d000001",
             "name": "stream name",
-            "is_private": false,
             "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
@@ -127,7 +123,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
         {
             "id": "54068a9063b906000d000002",
             "name": "stream name",
-            "is_private": false,
             "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
@@ -140,7 +135,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
         {
             "id": "54068a9063b906000d000003",
             "name": "stream name",
-            "is_private": ture,
             "stream_key": "random_stream_key",
             "storage_period": -1,
             "protocol": "RTMP",
@@ -183,7 +177,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 -X POST \
 --data-binary '{
     "name": "stream name",
-    "is_private": false,
     "stream_key": "random_stream_key",
     "protocol": "RTMP"
 }'
@@ -195,7 +188,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 {
     "id": "54068a9063b906000d000001",
     "name": "stream name",
-    "is_private": false,
     "stream_key": "random_stream_key",
     "storage_period": -1,
     "protocol": "RTMP",
@@ -224,7 +216,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 参数|描述|是否可选
 ----|----|------
 name|名字|非可选
-is_private|视频直播和回放是否可以被公开访问。值为false时，只有推流需要[流授权凭证](#liu-shou-quan-ping-zheng)，值为true时，推流，直播，回放都需要[流授权凭证](#liu-shou-quan-ping-zheng)|可选，默认为false
 stream_key|由设备生成的字符串，标示设备，可以使用设备的mac地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
@@ -232,17 +223,32 @@ protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 -----
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/actions/delete" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 -H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
--X POST
+-X DELETE
 ```
 
-> 无返回结果
+> 返回结果：
+
+```json
+{
+    "id": "54068a9063b906000d000001",
+    "name": "stream name",
+    "stream_key": "random_stream_key",
+    "storage_period": -1,
+    "protocol": "RTMP",
+    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+    "play_url": {
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+    }
+}
+```
 
 ### HTTP请求
 
-`POST /api/v1/streams/{id}/actions/delete`
+`DELETE /api/v1/streams/{id}`
 
 ### 认证方法
 
@@ -386,10 +392,10 @@ endtime|结束时间|可选|millisecond unix timestamp
 -------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/actions/delete?starttime=1409926345158" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
 -H "Authorization: bearer {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
--X POST
+-X DELETE
 ```
 
 > 返回结果为空
@@ -398,7 +404,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/a
 
 ### HTTP请求
 
-`POST /api/v1/streams/{id}/segments/actions/delete?starttime={starttime}&endtime={endtime}`
+`DELETE /api/v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 认证方法
 
