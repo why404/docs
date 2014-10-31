@@ -29,7 +29,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/login" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/refresh" \
--H "Authorization: bearer admin:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -52,7 +52,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/refresh" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/logout" \
--H "Authorization: bearer admin:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -67,7 +67,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/logout" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/users" \
--H "Authorization: bearer admin:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json"
 ```
 
@@ -96,7 +96,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/users" \
--H "Authorization: bearer admin:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{

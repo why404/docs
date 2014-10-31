@@ -2,23 +2,9 @@
 
 ## 接口鉴权
 
- 1. 生成待签名的原始字符串：
+登录时获得的`access_token`，以如下方式加入HTTP Header：
 
-    抽取请求URL中`{path}`或`{path}?{query}`的部分与请求内容部分（即HTTP Body），用`\n`连接起来。如无请求内容，该部分必须为空字符串。
-
-    `str = "{path}?{query}\n"`
-
-    或
-
-    `str = "{path}?{query}\n{body}"`
-
- 2. 使用`{secert_key}`对上一步生成的原始字符串计算HMAC-SHA1签名：
-
-    `sign = hmac_sha1(str, "{secret_key}")`
-
- 3. 对签名进行URL安全的Base64编码，生成`encoded_sign`：
-
-    `encoded_sign = urlsafe_base64_encode(sign)`
+`Authorization: bearer {access_token}`
 
 ## 推流鉴权
 
