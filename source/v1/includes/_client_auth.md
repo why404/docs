@@ -55,11 +55,11 @@
 
  1. 将过期时间戳拼入播放地址
 
-    假设过期时间戳为`1412122200`，播放地址为`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8`，拼接后的推流地址是`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?t=1412122200`
+    假设过期时间戳为`1412122200`，播放地址为`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8`，拼接后的推流地址是`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200`
 
  2. 使用`{secert_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
-    `sign = hmac_sha1("http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?t=1412122200", "{secert_key}")`
+    `sign = hmac_sha1("http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200", "{secert_key}")`
 
  3. 对签名进行URL安全的Base64编码，生成`play_token`
 
@@ -67,4 +67,4 @@
 
  4. 播放
 
-    之后客户播放时，将`access_key`和播放凭证加入到url地址的query里，实际使用`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?t=1412122200&token={access_key}:{play_token}`的请求进行播放。
+    之后客户播放时，将`access_key`和播放凭证加入到url地址的query里，实际使用`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200&token={access_key}:{play_token}`的请求进行播放。
