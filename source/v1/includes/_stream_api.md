@@ -43,7 +43,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -90,7 +90,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -161,7 +161,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -213,7 +213,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -259,7 +259,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -301,7 +301,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?pin
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -347,7 +347,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -384,7 +384,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/p
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
@@ -415,7 +415,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 ### 认证方法
 
-使用[接口权鉴](#jie-kou-quan-jian)进行认证
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: Qiniu {access_key}:{encoded_sign}`
 
