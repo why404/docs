@@ -32,15 +32,19 @@
 
     请求次数务必在每次进行推流请求时都增加，为了保证推流地址不被盗用，已经用过的请求次数将不再接受推流。
 
+    `url = "rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2"`
+
  2. 使用`{stream_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
-    `sign = hmac_sha1("rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2", "{stream_key}")`
+    `sign = hmac_sha1(url, "{stream_key}")`
 
  3. 对签名进行URL安全的Base64编码，生成`push_token`
 
     `push_token = urlsafe_base64_encode(sign)`
 
  4. 推流
+
+    `url = url + "?token={push_token}"
 
     之后客户推流时，将推流凭证加入到url地址的query最后一项，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2&token={push_token}`的请求进行推流。
 
@@ -55,11 +59,13 @@
 
  1. 将过期时间戳拼入播放地址
 
-    假设过期时间戳为`1412122200`（UTC时间2014年10月01日0点10分0秒的UNIX时间戳），播放地址为`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8`，拼接后的推流地址是`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200`
+    假设过期时间戳为`1412121600`（UTC时间2014年10月01日0点0分0秒的UNIX时间戳），播放地址为`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8`，拼接后的推流地址是`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600`
+
+    `url = "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600"`
 
  2. 使用`{secert_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
-    `sign = hmac_sha1("http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200", "{secert_key}")`
+    `sign = hmac_sha1(url, "{secert_key}")`
 
  3. 对签名进行URL安全的Base64编码，生成`play_token`
 
@@ -67,4 +73,6 @@
 
  4. 播放
 
-    之后客户播放时，将`access_key`和播放凭证组合，作为`token`加入到url地址的query最后一项，实际使用`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200&token={access_key}:{play_token}`的请求进行播放。
+    `url = url + "?token={play_token}"
+
+    之后客户播放时，将`access_key`和播放凭证组合，作为`token`加入到url地址的query最后一项，实际使用`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&token={access_key}:{play_token}`的请求进行播放。
