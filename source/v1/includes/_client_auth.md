@@ -26,13 +26,17 @@
 
 凭证算法：
 
- 1. 将请求次数递增拼入上推地址
+ 1. 将请求`nonce`拼入上推地址
 
-    假设当前流的请求次数`push_count`为`1`（可通过[查询流信息](#cha-xun-liu-xin-xi)接口查得），首先将请求次数递增为`2`，推流地址为`rtmp://115.238.155.183:49166/livestream/4q5cdgn2`，拼接后的推流地址是`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2`
+    如果是第一次推流，或者没有之前推流的`nonce`信息，则获取当前时间的UNIX时间戳作为`nonce`值。
 
-    请求次数务必在每次进行推流请求时都增加，为了保证推流地址不被盗用，已经用过的请求次数将不再接受推流。
+    如果是重试推流，且有之前的`nonce`值，将之前的`nonce`值递增。请尽量存储上一次`nonce`的值。
 
-    `url = "rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2"`
+    为了保证推流地址不被盗用，已经用过的`nonce`将不再接受推流。
+
+    假设得到的`nonce`值为`1412121600`。
+
+    `url = "rtmp://115.238.155.183:49166/livestream/4q5cdgn2?nonce=1412121600"`
 
  2. 使用`{stream_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
@@ -46,7 +50,7 @@
 
     `url = url + "&token=" + push_token`
 
-    之后客户推流时，将推流凭证加入到url地址的query最后一项，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2&token={push_token}`的请求进行推流。
+    之后客户推流时，将推流凭证加入到url地址的query最后一项，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?nonce=1412121600&token={push_token}`的请求进行推流。
 
 ## 播放鉴权
 
