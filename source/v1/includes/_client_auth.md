@@ -55,7 +55,7 @@
 
  1. 将过期时间戳拼入播放地址
 
-    假设过期时间戳为`1412122200`，播放地址为`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8`，拼接后的推流地址是`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200`
+    假设过期时间戳为`1412122200`（UTC时间2014年10月01日0点10分0秒的UNIX时间戳），播放地址为`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8`，拼接后的推流地址是`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200`
 
  2. 使用`{secert_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
