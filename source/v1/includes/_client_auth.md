@@ -42,7 +42,7 @@
 
  4. 推流
 
-    之后客户推流时，将推流凭证加入到url地址的query里，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2&token={push_token}`的请求进行推流。
+    之后客户推流时，将推流凭证加入到url地址的query最后一项，实际使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2&token={push_token}`的请求进行推流。
 
 ## 播放鉴权
 
@@ -67,4 +67,4 @@
 
  4. 播放
 
-    之后客户播放时，将`access_key`和播放凭证加入到url地址的query里，实际使用`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200&token={access_key}:{play_token}`的请求进行播放。
+    之后客户播放时，将`access_key`和播放凭证组合，作为`token`加入到url地址的query最后一项，实际使用`http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412122200&token={access_key}:{play_token}`的请求进行播放。
