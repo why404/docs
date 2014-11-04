@@ -156,7 +156,7 @@ Livestream接口
 -------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams" \
+$ curl "http://api.streamer/v3/livestreams" \
 -d '{
     "encrypt": 0,
     "live_storage": "local",
@@ -195,7 +195,7 @@ protocol|直播推流协议，默认为RTMP
 -------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11" \
+$ curl "http://api.streamer/v3/livestreams/3jo78i11" \
 -d '{
     "_action": "DELETE"
 }'
@@ -225,7 +225,7 @@ _action|动作描述，删除动作为DELETE
 -------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11" \
+$ curl "http://api.streamer/v3/livestreams/3jo78i11" \
 -d '{
     "_action": "UPDATE",
     "protocol": "RTMP"
@@ -261,7 +261,7 @@ protocol|推流协议
 -------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11"
+$ curl "http://api.streamer/v3/livestreams/3jo78i11"
 ```
 
 > 返回结果：
@@ -291,7 +291,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11"
 ----------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11/status"
+$ curl "http://api.streamer/v3/livestreams/3jo78i11/status"
 ```
 
 > 返回结果：
@@ -318,7 +318,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/status"
 ----------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11/timeshift/list"
+$ curl "http://api.streamer/v3/livestreams/3jo78i11/timeshift/list"
 ```
 
 > 返回结果：
@@ -349,7 +349,7 @@ endtime|列表内容完结时间|timestamp，microsecond|可选
 -------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11/timeshift/list" \
+$ curl "http://api.streamer/v3/livestreams/3jo78i11/timeshift/list" \
 -d '{
     "_action": "DELETE",
     "starttime": 1409926345158,
@@ -382,7 +382,7 @@ endtime|时移结束时间|timestamp，microsecond|必选
 ----------
 
 ```shell
-$ curl "http://api.streamer/v1/livestreams/3jo78i11/timeshift/play?starttime=1409926345158"
+$ curl "http://api.streamer/v3/livestreams/3jo78i11/timeshift/play?starttime=1409926345158"
 ```
 
 > 返回结果：
