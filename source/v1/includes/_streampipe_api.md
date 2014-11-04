@@ -44,7 +44,7 @@ Streamer接到上传请求，直播请求，时移播放请求后，将地址中
 
 ### HTTP请求
 
-`POST /api/v1/_inner/livestreams/{id}/actions/check`
+`POST /api/v1/_inner/livestreams/{sid}/actions/check`
 
 ### 请求参数
 
@@ -76,7 +76,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/upload"
 
 ### HTTP请求
 
-`POST /api/v1/_inner/livestreams/{id}/actions/upload`
+`POST /api/v1/_inner/livestreams/{sid}/actions/upload`
 
 ### 请求参数
 
@@ -111,7 +111,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/delete"
 
 ### HTTP请求
 
-`POST /api/v1/_inner/livestreams/{id}/actions/delete`
+`POST /api/v1/_inner/livestreams/{sid}/actions/delete`
 
 ### 请求参数
 
@@ -141,7 +141,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/status" \
 
 ### HTTP请求
 
-`POST /api/v1/_inner/livestreams/{id}/status`
+`POST /api/v1/_inner/livestreams/{sid}/status`
 
 ### 请求参数
 
@@ -168,7 +168,7 @@ $ curl "http://api.streamer/v1/livestreams" \
 
 ```json
 {
-    "id": "3jo78i11",
+    "sid": "3jo78i11",
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
@@ -213,7 +213,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11" \
 
 ### HTTP请求
 
-`POST /api/v1/livestreams/{id}`
+`POST /api/v1/livestreams/{sid}`
 
 ### 请求参数
 
@@ -248,7 +248,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11" \
 
 ### HTTP请求
 
-`POST /api/v1/livestreams/{id}`
+`POST /api/v1/livestreams/{sid}`
 
 ### 请求参数
 
@@ -268,7 +268,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11"
 
 ```json
 {
-    "id": "3jo78i11",
+    "sid": "3jo78i11",
     "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
@@ -281,7 +281,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11"
 
 ### HTTP请求
 
-`GET /api/v1/livestreams/{id}`
+`GET /api/v1/livestreams/{sid}`
 
 ### 请求参数
 
@@ -312,7 +312,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/status"
 
 ### HTTP请求
 
-`GET /api/v1/livestreams/{id}/status`
+`GET /api/v1/livestreams/{sid}/status`
 
 时移列表接口
 ----------
@@ -336,7 +336,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/list"
 
 ### HTTP请求
 
-`GET /api/v1/livestreams/{id}/timeshift/list?starttime={starttime}&endtime={endtime}`
+`GET /api/v1/livestreams/{sid}/timeshift/list?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
@@ -369,7 +369,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/list" \
 
 ### HTTP请求
 
-`POST /api/v1/livestreams/{id}/list`
+`POST /api/v1/livestreams/{sid}/list`
 
 ### 请求参数
 
@@ -397,7 +397,7 @@ $ curl "http://api.streamer/v1/livestreams/3jo78i11/play?starttime=1409926345158
 
 ### HTTP请求
 
-`GET /api/v1/livestreams/{id}/timeshift/play?starttime={starttime}&endtime={endtime}`
+`GET /api/v1/livestreams/{sid}/timeshift/play?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
