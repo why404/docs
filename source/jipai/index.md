@@ -21,6 +21,7 @@ $ curl "http://api.pili.qiniu.com/v1/_jipai/videos" \
     "id": "54068a9063b906000d000001",
     "name": "name",
     "description": "desc",
+    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2?nonce=4&token=fdasffda",
     "live_url": {
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
