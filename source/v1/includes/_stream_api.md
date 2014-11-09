@@ -6,7 +6,7 @@
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -44,7 +44,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -60,7 +60,7 @@ protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -90,14 +90,14 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 获取流列表
 ---------
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -158,7 +158,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -172,7 +172,7 @@ size|一页大小多大，默认为10，最大100
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -209,7 +209,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -224,7 +224,7 @@ protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -254,7 +254,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -265,7 +265,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?ping=30" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -296,7 +296,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?pin
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -309,7 +309,7 @@ ping|发送ping命令的时间间隔，单位秒|可选，如果不给出ping，
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -342,7 +342,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -356,7 +356,7 @@ endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -379,7 +379,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/p
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -393,7 +393,7 @@ endtime|结束时间|可选|millisecond unix timestamp
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: Qiniu {access_key}:{encoded_sign}" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -410,7 +410,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: Qiniu {access_key}:{encoded_sign}`
+`Authorization: pili {access_key}:{encoded_sign}`
 
 ### 请求参数
 
