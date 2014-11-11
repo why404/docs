@@ -24,6 +24,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
     "id": "54068a9063b906000d000001",
     "name": "stream name",
     "stream_key": "random_stream_key",
+    "is_private": false,
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
@@ -72,6 +73,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "id": "54068a9063b906000d000001",
     "name": "stream name",
     "stream_key": "random_stream_key",
+    "is_private": false,
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
@@ -112,6 +114,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "id": "54068a9063b906000d000001",
             "name": "stream name",
             "stream_key": "random_stream_key",
+            "is_private": false,
             "storage_period": -1,
             "protocol": "RTMP",
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
@@ -124,6 +127,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "id": "54068a9063b906000d000002",
             "name": "stream name",
             "stream_key": "random_stream_key",
+            "is_private": false,
             "storage_period": -1,
             "protocol": "RTMP",
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn4",
@@ -136,6 +140,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "id": "54068a9063b906000d000003",
             "name": "stream name",
             "stream_key": "random_stream_key",
+            "is_private": false,
             "storage_period": -1,
             "protocol": "RTMP",
             "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn7",
@@ -178,6 +183,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 --data-binary '{
     "name": "stream name",
     "stream_key": "random_stream_key",
+    "is_private": false,
     "protocol": "RTMP"
 }'
 ```
@@ -189,6 +195,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "id": "54068a9063b906000d000001",
     "name": "stream name",
     "stream_key": "random_stream_key",
+    "is_private": false,
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
@@ -236,6 +243,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "id": "54068a9063b906000d000001",
     "name": "stream name",
     "stream_key": "random_stream_key",
+    "is_private": false,
     "storage_period": -1,
     "protocol": "RTMP",
     "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
@@ -264,7 +272,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 ------------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?ping=30" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
@@ -273,20 +281,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?pin
 > 返回结果：
 
 ```json
-{"status": "disconnected"}
-{"status": "connected"}
-{"ping":"ok"}
-{"status": "disconnected"}
-...
+{
+    "status": "disconnected"
+}
 ```
-
-此请求为一个长链接接口，请求后会从服务器推送相应流的推送状态。
-
-每个状态为一行json格式的文本，以`\n`结束。每次连接后，会返回流当前的推送状态，之后如果状态有变更，会再次推送变更后的状态。
-
-长链接会每隔`ping`秒下发一个ping命令，保证在长时间状态没有改变时，也有消息发送给客户端，保证链接正常。
-
-每个流id最多只保持5个长链接推送接口。如果有第6个请求状态接口的连接，会自动断掉前一个状态连接。如果有广播状态的需求，需要客户在收到更新消息后，自己做广播。
 
 ### HTTP请求
 
@@ -300,9 +298,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status?pin
 
 ### 请求参数
 
-参数|描述|是否可选
-----|----|----
-ping|发送ping命令的时间间隔，单位秒|可选，如果不给出ping，默认返回当前状态后结束，不建立长连接
+参数|描述
+----|----
+status|connected表示正在推流，disconnected表示没有推流
 
 获取回放片段列表
 --------------
