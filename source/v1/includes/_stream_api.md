@@ -12,6 +12,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 --data-binary '{
     "name": "stream name",
     "stream_key": "random_stream_key",
+    "is_private": false,
     "storage_period": -1,
     "protocol": "RTMP"
 }'
@@ -53,6 +54,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 ----|----|------
 name|名字|非可选
 stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
+is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
 storage_period|存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数|可选，默认为0
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
@@ -224,6 +226,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 ----|----|------
 name|名字|非可选
 stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
+is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
 protocol|视频推流协议，目前必需为RTMP|可选，默认为RTMP
 
 删除流
