@@ -40,7 +40,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 ### HTTP请求
 
-`POST /api/v1/streams`
+`POST /v1/streams`
 
 ### 认证方法
 
@@ -88,7 +88,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### HTTP请求
 
-`GET /api/v1/streams/{id}`
+`GET /v1/streams/{id}`
 
 ### 认证方法
 
@@ -159,7 +159,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
 
 ### HTTP请求
 
-`GET /api/v1/streams`
+`GET /v1/streams`
 
 ### 认证方法
 
@@ -212,7 +212,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### HTTP请求
 
-`POST /api/v1/streams/{id}`
+`POST /v1/streams/{id}`
 
 ### 认证方法
 
@@ -259,7 +259,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### HTTP请求
 
-`DELETE /api/v1/streams/{id}`
+`DELETE /v1/streams/{id}`
 
 ### 认证方法
 
@@ -291,7 +291,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status" \
 
 ### HTTP请求
 
-`GET /api/v1/streams/{id}/status`
+`GET /v1/streams/{id}/status`
 
 ### 认证方法
 
@@ -337,7 +337,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 ### HTTP请求
 
-`GET /api/v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
+`GET /v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 认证方法
 
@@ -374,7 +374,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/p
 
 ### HTTP请求
 
-`GET /api/v1/streams/{id}/segments/play?starttime={starttime}&endtime={endtime}`
+`GET /v1/streams/{id}/segments/play?starttime={starttime}&endtime={endtime}`
 
 ### 认证方法
 
@@ -405,7 +405,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 ### HTTP请求
 
-`DELETE /api/v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
+`DELETE /v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 认证方法
 
