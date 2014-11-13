@@ -31,7 +31,7 @@
 
 `error`为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。`message`主要用于客户端记录log，最好不用于输出。｀details`用于记录请求中具体某个字段的错误原因。
 
-error|message|说明
+message|error|说明
 ------|------|----
 invalid json|400000|输入请求不符合json语法
 invalid string|400001|输入格式不是字符串
@@ -54,8 +54,9 @@ need endtime|400014|需要给出endtime参数
 
 `error`为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。`message`主要用于客户端记录log，最好不用于输出。
 
-http code|error|message|说明
+http code|message|error|说明
 ---------|-----|-------|----
 401|invalid authorization|401001|无效的鉴权方式
 403|token is invalid or has been expired|403001|token无效或者已经过期
 404|not found|404001|找不到要操作的资源
+500||500000|服务内部错误，message为细节错误，用于记录log
