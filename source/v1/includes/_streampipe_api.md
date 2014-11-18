@@ -159,8 +159,7 @@ Livestream接口
 $ curl "http://api.streamer/v3/livestreams" \
 -d '{
     "encrypt": 0,
-    "live_storage": "local",
-    "protocol": "RTMP"
+    "live_storage": "local"
 }'
 ```
 
@@ -169,7 +168,11 @@ $ curl "http://api.streamer/v3/livestreams" \
 ```json
 {
     "sid": "3jo78i11",
-    "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
+    "push_url": {
+        "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+        "PRTP": "tsudp://115.238.155.183:8000/4q5cdgn2",
+        "PTTP": "tstcp://115.238.155.183:8080/4q5cdgn2"
+    },
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
@@ -178,6 +181,13 @@ $ curl "http://api.streamer/v3/livestreams" \
 ```
 
 此接口返回新注册的livestream。
+
+协议名|协议
+-----|-----
+RTMP|Adobe Flash定义的实时多媒体流传输协议
+PRTP|基于云语udp加速技术的TS传输协议
+PTTP|基于tcp的TS传输协议
+HLS|Apple定义的多媒体流传输协议
 
 ### HTTP请求
 
@@ -189,7 +199,6 @@ $ curl "http://api.streamer/v3/livestreams" \
 ----|----
 encrypt|0表示不加密，1表示加密，默认为0
 live_storage|local表示直播时使用streamer的上传作为直播地址，cloud表示直播时使用用户的云上传做直播地址，默认为local
-protocol|直播推流协议，默认为RTMP
 
 注销接口
 -------
@@ -221,29 +230,6 @@ $ curl "http://api.streamer/v3/livestreams/3jo78i11" \
 ----|----
 _action|动作描述，删除动作为DELETE
 
-更新接口
--------
-
-```shell
-$ curl "http://api.streamer/v3/livestreams/3jo78i11" \
--d '{
-    "_action": "UPDATE",
-    "protocol": "RTMP"
-}'
-```
-
-> 返回结果：
-
-```json
-{
-    "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
-    "live_url": {
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
-    }
-}
-```
-
 此接口更新livestream上推流的接收url。此url在streamer服务重启后应该可以恢复并继续有效。
 
 ### HTTP请求
@@ -269,7 +255,11 @@ $ curl "http://api.streamer/v3/livestreams/3jo78i11"
 ```json
 {
     "sid": "3jo78i11",
-    "push_url": "rtmp://115.238.155.183:49170/livestream/3jo78i11",
+    "push_url": {
+        "RTMP": "rtmp://115.238.155.183:49166/livestream/3jo78i11",
+        "PRTP": "prtp://115.238.155.183:8000/3jo78i11",
+        "PTTP": "pttp://115.238.155.183:8080/3jo78i11"
+    },
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
         "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
