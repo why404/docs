@@ -170,8 +170,8 @@ $ curl "http://api.streamer/v3/livestreams" \
     "sid": "3jo78i11",
     "push_url": {
         "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
-        "PRTP": "tsudp://115.238.155.183:8000/4q5cdgn2",
-        "PTTP": "tstcp://115.238.155.183:8080/4q5cdgn2"
+        "PRTP": "prtp://115.238.155.183:8000/4q5cdgn2",
+        "PTTP": "pttp://115.238.155.183:8080/4q5cdgn2"
     },
     "live_url": {
         "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
