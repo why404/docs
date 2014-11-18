@@ -6,7 +6,6 @@ language_tabs:
 
 includes:
   - general
-  - api_guideline
   - streampipe_api
 
 search: true
