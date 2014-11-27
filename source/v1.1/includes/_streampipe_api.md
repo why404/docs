@@ -158,6 +158,7 @@ $curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark" \
     "id": "1234",
     "status": "pushed"
 }'
+```
 
 > 返回结果：
 
