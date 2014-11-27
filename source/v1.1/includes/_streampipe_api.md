@@ -169,7 +169,7 @@ $curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark" \
 }
 ```
 
-当livestreams的onTrack mark流过不同的处理程序时，调用此接口通知Stream Gateway通过的状态。
+当livestreams的onTrack mark（包的封装参数onMetaData）流过不同的处理程序时，调用此接口通知Stream Gateway通过的状态。
 
 status含有pushed（接受了推流），converted（进行了转码），downloaded（发送给了客户端）
 
