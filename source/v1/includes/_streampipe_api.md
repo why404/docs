@@ -125,6 +125,7 @@ url|待删除文件地址
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/status" \
 -d '{
+    "id": 1234,
     "status": "connect"
 }'
 ```
