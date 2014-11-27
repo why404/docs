@@ -153,12 +153,7 @@ status|流当前的状态，状态参见[获取状态接口](#huo-qu-zhuang-tai-
 -------
 
 ```shell
-$curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark" \
--d '{
-    "id": "1234",
-    "adjust_ms": 123,
-    "status": "pushed"
-}'
+$curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark?id=1234&adjust_ms=123&status=pushed"
 ```
 
 > 返回结果：
