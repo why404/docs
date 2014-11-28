@@ -9,6 +9,8 @@ includes:
   - manage_auth
   - api_guideline
   - user_api
+  - profile_api
+  - application_api
   - stream_api
   - return
 

@@ -6,6 +6,7 @@
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
+-H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -14,26 +15,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
     "storage_period": -1,
     "has_secondary": true,
     "profiles": [
-        {
-            "width": 1920,
-            "height": 1080,
-            "bitrate": "4m"
-        },
-        {
-            "width": 1280,
-            "height": 720,
-            "bitrate": "1000k"
-        },
-        {
-            "width": 720,
-            "height": 576,
-            "bitrate": "725k"
-        },
-        {
-            "width": 640,
-            "height": 480,
-            "bitrate": "500k"
-        }
+        "1080p", "720p", "480p"
     ]
 }'
 ```
@@ -47,26 +29,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
     "storage_period": -1,
     "has_secondary": true,
     "profiles": [
-        {
-            "width": 1920,
-            "height": 1080,
-            "bitrate": "4m"
-        },
-        {
-            "width": 1280,
-            "height": 720,
-            "bitrate": "1000k"
-        },
-        {
-            "width": 720,
-            "height": 576,
-            "bitrate": "725k"
-        },
-        {
-            "width": 640,
-            "height": 480,
-            "bitrate": "500k"
-        }
+        "1080p", "720p", "480p"
     ]
 }
 ```
@@ -93,26 +56,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
             "storage_period": -1,
             "has_secondary": true,
             "profiles": [
-                {
-                    "width": 1920,
-                    "height": 1080,
-                    "bitrate": "4m"
-                },
-                {
-                    "width": 1280,
-                    "height": 720,
-                    "bitrate": "1000k"
-                },
-                {
-                    "width": 720,
-                    "height": 576,
-                    "bitrate": "725k"
-                },
-                {
-                    "width": 640,
-                    "height": 480,
-                    "bitrate": "500k"
-                }
+                "1080p", "720p", "480p"
             ]
         },
         {
@@ -121,26 +65,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
             "storage_period": -1,
             "has_secondary": true,
             "profiles": [
-                {
-                    "width": 1920,
-                    "height": 1080,
-                    "bitrate": "4m"
-                },
-                {
-                    "width": 1280,
-                    "height": 720,
-                    "bitrate": "1000k"
-                },
-                {
-                    "width": 720,
-                    "height": 576,
-                    "bitrate": "725k"
-                },
-                {
-                    "width": 640,
-                    "height": 480,
-                    "bitrate": "500k"
-                }
+                "1080p"
             ]
         }
     ]
@@ -166,26 +91,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
     "storage_period": -1,
     "has_secondary": true,
     "profiles": [
-        {
-            "width": 1920,
-            "height": 1080,
-            "bitrate": "4m"
-        },
-        {
-            "width": 1280,
-            "height": 720,
-            "bitrate": "1000k"
-        },
-        {
-            "width": 720,
-            "height": 576,
-            "bitrate": "725k"
-        },
-        {
-            "width": 640,
-            "height": 480,
-            "bitrate": "500k"
-        }
+        "1080p", "720p", "480p"
     ],
     "key1": "key1",
     "secret1": "secret1",
@@ -213,21 +119,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
     "storage_period": -1,
     "has_secondary": true,
     "profiles": [
-        {
-            "name": "raw",
-            "width": 4000,
-            "height": 3000,
-            "bitrate": "16m"
-        }
-        {
-            "name": "1080p"
-        },
-        {
-            "name": "720p"
-        },
-        {
-            "name": "480p"
-        }
+        "1080p", "720p", "480p"
     ]
 }
 ```
