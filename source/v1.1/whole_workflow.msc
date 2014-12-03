@@ -1,0 +1,56 @@
+msc {
+    d[label="Device"], sh[label="Stream Hub"], qc[label="QCasting"], s[label="Streamer"], qn[label="Qiniu"];
+
+    --- [label="Stream Hub init process"];
+    sh -> qn [label="signup qiniu account[email/password]"];
+    sh <- qn [label="qiniu ak/sk"];
+
+    sh -> qc [label="update[qiniu email/password]"];
+          qc -> qn [label="get token[qiniu email/password]"];
+          qc <- qn [label="access token"];
+          qc -> qn [label="get user info[access token]"];
+          qc <- qn [label="qiniu ak/sk, user info"];
+    sh <- qc [label="ok"];
+
+    --- [label="Stream Hub update qiniu ak/sk"];
+    sh -> qn [label="login qiniu account[email/password]"];
+    sh -> qn [label="generate new ak/sk"];
+    sh <- qn [label="qiniu ak/sk"];
+
+    sh -> qc [label="update[qiniu email/password]"];
+          qc -> qn [label="get token[qiniu email/password]"];
+          qc <- qn [label="access token"];
+          qc -> qn [label="get user info[access token]"];
+          qc <- qn [label="qiniu ak/sk, user info"];
+    sh <- qc [label="ok"];
+
+    --- [label="Device init process"];
+    d -> d [label="generate stream_key"];
+    d -> sh [label="init(login Stream Hub with stream_key)"];
+         sh -> qc [label="register stream[stream_key, qiniu ak/sk, bucket]"];
+               qc -> s [label="register"];
+               qc <- s [label="sid"];
+               qc -> s [label="get push url[sid]"];
+               qc <- s [label="push url"];
+         sh <- qc [label="stream info(push url, id)"];
+    d <- sh [label="push url"];
+
+    --- [label="Device push stream process"];
+    d -> d [label="generate push key(key)[push url]"];
+    d -> s [label="push stream[push url with key]"];
+         s -> qc [label="check[sid, url with key, action]"];
+         qc -> s [label="ok"];
+    d box s [label="pushing stream"];
+         s -> qc [label="upload[sid, file url]"];
+              qc -> qn [label="store file[bucket, qiniu ak/sk, file content]"];
+              qc <- qn [label="result"];
+         s <- qc [label="result"];
+
+    --- [label="Stream Hub control process"];
+    sh -> qc [label="get streams list[qiniu ak/sk]"];
+    sh <- qc [label="streams list(id, status)"];
+    sh -> qc [label="get stream info[qiniu ak/sk]"];
+    sh <- qc [label="stream info(live url, status, timeshift)"];
+    sh -> qc [label="get timeshift url[qiniu ak/sk]"];
+    sh <- qc [label="timeshift url"];
+}
