@@ -1,0 +1,730 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="keywords" content="QINIU, live, RTMP, HLS, M3U8, API, DOC" />
+    <meta name="description" content="为开发者量身定制的直播云服务.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>客户API文档</title>
+
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+
+    <script src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+      <script src="../javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell"]);
+        });
+      </script>
+  </head>
+
+  <body class="v1 v1_index">
+
+    <header class="navbar navbar-default navbar-fixed-top" role="banner">
+      <div class="navbar-header">
+        <a href="../" class="navbar-brand">
+          <img src="http://qgroup.qiniudn.com/qcasting-logo-small-t.png" />
+        </a>
+      </div>
+
+      <nav role="navigation">
+        <ul class="nav">
+<!--           <li><a href="qgenius.com/qcasting/">首页</a></li>
+          <li><a href="http://qgenius.github.io/qcasting-docs/v2/" target="_blank">开发文档</a></li> -->
+        </ul>
+
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </nav>
+    </header>
+
+
+    <a href="#" id="nav-button"><span>NAV<img src="../images/navbar.png" /></span></a>
+
+
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+
+        <div class="search"><input type="text" class="search" id="input-search" placeholder="Search"></div>
+        <ul class="search-results"></ul>
+
+      <div id="toc"></div>
+
+    </div>
+
+    <div class="page-wrapper">
+
+      <div class="content">
+        
+          <h1 id='an-quan-gui-fan'>安全规范</h1><h2 id='jie-kou-jian-quan'>接口鉴权</h2>
+<p>客户在进行请求前，要先计算接口凭证，作为认证信息拼入请求Header。客户利用自己七牛账户里的Access Key和Secret Key，来生成接口凭证。</p>
+
+<p>凭证算法：</p>
+
+<ol>
+<li><p>生成待签名的原始字符串：</p>
+
+<p>抽取请求URL中<code class="prettyprint">{path}</code>或<code class="prettyprint">{path}?{query}</code>的部分与请求内容部分（即HTTP Body），用<code class="prettyprint">\n</code>连接起来。如无请求内容，该部分必须为空字符串。</p>
+
+<p><code class="prettyprint">str = &quot;{path}?{query}\n&quot;</code></p>
+
+<p>或</p>
+
+<p><code class="prettyprint">str = &quot;{path}?{query}\n{body}&quot;</code></p></li>
+<li><p>使用<code class="prettyprint">{secert_key}</code>对上一步生成的原始字符串计算HMAC-SHA1签名：</p>
+
+<p><code class="prettyprint">sign = hmac_sha1(str, &quot;{secret_key}&quot;)</code></p></li>
+<li><p>对签名进行URL安全的Base64编码，生成<code class="prettyprint">encoded_sign</code>：</p>
+
+<p><code class="prettyprint">encoded_sign = urlsafe_base64_encode(sign)</code></p></li>
+</ol>
+<h2 id='tui-liu-jian-quan'>推流鉴权</h2>
+<p>客户在进行推流前，要先计算推流凭证，作为认证信息拼入推流地址，进行推流。客户利用自己记录的<code class="prettyprint">nonce</code>，流信息里的<code class="prettyprint">stream_key</code>和推流地址<code class="prettyprint">push_url</code>，来生成推流凭证。</p>
+
+<p>凭证算法：</p>
+
+<ol>
+<li><p>将请求<code class="prettyprint">nonce</code>拼入上推地址</p>
+
+<p>如果是第一次推流，或者没有之前推流的<code class="prettyprint">nonce</code>信息，则获取当前时间的UNIX时间戳作为<code class="prettyprint">nonce</code>值。</p>
+
+<p>如果是重试推流，且有之前的<code class="prettyprint">nonce</code>值，将之前的<code class="prettyprint">nonce</code>值递增。请尽量存储上一次<code class="prettyprint">nonce</code>的值。</p>
+
+<p>为了保证推流地址不被盗用，已经用过的<code class="prettyprint">nonce</code>将不再接受推流。</p>
+
+<p>假设得到的<code class="prettyprint">nonce</code>值为<code class="prettyprint">1412121600</code>，流信息里得到的推流地址<code class="prettyprint">push_url</code>为<code class="prettyprint">rtmp://115.238.155.183:49166/livestream/4q5cdgn2</code>。</p>
+
+<p><code class="prettyprint">url = &quot;rtmp://115.238.155.183:49166/livestream/4q5cdgn2&quot; + &quot;?&quot; + &quot;nonce=1412121600&quot;</code></p></li>
+<li><p>使用<code class="prettyprint">{stream_key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
+
+<p><code class="prettyprint">sign = hmac_sha1(url, &quot;{stream_key}&quot;)</code></p></li>
+<li><p>对签名进行URL安全的Base64编码，生成<code class="prettyprint">push_token</code></p>
+
+<p><code class="prettyprint">push_token = urlsafe_base64_encode(sign)</code></p></li>
+<li><p>推流</p>
+
+<p><code class="prettyprint">url = url + &quot;&amp;token=&quot; + push_token</code></p>
+
+<p>之后客户推流时，将推流凭证加入到url地址的query最后一项，实际使用<code class="prettyprint">rtmp://115.238.155.183:49166/livestream/4q5cdgn2?nonce=1412121600&amp;token={push_token}</code>的请求进行推流。</p></li>
+</ol>
+<h2 id='bo-fang-jian-quan'>播放鉴权</h2>
+<p>播放凭证仅用于<code class="prettyprint">is_private</code>为<code class="prettyprint">true</code>的流的直播和回放。对于<code class="prettyprint">is_private</code>为<code class="prettyprint">false</code>的流，直接使用播放地址就可以播放，不需要凭证。</p>
+
+<p>对于<code class="prettyprint">is_private</code>为<code class="prettyprint">true</code>的流，不管是直播还是回放，客户在进行播放前，要先计算播放凭证，作为认证信息拼入播放地址，进行播放。客户使用自己的<code class="prettyprint">access_key</code>和<code class="prettyprint">secret_key</code>，过期时间戳和从设备服务器请求到的播放地址，来生成播放凭证。</p>
+
+<p><code class="prettyprint">因为有效时间戳的创建和验证在不同的服务端进行（在业务服务器创建，在云服务器验证），因此开发者的业务服务器需要尽可能校准标准时间，否则可能出现凭证刚创建就过期等各种奇怪的问题。</code>
+凭证算法：</p>
+
+<ol>
+<li><p>将过期时间戳拼入播放地址</p>
+
+<p>假设过期时间戳为<code class="prettyprint">1412121600</code>（UTC时间2014年10月01日0点0分0秒的UNIX时间戳），播放地址为<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8</code>，拼接后的推流地址是<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600</code></p>
+
+<p><code class="prettyprint">url = &quot;http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&quot;</code></p></li>
+<li><p>使用<code class="prettyprint">{secert_key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
+
+<p><code class="prettyprint">sign = hmac_sha1(url, &quot;{secert_key}&quot;)</code></p></li>
+<li><p>对签名进行URL安全的Base64编码，生成<code class="prettyprint">play_token</code></p>
+
+<p><code class="prettyprint">play_token = urlsafe_base64_encode(sign)</code></p></li>
+<li><p>播放</p>
+
+<p><code class="prettyprint">url = url + &quot;&amp;token={access_key}:&quot; + play_token</code></p>
+
+<p>之后客户播放时，将<code class="prettyprint">access_key</code>和播放凭证组合，作为<code class="prettyprint">token</code>加入到url地址的query最后一项，实际使用<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&amp;token={access_key}:{play_token}</code>的请求进行播放。</p></li>
+</ol>
+
+          <h1 id='liu-guan-li-jie-kou'>流管理接口</h1><h2 id='chuang-jian-liu'>创建流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST <span class="se">\</span>
+--data-binary <span class="s1">'{
+    "name": "stream name",
+    "stream_key": "random_stream_key",
+    "is_private": false,
+    "storage_period": -1,
+    "protocol": "RTMP"
+}'</span>
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>此接口返回注册后的流id和推流地址。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">POST /v1/streams</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>是否可选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>名字</td>
+<td>非可选</td>
+</tr>
+<tr>
+<td>stream_key</td>
+<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
+<td>可选，如果不指定，则服务器会随机生成一串stream_key</td>
+</tr>
+<tr>
+<td>is_private</td>
+<td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
+<td>可选，默认为false</td>
+</tr>
+<tr>
+<td>storage_period</td>
+<td>存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数</td>
+<td>可选，默认为0</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>视频推流协议</td>
+<td>必选</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>协议名</th>
+<th>协议</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RTMP</td>
+<td>Adobe Flash定义的实时多媒体流传输协议</td>
+</tr>
+<tr>
+<td>PRTP</td>
+<td>Pili定义的udp加速技术的TS传输协议</td>
+</tr>
+<tr>
+<td>PTTP</td>
+<td>基于tcp的TS传输协议</td>
+</tr>
+<tr>
+<td>HLS</td>
+<td>Apple定义的多媒体流传输协议</td>
+</tr>
+</tbody></table>
+<h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams/{id}</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h2 id='huo-qu-liu-lie-biao'>获取流列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams?page=1&amp;size=10"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"streams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn4"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn4"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn7"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>此接口返回对应用户创建的所有流的id以及流的连接状态。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>显示第几页，默认为第1页</td>
+</tr>
+<tr>
+<td>size</td>
+<td>一页大小多大，默认为10，最大100</td>
+</tr>
+</tbody></table>
+<h2 id='geng-xin-liu'>更新流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST <span class="se">\</span>
+--data-binary <span class="s1">'{
+    "name": "stream name",
+    "stream_key": "random_stream_key",
+    "is_private": false,
+    "protocol": "RTMP"
+}'</span>
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>此接口更新流的推流地址。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">POST /v1/streams/{id}</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>名字</td>
+</tr>
+<tr>
+<td>stream_key</td>
+<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
+</tr>
+<tr>
+<td>is_private</td>
+<td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>视频推流协议</td>
+</tr>
+</tbody></table>
+<h2 id='shan-chu-liu'>删除流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X DELETE
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">DELETE /v1/streams/{id}</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<p>无</p>
+<h2 id='liu-zhuang-tai-tui-song-jie-kou'>流状态推送接口</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disconnected"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams/{id}/status</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>connected表示正在推流，disconnected表示没有推流</td>
+</tr>
+</tbody></table>
+<h2 id='huo-qu-hui-fang-pian-duan-lie-biao'>获取回放片段列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926345158</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926837567</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409929883546</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409932087561</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>是否可选</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starttime</td>
+<td>列表开始时间</td>
+<td>可选</td>
+<td>millisecond unix timestamp</td>
+</tr>
+<tr>
+<td>endtime</td>
+<td>列表结束时间</td>
+<td>可选</td>
+<td>millisecond unix timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='huo-qu-hui-fang-pian-duan-di-zhi'>获取回放片段地址</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://115.238.155.183:49166/livestream/jnl617jk.m3u8"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>此接口获取回放片段的播放地址</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams/{id}/segments/play?starttime={starttime}&amp;endtime={endtime}</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>是否可选</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starttime</td>
+<td>开始时间</td>
+<td>必选</td>
+<td>millisecond unix timestamp</td>
+</tr>
+<tr>
+<td>endtime</td>
+<td>结束时间</td>
+<td>可选</td>
+<td>millisecond unix timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='shan-chu-pian-duan'>删除片段</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X DELETE
+</pre>
+
+<blockquote>
+<p>返回结果为空</p>
+</blockquote>
+
+<p>此接口删除指定时间内的回放片段。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">DELETE /v1/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>是否可选</th>
+<th>类型</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starttime</td>
+<td>开始时间</td>
+<td>必选</td>
+<td>millisecond unix timestamp</td>
+</tr>
+<tr>
+<td>endtime</td>
+<td>结束时间</td>
+<td>必选</td>
+<td>millisecond unix timestamp</td>
+</tr>
+</tbody></table>
+
+          <h1 id='jie-kou-fan-hui'>接口返回</h1>
+<p>接口输入和输出都是用JSON格式。不同的返回码对应不同的格式。</p>
+<h2 id='200'>200</h2>
+<p>返回格式参见不同接口的文档</p>
+<h2 id='204'>204</h2>
+<p>无返回内容</p>
+<h2 id='400'>400</h2><pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bad request"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400001</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid string"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"field2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400004</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid bool"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p><code class="prettyprint">error</code>为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。<code class="prettyprint">message</code>主要用于客户端记录log，最好不用于输出。｀details`用于记录请求中具体某个字段的错误原因。</p>
+
+<table><thead>
+<tr>
+<th>message</th>
+<th>error</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invalid json</td>
+<td>400000</td>
+<td>输入请求不符合json语法</td>
+</tr>
+<tr>
+<td>invalid string</td>
+<td>400001</td>
+<td>输入格式不是字符串</td>
+</tr>
+<tr>
+<td>string should NOT empty</td>
+<td>400002</td>
+<td>字符串不应为空</td>
+</tr>
+<tr>
+<td>invalid number</td>
+<td>400003</td>
+<td>输入格式不是有效数字</td>
+</tr>
+<tr>
+<td>invalid bool</td>
+<td>400004</td>
+<td>输入格式不是布尔型</td>
+</tr>
+<tr>
+<td>need protocol</td>
+<td>400011</td>
+<td>需要给出protocol参数</td>
+</tr>
+<tr>
+<td>invalid protocol</td>
+<td>400012</td>
+<td>无效的protocol参数</td>
+</tr>
+<tr>
+<td>need starttime</td>
+<td>400013</td>
+<td>需要给出starttime参数</td>
+</tr>
+<tr>
+<td>need endtime</td>
+<td>400014</td>
+<td>需要给出endtime参数</td>
+</tr>
+</tbody></table>
+<h2 id='401-404-500'>401/404/500</h2><pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">401001</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid authorization"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p><code class="prettyprint">error</code>为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。<code class="prettyprint">message</code>主要用于客户端记录log，最好不用于输出。</p>
+
+<table><thead>
+<tr>
+<th>http code</th>
+<th>message</th>
+<th>error</th>
+<th>说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>401</td>
+<td>invalid authorization</td>
+<td>401001</td>
+<td>无效的鉴权方式</td>
+</tr>
+<tr>
+<td>403</td>
+<td>token is invalid or has been expired</td>
+<td>403001</td>
+<td>token无效或者已经过期</td>
+</tr>
+<tr>
+<td>404</td>
+<td>not found</td>
+<td>404001</td>
+<td>找不到要操作的资源</td>
+</tr>
+<tr>
+<td>500</td>
+<td></td>
+<td>500000</td>
+<td>服务内部错误，message为细节错误，用于记录log</td>
+</tr>
+</tbody></table>
+
+      </div>
+
+      <div class="dark-box"></div>
+    </div>
+
+  </body>
+</html>
