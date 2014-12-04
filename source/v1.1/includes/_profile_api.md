@@ -15,7 +15,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
     "name": "1080p",
     "width": 1920,
     "height": 1080,
-    "bitrate": "4m",
+    "kbitrate": 4000,
     "price_factor": 4.0
 }'
 ```
@@ -27,7 +27,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
     "name": "1080p",
     "width": 1920,
     "height": 1080,
-    "bitrate": "4m",
+    "kbitrate": 4000,
     "price_factor": 4.0
 }
 ```
@@ -49,7 +49,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles/1080p" \
     "name": "1080p",
     "width": 1920,
     "height": 1080,
-    "bitrate": "4m",
+    "kbitrate": 4000,
     "price_factor": 4.0
 }
 ```
@@ -73,21 +73,21 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
             "name": "1080p",
             "width": 1920,
             "height": 1080,
-            "bitrate": "4m",
+            "kbitrate": 4000,
             "price_factor": 4.0
         },
         {
             "name": "720p",
             "width": 1280,
             "height": 720,
-            "bitrate": "1000k",
+            "kbitrate": 1000,
             "price_factor": 1.0
         },
         {
             "name": "480p",
             "width": 640,
             "height": 480,
-            "bitrate": "500k",
+            "kbitrate": 500,
             "price_factor": 0.25
         }
     ]
@@ -106,7 +106,7 @@ $ curl "http://api.pili.qiniu.com/v1/profiles/1080p" \
     "name": "1080p",
     "width": 1920,
     "height": 1080,
-    "bitrate": "4m",
+    "kbitrate": 4000,
     "price_factor": 4.0
 }'
 ```
@@ -118,7 +118,7 @@ $ curl "http://api.pili.qiniu.com/v1/profiles/1080p" \
     "name": "1080p",
     "width": 1920,
     "height": 1080,
-    "bitrate": "4m",
+    "kbitrate": 4000,
     "price_factor": 4.0
 }
 ```
@@ -140,7 +140,7 @@ $ curl "http://api.pili.qiniu.com/v1/profiles/1080p" \
     "name": "1080p",
     "width": 1920,
     "height": 1080,
-    "bitrate": "4m",
+    "kbitrate": 4000,
     "price_factor": 4.0
 }
 ```
