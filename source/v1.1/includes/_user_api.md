@@ -66,7 +66,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/logout" \
 -----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/users" \
+$ curl "http://api.pili.qiniu.com/v1/_management/users?email=name@domain.com" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json"
 ```
@@ -74,35 +74,36 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users" \
 > 返回结果
 
 ```json
-{
-    "id": "54068a9063b906000d000001",
-    "email": "name@domain.com",
-    "role": "client",
-    "key1": {
-        "access": "xxx",
-        "secret": "xxx",
-        "created_at": "2014-10-26T11:10:00Z"
-    },
-    "key2": {
-        "access": "xxx",
-        "secret": "xxx",
-        "created_at": "2014-10-26T11:10:00Z"
+[
+    {
+        "id": "54068a9063b906000d000001",
+        "email": "name@domain.com",
+        "role": "client",
+        "key1": {
+            "access": "xxx",
+            "secret": "xxx",
+            "created_at": "2014-10-26T11:10:00Z"
+        },
+        "key2": {
+            "access": "xxx",
+            "secret": "xxx",
+            "created_at": "2014-10-26T11:10:00Z"
+        }
     }
-}
+]
 ```
 
 更新用户信息
 -----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/users" \
+$ curl "http://api.pili.qiniu.com/v1/_management/users/54068a9063b906000d000001" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "email": "name@domain.com",
-    "password": "password",
-    "key1": {}
+    "role": "admin",
+    "max_applications": 10
 }'
 ```
 
@@ -112,7 +113,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users" \
 {
     "id": "54068a9063b906000d000001",
     "email": "name@domain.com",
-    "role": "client",
+    "role": "admin",
     "key1": {
         "access": "xxx",
         "secret": "xxx",
@@ -122,6 +123,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users" \
         "access": "xxx",
         "secret": "xxx",
         "created_at": "2014-10-26T11:10:00Z"
-    }
+    },
+    "max_applications": 10
 }
 ```
