@@ -100,7 +100,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users?email=name@domain.com" \
 $ curl "http://api.pili.qiniu.com/v1/_management/users/54068a9063b906000d000001" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
--X POST \
+-X PUT \
 --data-binary '{
     "role": "admin",
     "max_applications": 10
