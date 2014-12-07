@@ -213,7 +213,7 @@
 <p>返回结果</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"management:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
     </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlm"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -231,7 +231,7 @@
 <p>返回结果</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"management:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIk"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIk"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
     </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlf"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -248,184 +248,44 @@
 <blockquote>
 <p>无返回结果</p>
 </blockquote>
-<h2 id='de-dao-yong-hu-xin-xi'>得到用户信息</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users?email=name@domain.com"</span> <span class="se">\</span>
+
+          <h1 id='ying-yong-pei-zhi-jie-kou'>应用配置接口</h1><h2 id='huo-qu-profile-lie-biao'>获取Profile列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
 </pre>
 
 <blockquote>
-<p>返回结果</p>
+<p>返回结果：</p>
 </blockquote>
 <pre class="highlight json"><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"key1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-10-26T11:10:00Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"key2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-10-26T11:10:00Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000004"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
-<h2 id='geng-xin-yong-hu-xin-xi'>更新用户信息</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/54068a9063b906000d000001"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X PUT <span class="se">\</span>
---data-binary <span class="s1">'{
-    "role": "admin",
-    "max_applications": 10
-}'</span>
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"key1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-10-26T11:10:00Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"key2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-10-26T11:10:00Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-
-          <h1 id='profile-guan-li-jie-kou'>Profile管理接口</h1>
-<p>Profile定义了一个视频编码的格式标准。系统默认有一组可选的Profile。</p>
-<h2 id='chuang-jian-profile'>创建Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="se">\</span>
---data-binary <span class="s1">'{
-    "name": "1080p",
-    "width": 1920,
-    "height": 1080,
-    "kbitrate": 4000,
-    "price_factor": 4.0
-}'</span>
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-<h2 id='cha-xun-profile'>查询Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles/1080p"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-<h2 id='huo-qu-profile-lie-biao'>获取Profile列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-<h2 id='geng-xin-profile'>更新Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/profiles/1080p"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="se">\</span>
---data-binary <span class="s1">'{
-    "name": "1080p",
-    "width": 1920,
-    "height": 1080,
-    "kbitrate": 4000,
-    "price_factor": 4.0
-}'</span>
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-<h2 id='shan-chu-profile'>删除Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/profiles/1080p"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X DELETE
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"price_factor"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-
-          <h1 id='ying-yong-pei-zhi-jie-kou'>应用配置接口</h1><h2 id='chuang-jian-ying-yong'>创建应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications"</span> <span class="se">\</span>
+<h2 id='chuang-jian-ying-yong'>创建应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
@@ -434,8 +294,10 @@
     "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
     "has_secondary": true,
-    "profiles": [
-        "1080p", "720p", "480p"
+    "profiles_id": [
+        "54068a9063b906000d000002",
+        "54068a9063b906000d000003",
+        "54068a9063b906000d000004"
     ]
 }'</span>
 </pre>
@@ -449,8 +311,32 @@
     </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000004"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yy"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-ying-yong-lie-biao'>查询应用列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications?page=1&amp;size=10"</span> <span class="se">\</span>
@@ -462,29 +348,60 @@
 <blockquote>
 <p>返回结果</p>
 </blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"applications"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app1"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app2"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"1080p"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
+<pre class="highlight json"><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000004"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xx"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yy"</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xx"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yy"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-ying-yong-xi-jie'>查询应用细节</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/app"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
@@ -496,17 +413,37 @@
 <p>返回结果</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000004"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"key1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"key1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"secret1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"key2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"key2"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"secret2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret2"</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yy"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='shan-chu-ying-yong'>删除应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/app"</span> <span class="se">\</span>
@@ -519,13 +456,37 @@
 <p>返回结果</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
     </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="p">,</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000004"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">640</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"kbitrate"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="err">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yy"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='tong-zhi-jie-kou'>通知接口</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://client.server/streams/notify"</span> <span class="se">\</span>
@@ -566,7 +527,6 @@
     "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP"
 }'</span>
 </pre>
 
@@ -578,13 +538,22 @@
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
     </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
         </span><span class="p">},</span><span class="w">
@@ -595,8 +564,8 @@
         </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-    </span><span class="err">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
@@ -674,11 +643,33 @@
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
     </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+        </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -705,11 +696,33 @@
             </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
             </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+                </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+                </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -717,11 +730,33 @@
             </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn4"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
             </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn4"</span><span class="w">
+                </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+                </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -729,11 +764,33 @@
             </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
             </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn7"</span><span class="w">
+                </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+                </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -770,7 +827,6 @@
 --data-binary <span class="s1">'{
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP"
 }'</span>
 </pre>
 
@@ -782,11 +838,33 @@
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
     </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+        </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -832,12 +910,34 @@
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"primary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"secondary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
     </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"*"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
