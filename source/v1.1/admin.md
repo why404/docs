@@ -1,5 +1,5 @@
 ---
-title: Demo设备管理器文档
+title: admin
 
 language_tabs:
   - shell
@@ -8,7 +8,8 @@ includes:
   - general
   - manage_auth
   - api_guideline
-  - user_api
+  - admin_api
+  - profile_api
   - application_api
   - stream_api
   - return

@@ -18,7 +18,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/login" \
 
 ```json
 {
-    "access_token": "management:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw",
+    "access_token": "YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw",
     "expires_in": 3600,
     "refresh_token": "ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlm"
 }
@@ -41,7 +41,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/refresh" \
 
 ```json
 {
-    "access_token": "management:YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIk",
+    "access_token": "YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIk",
     "expires_in": 3600,
     "refresh_token": "ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlf"
 }
@@ -61,69 +61,3 @@ $ curl "http://api.pili.qiniu.com/v1/_management/users/actions/logout" \
 ```
 
 > 无返回结果
-
-得到用户信息
------------
-
-```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/users?email=name@domain.com" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
--H "Content-Type: application/json"
-```
-
-> 返回结果
-
-```json
-[
-    {
-        "id": "54068a9063b906000d000001",
-        "email": "name@domain.com",
-        "role": "client",
-        "key1": {
-            "access": "xxx",
-            "secret": "xxx",
-            "created_at": "2014-10-26T11:10:00Z"
-        },
-        "key2": {
-            "access": "xxx",
-            "secret": "xxx",
-            "created_at": "2014-10-26T11:10:00Z"
-        }
-    }
-]
-```
-
-更新用户信息
------------
-
-```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/users/54068a9063b906000d000001" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
--H "Content-Type: application/json" \
--X PUT \
---data-binary '{
-    "role": "admin",
-    "max_applications": 10
-}'
-```
-
-> 返回结果：
-
-```json
-{
-    "id": "54068a9063b906000d000001",
-    "email": "name@domain.com",
-    "role": "admin",
-    "key1": {
-        "access": "xxx",
-        "secret": "xxx",
-        "created_at": "2014-10-26T11:10:00Z"
-    },
-    "key2": {
-        "access": "xxx",
-        "secret": "xxx",
-        "created_at": "2014-10-26T11:10:00Z"
-    },
-    "max_applications": 10
-}
-```

@@ -13,7 +13,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
     "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP"
 }'
 ```
 
@@ -25,12 +24,21 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
     "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP",
     "push_url": {
-        "primary": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
-        "secondary": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"
+        "primary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        "secondary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
     },
     "live_url": {
+        "*": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
         "1080p": {
             "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
             "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
@@ -42,7 +50,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
         "480p": {
             "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
             "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
-        },
+        }
     }
 }
 ```
@@ -93,11 +101,33 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+    "push_url": {
+        "primary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        "secondary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    },
     "live_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        "*": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        }
     }
 }
 ```
@@ -133,11 +163,33 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "application": "app_name",
             "stream_key": "random_stream_key",
             "is_private": false,
-            "protocol": "RTMP",
-            "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+            "push_url": {
+                "primary": {
+                    "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+                    "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+                },
+                "secondary": {
+                    "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+                    "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+                },
+            },
             "live_url": {
-                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+                "*": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+                }
+                "1080p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+                },
+                "720p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+                },
+                "480p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+                }
             }
         },
         {
@@ -145,11 +197,33 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "application": "app_name",
             "stream_key": "random_stream_key",
             "is_private": false,
-            "protocol": "RTMP",
-            "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn4",
+            "push_url": {
+                "primary": {
+                    "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+                    "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+                },
+                "secondary": {
+                    "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+                    "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+                },
+            },
             "live_url": {
-                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8",
-                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn4"
+                "*": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+                }
+                "1080p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+                },
+                "720p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+                },
+                "480p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+                }
             }
         },
         {
@@ -157,11 +231,33 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
             "application": "app_name",
             "stream_key": "random_stream_key",
             "is_private": false,
-            "protocol": "RTMP",
-            "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn7",
+            "push_url": {
+                "primary": {
+                    "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+                    "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+                },
+                "secondary": {
+                    "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+                    "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+                },
+            },
             "live_url": {
-                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8",
-                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn7"
+                "*": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+                }
+                "1080p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+                },
+                "720p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+                },
+                "480p": {
+                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+                    "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+                }
             }
         }
     ]
@@ -198,7 +294,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 --data-binary '{
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP"
 }'
 ```
 
@@ -210,11 +305,33 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+    "push_url": {
+        "primary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        "secondary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    },
     "live_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        "*": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        }
     }
 }
 ```
@@ -257,11 +374,33 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
     "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+    "push_url": {
+        "primary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        "secondary": {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    },
     "live_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        "*": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        },
     }
 }
 ```
