@@ -35,7 +35,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
         },
     ],
     "live_url": {
-        "*": {
+        "[default]": {
             "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
             "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
         }
@@ -112,7 +112,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
         },
     ],
     "live_url": {
-        "*": {
+        "[default]": {
             "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
             "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
         }
@@ -174,7 +174,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
                 },
             ],
             "live_url": {
-                "*": {
+                "[default]": {
                     "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
                     "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
                 }
@@ -208,7 +208,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
                 },
             ],
             "live_url": {
-                "*": {
+                "[default]": {
                     "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
                     "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
                 }
@@ -242,7 +242,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
                 },
             ],
             "live_url": {
-                "*": {
+                "[default]": {
                     "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
                     "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
                 }
@@ -316,7 +316,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
         },
     ],
     "live_url": {
-        "*": {
+        "[default]": {
             "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
             "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
         }
@@ -385,7 +385,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
         },
     ],
     "live_url": {
-        "*": {
+        "[default]": {
             "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
             "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
         }
