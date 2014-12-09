@@ -74,14 +74,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 application|所属于的应用名字|必选
 stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
-protocol|视频推流协议|必选
-
-协议名|协议
------|-----
-RTMP|Adobe Flash定义的实时多媒体流传输协议
-PRTP|Pili定义的udp加速技术的TS传输协议
-PTTP|基于tcp的TS传输协议
-HLS|Apple定义的多媒体流传输协议
 
 查询流信息
 ---------
@@ -213,7 +205,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 ----|----
 stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
-protocol|视频推流协议
 
 删除流
 -----
