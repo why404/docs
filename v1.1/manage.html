@@ -599,35 +599,6 @@
 <td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
 <td>可选，默认为false</td>
 </tr>
-<tr>
-<td>protocol</td>
-<td>视频推流协议</td>
-<td>必选</td>
-</tr>
-</tbody></table>
-
-<table><thead>
-<tr>
-<th>协议名</th>
-<th>协议</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>RTMP</td>
-<td>Adobe Flash定义的实时多媒体流传输协议</td>
-</tr>
-<tr>
-<td>PRTP</td>
-<td>Pili定义的udp加速技术的TS传输协议</td>
-</tr>
-<tr>
-<td>PTTP</td>
-<td>基于tcp的TS传输协议</td>
-</tr>
-<tr>
-<td>HLS</td>
-<td>Apple定义的多媒体流传输协议</td>
-</tr>
 </tbody></table>
 <h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
@@ -749,10 +720,6 @@
 <tr>
 <td>is_private</td>
 <td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
-</tr>
-<tr>
-<td>protocol</td>
-<td>视频推流协议</td>
 </tr>
 </tbody></table>
 <h2 id='shan-chu-liu'>删除流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
