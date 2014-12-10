@@ -10,11 +10,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "name": "stream name",
+    "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "storage_period": -1,
-    "protocol": "RTMP"
 }'
 ```
 
@@ -23,15 +21,36 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 ```json
 {
     "id": "54068a9063b906000d000001",
-    "name": "stream name",
+    "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "storage_period": -1,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
-    "play_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+    "push_url":[
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    ],
+    "live_url": {
+        "[default]": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        }
     }
 }
 ```
@@ -52,18 +71,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 参数|描述|是否可选
 ----|----|------
-name|名字|非可选
+application|所属于的应用名字|必选
 stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
-storage_period|存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数|可选，默认为0
-protocol|视频推流协议|必选
-
-协议名|协议
------|-----
-RTMP|Adobe Flash定义的实时多媒体流传输协议
-PRTP|Pili定义的udp加速技术的TS传输协议
-PTTP|基于tcp的TS传输协议
-HLS|Apple定义的多媒体流传输协议
 
 查询流信息
 ---------
@@ -80,15 +90,36 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 ```json
 {
     "id": "54068a9063b906000d000001",
-    "name": "stream name",
+    "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "storage_period": -1,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
-    "play_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+    "push_url":[
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    ],
+    "live_url": {
+        "[default]": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        }
     }
 }
 ```
@@ -103,84 +134,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 `Authorization: pili {access_key}:{encoded_sign}`
 
-获取流列表
----------
-
-```shell
-$ curl "http://api.pili.qiniu.com/v1/streams?page=1&size=10" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
--H "Content-Type: application/json" \
--X GET
-```
-
->返回结果：
-
-```json
-{
-    "total": 3,
-    "streams": [
-        {
-            "id": "54068a9063b906000d000001",
-            "name": "stream name",
-            "stream_key": "random_stream_key",
-            "is_private": false,
-            "storage_period": -1,
-            "protocol": "RTMP",
-            "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
-            "play_url": {
-                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
-            }
-        },
-        {
-            "id": "54068a9063b906000d000002",
-            "name": "stream name",
-            "stream_key": "random_stream_key",
-            "is_private": false,
-            "storage_period": -1,
-            "protocol": "RTMP",
-            "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn4",
-            "play_url": {
-                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8",
-                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn4"
-            }
-        },
-        {
-            "id": "54068a9063b906000d000003",
-            "name": "stream name",
-            "stream_key": "random_stream_key",
-            "is_private": false,
-            "storage_period": -1,
-            "protocol": "RTMP",
-            "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn7",
-            "play_url": {
-                "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8",
-                "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn7"
-            }
-        }
-    ]
-}
-```
-
-此接口返回对应用户创建的所有流的id以及流的连接状态。
-
-### HTTP请求
-
-`GET /v1/streams`
-
-### 认证方法
-
-使用[接口鉴权](#jie-kou-jian-quan)进行认证
-
-`Authorization: pili {access_key}:{encoded_sign}`
-
-### 请求参数
-
-参数|描述
-----|----
-page|显示第几页，默认为第1页
-size|一页大小多大，默认为10，最大100
-
 更新流
 -----
 
@@ -190,10 +143,8 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "name": "stream name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "protocol": "RTMP"
 }'
 ```
 
@@ -202,15 +153,36 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 ```json
 {
     "id": "54068a9063b906000d000001",
-    "name": "stream name",
+    "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "storage_period": -1,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
-    "play_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+    "push_url":[
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    ],
+    "live_url": {
+        "[default]": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        }
     }
 }
 ```
@@ -231,10 +203,8 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 参数|描述
 ----|----
-name|名字
 stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
-protocol|视频推流协议
 
 删除流
 -----
@@ -251,15 +221,36 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 ```json
 {
     "id": "54068a9063b906000d000001",
-    "name": "stream name",
+    "application": "app_name",
     "stream_key": "random_stream_key",
     "is_private": false,
-    "storage_period": -1,
-    "protocol": "RTMP",
-    "push_url": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
-    "play_url": {
-        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+    "push_url":[
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_primary"
+        },
+        {
+            "RTMP": "rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary",
+            "PFSP": "pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"
+        },
+    ],
+    "live_url": {
+        "[default]": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"
+        }
+        "1080p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
+        },
+        "720p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
+        },
+        "480p": {
+            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
+            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
+        }
     }
 }
 ```

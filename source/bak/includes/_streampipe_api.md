@@ -149,25 +149,6 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/status" \
 ----|----
 status|流当前的状态，状态参见[获取状态接口](#huo-qu-zhuang-tai-jie-kou)
 
-标记通知
--------
-
-```shell
-$curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark?id=1234&adjust_ms=123&status=pushed"
-```
-
-> 返回结果：
-
-```json
-{
-    "result": "ok"
-}
-```
-
-当livestreams的onTrack mark（包的封装参数onMetaData）流过不同的处理程序时，调用此接口通知Stream Gateway通过的状态。
-
-status含有pushed（接受了推流），converted（进行了转码），downloaded（发送给了客户端）
-
 Livestream接口
 =============
 
@@ -178,28 +159,7 @@ Livestream接口
 $ curl "http://api.streamer/v3/livestreams" \
 -d '{
     "encrypt": 0,
-    "live_storage": "local",
-    "has_secondary": true,
-    "profiles": [
-        {
-            "name": "1080p",
-            "width": 1920,
-            "height": 1080,
-            "bitrate": "4m"
-        },
-        {
-            "name": "720p",
-            "width": 1280,
-            "height": 720,
-            "bitrate": "1000k"
-        },
-        {
-            "name": "480p",
-            "width": 640,
-            "height": 480,
-            "bitrate": "500k"
-        }
-    ]
+    "live_storage": "local"
 }'
 ```
 
@@ -208,29 +168,13 @@ $ curl "http://api.streamer/v3/livestreams" \
 ```json
 {
     "sid": "3jo78i11",
-    "push_url": [
-        {
-            "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2_primary",
-            "PFSP": "pfsp://115.238.155.183:8000/4q5cdgn2_primary"
-        },
-        {
-            "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2_secondary",
-            "PFSP": "pfsp://115.238.155.183:8000/4q5cdgn2_secondary"
-        }
-    ]
+    "push_url": {
+        "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2",
+        "PFSP": "pfsp://115.238.155.183:8000/4q5cdgn2"
+    },
     "live_url": {
-        "1080p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
-        },
-        "720p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
-        },
-        "480p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
-        },
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
     }
 }
 ```
@@ -284,6 +228,19 @@ $ curl "http://api.streamer/v3/livestreams/3jo78i11" \
 ----|----
 _action|动作描述，删除动作为DELETE
 
+此接口更新livestream上推流的接收url。此url在streamer服务重启后应该可以恢复并继续有效。
+
+### HTTP请求
+
+`POST /v1/livestreams/{sid}`
+
+### 请求参数
+
+参数|描述
+----|----
+_action|动作描述，推流动作为UPDATE
+protocol|推流协议
+
 获取接口
 -------
 
@@ -296,29 +253,13 @@ $ curl "http://api.streamer/v3/livestreams/3jo78i11"
 ```json
 {
     "sid": "3jo78i11",
-    "push_url": [
-        {
-            "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2_primary",
-            "PFSP": "pfsp://115.238.155.183:8000/4q5cdgn2_primary"
-        },
-        {
-            "RTMP": "rtmp://115.238.155.183:49166/livestream/4q5cdgn2_secondary",
-            "PFSP": "pfsp://115.238.155.183:8000/4q5cdgn2_secondary"
-        }
-    ]
+    "push_url": {
+        "RTMP": "rtmp://115.238.155.183:49166/livestream/3jo78i11",
+        "PFSP": "pfsp://115.238.155.183:8000/3jo78i11"
+    },
     "live_url": {
-        "1080p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"
-        },
-        "720p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"
-        },
-        "480p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"
-        },
+        "RTMP": "rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11",
+        "HLS": "http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"
     }
 }
 ```
