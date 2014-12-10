@@ -216,10 +216,45 @@
 <td>流当前的状态，状态参见<a href="#huo-qu-zhuang-tai-jie-kou">获取状态接口</a></td>
 </tr>
 </tbody></table>
+<h2 id='biao-ji-tong-zhi'>标记通知</h2><pre class="highlight shell"><span class="nv">$curl</span> <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark?id=1234&amp;adjust_ms=123&amp;status=pushed"</span>
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>当livestreams的onTrack mark（包的封装参数onMetaData）流过不同的处理程序时，调用此接口通知Stream Gateway通过的状态。</p>
+
+<p>status含有pushed（接受了推流），converted（进行了转码），downloaded（发送给了客户端）</p>
 <h1 id='livestream-jie-kou'>Livestream接口</h1><h2 id='zhu-ce-jie-kou'>注册接口</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams"</span> <span class="se">\</span>
 -d <span class="s1">'{
     "encrypt": 0,
-    "live_storage": "local"
+    "live_storage": "local",
+    "has_secondary": true,
+    "profiles": [
+        {
+            "name": "1080p",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": "4m"
+        },
+        {
+            "name": "720p",
+            "width": 1280,
+            "height": 720,
+            "bitrate": "1000k"
+        },
+        {
+            "name": "480p",
+            "width": 640,
+            "height": 480,
+            "bitrate": "500k"
+        }
+    ]
 }'</span>
 </pre>
 
@@ -228,14 +263,30 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3jo78i11"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"live_url"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
@@ -307,26 +358,6 @@
 <td>动作描述，删除动作为DELETE</td>
 </tr>
 </tbody></table>
-
-<p>此接口更新livestream上推流的接收url。此url在streamer服务重启后应该可以恢复并继续有效。</p>
-<h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/livestreams/{sid}</code></p>
-<h3 id='qing-qiu-can-shu'>请求参数</h3>
-<table><thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>_action</td>
-<td>动作描述，推流动作为UPDATE</td>
-</tr>
-<tr>
-<td>protocol</td>
-<td>推流协议</td>
-</tr>
-</tbody></table>
 <h2 id='huo-qu-jie-kou'>获取接口</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11"</span>
 </pre>
 
@@ -335,14 +366,30 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3jo78i11"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/3jo78i11"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/3jo78i11"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/3jo78i11"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/3jo78i11.m3u8"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"live_url"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 

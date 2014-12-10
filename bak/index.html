@@ -21,7 +21,7 @@
       </script>
   </head>
 
-  <body class="v1">
+  <body class="bak bak_index">
 
     <header class="navbar navbar-default navbar-fixed-top" role="banner">
       <div class="navbar-header">
@@ -145,9 +145,11 @@
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
-    "application": "app_name",
+    "name": "stream name",
     "stream_key": "random_stream_key",
     "is_private": false,
+    "storage_period": -1,
+    "protocol": "RTMP"
 }'</span>
 </pre>
 
@@ -156,36 +158,15 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"[default]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -206,9 +187,9 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>application</td>
-<td>所属于的应用名字</td>
-<td>必选</td>
+<td>name</td>
+<td>名字</td>
+<td>非可选</td>
 </tr>
 <tr>
 <td>stream_key</td>
@@ -219,6 +200,40 @@
 <td>is_private</td>
 <td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
 <td>可选，默认为false</td>
+</tr>
+<tr>
+<td>storage_period</td>
+<td>存储的时间周期，0为不存储，-1为永远存储，其余正整数为保存小时数</td>
+<td>可选，默认为0</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>视频推流协议</td>
+<td>必选</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>协议名</th>
+<th>协议</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RTMP</td>
+<td>Adobe Flash定义的实时多媒体流传输协议</td>
+</tr>
+<tr>
+<td>PRTP</td>
+<td>Pili定义的udp加速技术的TS传输协议</td>
+</tr>
+<tr>
+<td>PTTP</td>
+<td>基于tcp的TS传输协议</td>
+</tr>
+<tr>
+<td>HLS</td>
+<td>Apple定义的多媒体流传输协议</td>
 </tr>
 </tbody></table>
 <h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
@@ -232,36 +247,15 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"[default]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -271,13 +265,93 @@
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
 <p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h2 id='huo-qu-liu-lie-biao'>获取流列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams?page=1&amp;size=10"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"streams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn4"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn4.m3u8"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn4"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000003"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn7"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn7.m3u8"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn7"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>此接口返回对应用户创建的所有流的id以及流的连接状态。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>显示第几页，默认为第1页</td>
+</tr>
+<tr>
+<td>size</td>
+<td>一页大小多大，默认为10，最大100</td>
+</tr>
+</tbody></table>
 <h2 id='geng-xin-liu'>更新流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
+    "name": "stream name",
     "stream_key": "random_stream_key",
     "is_private": false,
+    "protocol": "RTMP"
 }'</span>
 </pre>
 
@@ -286,36 +360,15 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"[default]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
@@ -335,12 +388,20 @@
 </tr>
 </thead><tbody>
 <tr>
+<td>name</td>
+<td>名字</td>
+</tr>
+<tr>
 <td>stream_key</td>
 <td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
 </tr>
 <tr>
 <td>is_private</td>
 <td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>视频推流协议</td>
 </tr>
 </tbody></table>
 <h2 id='shan-chu-liu'>删除流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
@@ -354,36 +415,15 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream name"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_primary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://pili-in.qiniu.com/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://pili-in.qiniu.com/4q5cdgn2_secondary"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"live_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"[default]"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+    </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTMP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"play_url"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
