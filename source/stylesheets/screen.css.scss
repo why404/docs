@@ -67,7 +67,24 @@ header{
     .navbar-brand{
       display: inline-block;
       padding: 5px 15px;
-      &:hover{ background-color: transparent;}
+      margin: 5px 20px 0 20px;
+
+      background-image: url(http://7q5ceh.com1.z0.glb.clouddn.com/pili/logo-pili-white.png);
+      background-repeat: no-repeat;
+      background-color: transparent;
+      background-position: center;
+      background-size: contain;
+
+      img{
+        width: 100%;
+        opacity: 0;
+      }
+    }
+
+    @media only screen and (-webkit-device-pixel-ratio: 2){
+      .navbar-brand {
+        background-image: url(http://7q5ceh.com1.z0.glb.clouddn.com/pili/logo-pili-white@2x.png);
+      }
     }
   }
 
