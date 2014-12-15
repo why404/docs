@@ -84,7 +84,7 @@
 
     `url = "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600"`
 
- 2. 使用`{secert_key}`对拼接后的推流地址进行HMAC-SHA1签名
+ 2. 使用`{stream_key}`对拼接后的推流地址进行HMAC-SHA1签名
 
     `sign = hmac_sha1(url, "{stream_key}")`
 
