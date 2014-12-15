@@ -392,6 +392,10 @@ header{
 
   strong{ color: #000; }
 
+  .doc-focus{
+    padding-top: 65px;
+  }
+
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>ul, &>ol, &>aside, &>dl {
     padding: 0 $main-padding;
     @include box-sizing(border-box);
@@ -412,14 +416,14 @@ header{
   h1 {
     font-size: 2em;
     margin: 0;
-    padding-top: 55px;
+    padding-top: 25px;
     border-bottom: 1px solid #dee5e7;
   }
 
   h2 {
     margin: 0 20px;
     padding: 0;
-    padding-top: 65px;
+    padding-top: 20px;
     border-bottom: 1px solid #eeeef4;
   }
 
@@ -427,7 +431,7 @@ header{
   // against the h1s.
   h1 + h2, h1 + div + h2 {
     // margin: 0 0 10px 0;
-    padding-top: 65px;
+    padding-top: 20px;
     border-top: none;
   }
 
