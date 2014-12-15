@@ -2,9 +2,9 @@
 
 @import 'compass';
 @import 'variables';
-// @import 'syntax';
+@import 'syntax';
 
-@import 'solarized-dark';
+// @import 'solarized-dark';
 
 // @import 'superhero-bootstrap';
 
@@ -31,34 +31,38 @@ under the License.
 html, body {
   // font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   // font-family: "Lantinghei SC","Hiragino Sans GB","Microsoft Yahei";
-  // font-size: 14px;
-  // line-height: 1.42857143;
-  // color: #ebebeb;
-  // background-color: #2b3e50;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: rgb(54, 63, 68);
+  background-color: $main-bg;
 
-  // height: 100%;
-  // padding: 0;
-  // margin: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
-  // -webkit-text-size-adjust: none; /* Never autoresize text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: none; /* Never autoresize text */
 }
 
 body{
   margin: 0;
-  padding-top: 45px;
+  padding-top: 50px;
 }
 
+a{
+  color: $link-color;
+}
 
 header{
   width: 100%;
-  height: 45px;
-  line-height: 45px;
+  height: 50px;
+  line-height: 50px;
   position: fixed;
   top: 0;
   z-index: 999;
-  background: #4e5d6c;
+  background: $nav-bg;
 
   img{ margin-bottom: 0;}
 
@@ -66,8 +70,23 @@ header{
     width: 231px; float: left;
     .navbar-brand{
       display: inline-block;
-      padding: 5px 15px;
-      &:hover{ background-color: transparent;}
+      margin: 0px 20px;
+      background-image: url(http://7q5ceh.com1.z0.glb.clouddn.com/pili/logo-pili-white.png);
+      background-repeat: no-repeat;
+      background-color: transparent;
+      background-position: center;
+      background-size: contain;
+
+      img{
+        width: 100%;
+        opacity: 0;
+      }
+    }
+
+    @media only screen and (-webkit-device-pixel-ratio: 2){
+      .navbar-brand {
+        background-image: url(http://7q5ceh.com1.z0.glb.clouddn.com/pili/logo-pili-white@2x.png);
+      }
     }
   }
 
@@ -110,7 +129,7 @@ header{
     text-decoration: none;
     padding: 0 10px;
     line-height: 30px;
-    background-color: #39495A;
+    background-color: $lang-select-bg;
 
     &:active {
       background-color: $lang-select-pressed-bg;
@@ -118,7 +137,7 @@ header{
     }
 
     &.active {
-      background-color: #002b36;
+      background-color: $lang-select-active-bg;
       color: $lang-select-active-text;
     }
   }
@@ -148,7 +167,7 @@ header{
   @include transition(left ease-in-out 0.3s);
   overflow-y: auto;
   overflow-x: hidden;
-  border-right: 1px solid #4e5d6c;
+  border-right: 1px solid #dee5e7;
   position: fixed;
   z-index: 30;
   top: 45px;
@@ -157,7 +176,7 @@ header{
   width: $nav-width;
   font-size: 16px;
   font-weight: bold;
-  background: #002b36;
+  background: $tocify-wrapper-bg;
 
   // language selector for mobile devices
   .lang-selector {
@@ -175,14 +194,12 @@ header{
     position: relative;
 
     input {
-      border-width: 0 0 1px 0;
-      border-color: $search-box-border-color;
       padding: 6px;
-      @include box-sizing(border-box);
-      margin: 15px 10px;
+      margin: 15px 10px 10px 10px;
       width: $nav-width - 20;
       outline: none;
       border-radius: 0; /* ios has a default border radius */
+      @include box-sizing(border-box);
     }
 
     &:before {
@@ -215,7 +232,7 @@ header{
     li { margin: 1em $nav-padding; line-height: 1; }
 
     a {
-      color: $nav-text;
+      // color: $nav-text;
       text-decoration: none;
       &:hover {text-decoration: underline;}
     }
@@ -242,23 +259,25 @@ header{
   }
 
   li {
-    color: $nav-text;
+    // color: $nav-text;
+    word-break: break-all;
     @include transition-property('background');
     @include transition-timing-function('linear');
     @include transition-duration(230ms);
   }
 
   a{
-    color: #ebebeb;
-    text-decoration: none;
+    color: $tocify-wrapper-link; text-decoration: none;
 
-    &:hover { text-decoration: none; background-color: #4e5d6c; }
+    &:hover { text-decoration: none; background-color: $tocify-wrapper-link-hover; }
   }
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    background-color: #df691a;
-    color: #ffffff;
+    background-color: $tocify-focus;
+
+    a{ color: #FFF; }
+    a:hover{ background-color: $tocify-focus;}
   }
 
   // Subheaders are the submenus that slide open
@@ -299,7 +318,7 @@ header{
     display: block;
     $side-pad: $main-padding / 2 - 8px;
     padding: $side-pad $side-pad $side-pad;
-    background-color: rgba($main-bg, 0.7);
+    background-color: rgb(238, 238, 244);
     @include transform-origin(0, 0);
     @include transform(rotate(-90deg) translate(-100%, 0));
     border-radius: 0 0 0 5px;
@@ -307,7 +326,7 @@ header{
   padding: 0 1.5em 5em 0; // increase touch size area
   display: none;
   position: fixed;
-  top: 45px;
+  top: 50px;
   left: 0;
   z-index: 100;
   color: #000;
@@ -315,10 +334,7 @@ header{
   font-weight: bold;
   opacity: 0.7;
   line-height: 16px;
-  img {
-    height: 16px;
-    vertical-align: bottom;
-  }
+  background-color: transparent;
 
   @include transition(left ease-in-out 0.3s);
 
@@ -390,9 +406,9 @@ header{
 
   h1 {
     font-size: 3em;
-    margin: 42px 0 21px;
-    padding-bottom: 9.5px;
-    // border-bottom: 1px solid #4e5d6c;
+    margin: 0;
+    padding-top: 55px;
+    border-bottom: 1px solid #dee5e7;
   }
 
   // h1:first-child, div:first-child + h1 {
@@ -405,8 +421,8 @@ header{
     // margin-top: 4em;
     // margin-bottom: 0;
     // border-top: 1px solid #4e5d6c;
-    margin-right: 0;
-    padding-top: 1.2em;
+    margin: 0;
+    padding-top: 65px;
     // padding-bottom: 1.2em;
     // @include background-image(
     //   linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0))
@@ -417,8 +433,9 @@ header{
   // against the h1s.
   h1 + h2, h1 + div + h2 {
     // margin-top: $h1-margin-bottom * -1;
+    margin: 0;
+    padding-top: 65px;
     border-top: none;
-    padding-top: 0;
   }
 
   h3, h4, h5, h6 {
@@ -477,13 +494,12 @@ header{
 
   code {
     display: inline-block;
-    background-color: #073642;
+    background-color: rgb(238, 238, 244);
     margin-left: 3px;
     margin-right: 3px;
     padding: 2px 5px;
     border-radius: 2px;
     @extend %break-words;
-    // @extend %code-font;
   }
 
   aside {
@@ -532,7 +548,7 @@ header{
     // background-color: $code-bg;
     // color: #fff;
 
-    margin: 0;
+    margin: 0 15px 0 0;
     width: $examples-width;
 
     float:right;
@@ -552,9 +568,10 @@ header{
   }
 
   pre {
+    max-height: 500px;
     padding: 15px;
-    // @extend %code-font;
     line-height: 1.6;
+    overflow: auto;
   }
 
   blockquote {

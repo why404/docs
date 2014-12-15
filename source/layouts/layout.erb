@@ -27,6 +27,8 @@ under the License.
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
 
+    <link rel="stylesheet" type="text/css" href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css">
+
     <script src="http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>
@@ -48,15 +50,17 @@ under the License.
     <header class="navbar navbar-default navbar-fixed-top" role="banner">
       <div class="navbar-header">
         <a href="../" class="navbar-brand">
-          <img src="http://qgroup.qiniudn.com/qcasting-logo-small-t.png" />
+          <img src="http://7q5ceh.com1.z0.glb.clouddn.com/pili/logo-pili-white.png" />
         </a>
       </div>
 
       <nav role="navigation">
+        <!--
         <ul class="nav">
-<!--           <li><a href="qgenius.com/qcasting/">首页</a></li>
-          <li><a href="http://qgenius.github.io/qcasting-docs/v2/" target="_blank">开发文档</a></li> -->
+          <li><a href="qgenius.com/qcasting/">首页</a></li>
+          <li><a href="http://qgenius.github.io/qcasting-docs/v2/" target="_blank">开发文档</a></li>
         </ul>
+        -->
 
         <% if language_tabs %>
           <div class="lang-selector">
@@ -73,7 +77,9 @@ under the License.
     </header>
 
 
-    <a href="#" id="nav-button"><span>NAV<%= image_tag('navbar.png') %></span></a>
+    <a href="#" id="nav-button">
+      <span><i class="fa fa-bars"></i> NAV</span>
+    </a>
 
 
     <div class="tocify-wrapper">

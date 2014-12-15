@@ -53,7 +53,7 @@
         });
         highlight.call(this);
       } else {
-        searchResults.html('<li>No Results Found for "' + this.value + '"</li>');
+        searchResults.html('<li>对不起，没有找到与 "' + this.value + '" 相关内容</li>');
       }
     } else {
       unhighlight();
