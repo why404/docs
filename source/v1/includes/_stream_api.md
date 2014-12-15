@@ -255,7 +255,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 }
 ```
 
-此接口更新流的推流地址。
+此接口更新流的相关信息。
 
 ### HTTP请求
 
