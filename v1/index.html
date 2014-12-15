@@ -130,10 +130,11 @@
 <h2 id='bo-fang-jian-quan'>播放鉴权</h2>
 <p>播放凭证仅用于<code class="prettyprint">is_private</code>为<code class="prettyprint">true</code>的流的直播和回放。对于<code class="prettyprint">is_private</code>为<code class="prettyprint">false</code>的流，直接使用播放地址就可以播放，不需要凭证。</p>
 
-<p>对于<code class="prettyprint">is_private</code>为<code class="prettyprint">true</code>的流，不管是直播还是回放，客户在进行播放前，要先计算播放凭证，作为认证信息拼入播放地址，进行播放。客户使用自己的<code class="prettyprint">access_key</code>和<code class="prettyprint">secret_key</code>，过期时间戳和从设备服务器请求到的播放地址，来生成播放凭证。</p>
+<p>对于<code class="prettyprint">is_private</code>为<code class="prettyprint">true</code>的流，不管是直播还是回放，客户在进行播放前，要先计算播放凭证，作为认证信息拼入播放地址，进行播放。客户使用<code class="prettyprint">stream_key</code>，过期时间戳和从设备服务器请求到的播放地址，来生成播放凭证。</p>
 
-<p><code class="prettyprint">因为有效时间戳的创建和验证在不同的服务端进行（在业务服务器创建，在云服务器验证），因此开发者的业务服务器需要尽可能校准标准时间，否则可能出现凭证刚创建就过期等各种奇怪的问题。</code>
-凭证算法：</p>
+<p><strong>因为有效时间戳的创建和验证在不同的服务端进行（在业务服务器创建，在云服务器验证），因此开发者的业务服务器需要尽可能校准标准时间，否则可能出现凭证刚创建就过期等各种奇怪的问题。</strong></p>
+
+<p>凭证算法：</p>
 
 <ol>
 <li><p>将过期时间戳拼入播放地址</p>
@@ -143,15 +144,15 @@
 <p><code class="prettyprint">url = &quot;http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&quot;</code></p></li>
 <li><p>使用<code class="prettyprint">{secert_key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
 
-<p><code class="prettyprint">sign = hmac_sha1(url, &quot;{secert_key}&quot;)</code></p></li>
+<p><code class="prettyprint">sign = hmac_sha1(url, &quot;{stream_key}&quot;)</code></p></li>
 <li><p>对签名进行URL安全的Base64编码，生成<code class="prettyprint">play_token</code></p>
 
 <p><code class="prettyprint">play_token = urlsafe_base64_encode(sign)</code></p></li>
 <li><p>播放</p>
 
-<p><code class="prettyprint">url = url + &quot;&amp;token={access_key}:&quot; + play_token</code></p>
+<p><code class="prettyprint">url = url + &quot;&amp;token=&quot; + play_token</code></p>
 
-<p>之后客户播放时，将<code class="prettyprint">access_key</code>和播放凭证组合，作为<code class="prettyprint">token</code>加入到url地址的query最后一项，实际使用<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&amp;token={access_key}:{play_token}</code>的请求进行播放。</p></li>
+<p>之后客户播放时，将播放凭证作为<code class="prettyprint">token</code>加入到url地址的query最后一项，实际使用<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&amp;token={play_token}</code>的请求进行播放。</p></li>
 </ol>
 
           <h1 id='liu-guan-li-jie-kou'>流管理接口</h1><h2 id='chuang-jian-liu'>创建流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
@@ -298,8 +299,8 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="err">[</span><span class="w">
-        </span><span class="err">{</span><span class="w">
+    </span><span class="s2">"streams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
@@ -334,8 +335,8 @@
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
-    </span><span class="err">]</span><span class="w">
-</span><span class="err">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></pre>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">GET /v1/streams/{id}</code></p>
