@@ -90,9 +90,7 @@
 
 <p><code class="prettyprint">encoded_sign = urlsafe_base64_encode(sign)</code></p></li>
 </ol>
-<h2 id='tui-liu-jian-quan'>推流鉴权</h2>
-<p>凭证算法1：安全算法</p>
-
+<h2 id='tui-liu-jian-quan'>推流鉴权</h2><h3 id='an-quan-suan-fa'>安全算法</h3>
 <p>客户在进行推流前，要先计算推流凭证，作为认证信息拼入推流地址，进行推流。客户利用自己记录的<code class="prettyprint">nonce</code>，流信息里的<code class="prettyprint">stream_key</code>和推流地址<code class="prettyprint">push_url</code>，来生成推流凭证。</p>
 
 <p><strong>这种算法保证推流地址一次有效，即便被中间人窃取，也没法盗用已有地址进行推流。可以最大限度保护客户的资源不被盗用。推荐实际生产时尽量使用此推流算法。</strong></p>
@@ -121,9 +119,7 @@
 
 <p>之后客户推流时，将推流凭证加入到url地址的query最后一项，实际使用<code class="prettyprint">rtmp://115.238.155.183:49166/livestream/4q5cdgn2?nonce=1412121600&amp;token={push_token}</code>的请求进行推流。</p></li>
 </ol>
-
-<p>凭证算法2：简便算法</p>
-
+<h3 id='jian-bian-suan-fa'>简便算法</h3>
 <p>客户利用流信息里的<code class="prettyprint">stream_key</code>和推流地址<code class="prettyprint">push_url</code>，来生成推流凭证。</p>
 
 <p><strong>这种算法生成的推流地址不会变化，一旦泄露，会被人利用推流，一方面资源会被占用，另一方面被盗用后视频内容无法保证。建议只在测试时使用，测试后更换<code class="prettyprint">stream_key</code>。客户使用中发现流内容可能被盗用时，也请更换<code class="prettyprint">stream_key</code>。</strong></p>
