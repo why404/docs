@@ -385,7 +385,9 @@ header{
     clear: both;
   }
 
-  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
+  strong{ color: #000; }
+
+  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>ul, &>ol, &>aside, &>dl {
     padding: 0 $main-padding;
     @include box-sizing(border-box);
     display: block;
@@ -403,31 +405,29 @@ header{
   }
 
   h1 {
-    font-size: 3em;
+    font-size: 2em;
     margin: 0;
     padding-top: 55px;
     border-bottom: 1px solid #dee5e7;
   }
 
   h2 {
-    margin: 0;
+    margin: 0 20px;
+    padding: 0;
     padding-top: 65px;
+    border-bottom: 1px solid #eeeef4;
   }
 
   // h2s right after h1s should bump right up
   // against the h1s.
   h1 + h2, h1 + div + h2 {
-    margin: 0 0 10px 0;
+    // margin: 0 0 10px 0;
     padding-top: 65px;
     border-top: none;
   }
 
   h3, h4, h5, h6 {
-    @extend %header-font;
-    font-size: 12px;
-    margin-top: 2.5em;
     margin-bottom: 0.8em;
-    text-transform: uppercase;
   }
 
   h4, h5, h6 {
@@ -441,24 +441,38 @@ header{
   }
 
   table {
+    margin: 0 20px;
     margin-bottom: 1em;
+    padding: 0;
     overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+
     th,td {
       text-align: left;
       vertical-align: top;
-      line-height: 1.6;
+      border-left: none;
+      border-bottom: 1px solid #ccc;
+      border-right: 1px solid #ccc;
     }
 
     th {
+      line-height: 1.6;
       padding: 5px 10px;
-      border-bottom: 1px solid #ccc;
       vertical-align: bottom;
+      border-bottom: 2px solid #ccc;
+      &:last-child{ border-right: none;}
     }
 
-    td { padding: 10px; }
+    td {
+      padding: 10px;
+      line-height: 1.2;
+      &:last-child{ border-right: none;}
+    }
     tr:last-child { border-bottom: 1px solid #ccc; }
     tr:nth-child(odd)>td {
-      // background-color: lighten($main-bg,4.2%);
+      background-color: rgb(249, 249, 249);
     }
 
     tr:nth-child(even)>td {
@@ -471,6 +485,7 @@ header{
 
   p, li, dt, dd {
     line-height: 1.6;
+    margin: 8px 0;
   }
 
   img { max-width: 100%; }
@@ -480,9 +495,11 @@ header{
     background-color: rgb(238, 238, 244);
     margin-left: 3px;
     margin-right: 3px;
-    padding: 2px 5px;
+    padding: 0 5px;
     border-radius: 2px;
     @extend %break-words;
+
+    &:first-child{ margin-left: 0;}
   }
 
   aside {
@@ -531,7 +548,7 @@ header{
     // background-color: $code-bg;
     // color: #fff;
 
-    margin: 0 15px;
+    margin: 0 20px;
 
     @include box-sizing(border-box);
 
@@ -549,7 +566,7 @@ header{
   pre {
     max-height: 500px;
     padding: 15px;
-    line-height: 1.6;
+    line-height: 1.2;
     overflow: auto;
   }
 
