@@ -708,7 +708,39 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
-          <h1 id='liu-guan-li-jie-kou'>流管理接口</h1><h2 id='chuang-jian-liu'>创建流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
+          <h1 id='liu-guan-li-jie-kou'>流管理接口</h1><h2 id='chuang-jian-liu'>创建流</h2>
+<p>此接口返回注册后的流id和推流地址。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">POST /v1/streams</code></p>
+<h3 id='ren-zheng-fang-fa'>认证方法</h3>
+<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
+
+<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>是否可选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>stream_key</td>
+<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
+<td>可选，如果不指定，则服务器会随机生成一串stream_key</td>
+</tr>
+<tr>
+<td>is_private</td>
+<td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
+<td>可选，默认为false</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>关于流的注释，没有业务上的含义</td>
+<td>可选，默认为空</td>
+</tr>
+</tbody></table>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
@@ -758,39 +790,13 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-
-<p>此接口返回注册后的流id和推流地址。</p>
-<h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/streams</code></p>
+<h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">GET /v1/streams/{id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
 <p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
-<h3 id='qing-qiu-can-shu'>请求参数</h3>
-<table><thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>是否可选</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>stream_key</td>
-<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
-<td>可选，如果不指定，则服务器会随机生成一串stream_key</td>
-</tr>
-<tr>
-<td>is_private</td>
-<td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
-<td>可选，默认为false</td>
-</tr>
-<tr>
-<td>comment</td>
-<td>关于流的注释，没有业务上的含义</td>
-<td>可选，默认为空</td>
-</tr>
-</tbody></table>
-<h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -835,13 +841,13 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h3 id='http-qing-qiu'>HTTP请求</h3>
+<h2 id='cha-xun-liu-lie-biao'>查询流列表</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">GET /v1/streams/{id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
 <p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
-<h2 id='cha-xun-liu-lie-biao'>查询流列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -891,13 +897,35 @@
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
+<h2 id='geng-xin-liu'>更新流</h2>
+<p>此接口更新流的相关信息。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/streams/{id}</code></p>
+<p><code class="prettyprint">POST /v1/streams/{id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
 <p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
-<h2 id='geng-xin-liu'>更新流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>stream_key</td>
+<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
+</tr>
+<tr>
+<td>is_private</td>
+<td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>关于流的注释，没有业务上的含义</td>
+</tr>
+</tbody></table>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
@@ -946,35 +974,15 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-
-<p>此接口更新流的相关信息。</p>
-<h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/streams/{id}</code></p>
+<h2 id='shan-chu-liu'>删除流</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">DELETE /v1/streams/{id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
 <p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
-<table><thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>stream_key</td>
-<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
-</tr>
-<tr>
-<td>is_private</td>
-<td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
-</tr>
-<tr>
-<td>comment</td>
-<td>关于流的注释，没有业务上的含义</td>
-</tr>
-</tbody></table>
-<h2 id='shan-chu-liu'>删除流</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
+<p>无</p>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
@@ -1019,28 +1027,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">DELETE /v1/streams/{id}</code></p>
-<h3 id='ren-zheng-fang-fa'>认证方法</h3>
-<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
-
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
-<h3 id='qing-qiu-can-shu'>请求参数</h3>
-<p>无</p>
-<h2 id='liu-zhuang-tai-tui-song-jie-kou'>流状态推送接口</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disconnected"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-<h3 id='http-qing-qiu'>HTTP请求</h3>
+<h2 id='liu-zhuang-tai-tui-song-jie-kou'>流状态推送接口</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">GET /v1/streams/{id}/status</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
@@ -1058,7 +1045,7 @@
 <td>connected表示正在推流，disconnected表示没有推流</td>
 </tr>
 </tbody></table>
-<h2 id='huo-qu-hui-fang-pian-duan-lie-biao'>获取回放片段列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -1068,20 +1055,10 @@
 <p>返回结果：</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926345158</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926837567</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409929883546</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409932087561</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disconnected"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-
+<h2 id='huo-qu-hui-fang-pian-duan-lie-biao'>获取回放片段列表</h2>
 <p>本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">GET /v1/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
@@ -1111,7 +1088,7 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='huo-qu-hui-fang-pian-duan-di-zhi'>获取回放片段地址</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -1121,10 +1098,20 @@
 <p>返回结果：</p>
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://115.238.155.183:49166/livestream/jnl617jk.m3u8"</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926345158</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926837567</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409929883546</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409932087561</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-
+<h2 id='huo-qu-hui-fang-pian-duan-di-zhi'>获取回放片段地址</h2>
 <p>此接口获取回放片段的播放地址</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">GET /v1/streams/{id}/segments/play?starttime={starttime}&amp;endtime={endtime}</code></p>
@@ -1154,16 +1141,20 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='shan-chu-pian-duan'>删除片段</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X DELETE
+-X GET
 </pre>
 
 <blockquote>
-<p>返回结果为空</p>
+<p>返回结果：</p>
 </blockquote>
-
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://115.238.155.183:49166/livestream/jnl617jk.m3u8"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<h2 id='shan-chu-pian-duan'>删除片段</h2>
 <p>此接口删除指定时间内的回放片段。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">DELETE /v1/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
@@ -1193,6 +1184,15 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X DELETE
+</pre>
+
+<blockquote>
+<p>返回结果为空</p>
+</blockquote>
 
           <h1 id='jie-kou-fan-hui'>接口返回</h1>
 <p>接口输入和输出都是用JSON格式。不同的返回码对应不同的格式。</p>
