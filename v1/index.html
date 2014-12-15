@@ -142,7 +142,7 @@
 <p>假设过期时间戳为<code class="prettyprint">1412121600</code>（UTC时间2014年10月01日0点0分0秒的UNIX时间戳），播放地址为<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8</code>，拼接后的推流地址是<code class="prettyprint">http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600</code></p>
 
 <p><code class="prettyprint">url = &quot;http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8?expiry=1412121600&quot;</code></p></li>
-<li><p>使用<code class="prettyprint">{secert_key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
+<li><p>使用<code class="prettyprint">{stream_key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
 
 <p><code class="prettyprint">sign = hmac_sha1(url, &quot;{stream_key}&quot;)</code></p></li>
 <li><p>对签名进行URL安全的Base64编码，生成<code class="prettyprint">play_token</code></p>
