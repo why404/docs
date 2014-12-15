@@ -151,7 +151,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 ```json
 {
     "total": 1,
-    [
+    "streams": [
         {
             "id": "54068a9063b906000d000001",
             "application": "app_name",
