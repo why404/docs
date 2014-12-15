@@ -4,6 +4,26 @@
 创建流
 -----
 
+此接口返回注册后的流id和推流地址。
+
+### HTTP请求
+
+`POST /v1/streams`
+
+### 认证方法
+
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
+
+`Authorization: pili {access_key}:{encoded_sign}`
+
+### 请求参数
+
+参数|描述|是否可选
+----|----|------
+stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
+is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
+comment|关于流的注释，没有业务上的含义|可选，默认为空
+
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
@@ -56,28 +76,19 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 }
 ```
 
-此接口返回注册后的流id和推流地址。
+
+查询流信息
+---------
 
 ### HTTP请求
 
-`POST /v1/streams`
+`GET /v1/streams/{id}`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: pili {access_key}:{encoded_sign}`
-
-### 请求参数
-
-参数|描述|是否可选
-----|----|------
-stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
-is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
-comment|关于流的注释，没有业务上的含义|可选，默认为空
-
-查询流信息
----------
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
@@ -126,6 +137,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 }
 ```
 
+
+查询流列表
+---------
+
 ### HTTP请求
 
 `GET /v1/streams/{id}`
@@ -135,9 +150,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
 `Authorization: pili {access_key}:{encoded_sign}`
-
-查询流列表
----------
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams" \
@@ -191,9 +203,15 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 }
 ```
 
+
+更新流
+-----
+
+此接口更新流的相关信息。
+
 ### HTTP请求
 
-`GET /v1/streams/{id}`
+`POST /v1/streams/{id}`
 
 ### 认证方法
 
@@ -201,8 +219,13 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 `Authorization: pili {access_key}:{encoded_sign}`
 
-更新流
------
+### 请求参数
+
+参数|描述
+----|----
+stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串
+is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
+comment|关于流的注释，没有业务上的含义|可选，默认为空
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
@@ -255,11 +278,13 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 }
 ```
 
-此接口更新流的相关信息。
+
+删除流
+-----
 
 ### HTTP请求
 
-`POST /v1/streams/{id}`
+`DELETE /v1/streams/{id}`
 
 ### 认证方法
 
@@ -269,14 +294,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### 请求参数
 
-参数|描述
-----|----
-stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串
-is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
-comment|关于流的注释，没有业务上的含义|可选，默认为空
-
-删除流
------
+无
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
@@ -325,37 +343,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 }
 ```
 
-### HTTP请求
-
-`DELETE /v1/streams/{id}`
-
-### 认证方法
-
-使用[接口鉴权](#jie-kou-jian-quan)进行认证
-
-`Authorization: pili {access_key}:{encoded_sign}`
-
-### 请求参数
-
-无
 
 流状态推送接口
 ------------
-
-```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
--H "Content-Type: application/json" \
--X GET
-```
-
-> 返回结果：
-
-```json
-{
-    "status": "disconnected"
-}
-```
 
 ### HTTP请求
 
@@ -373,8 +363,43 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status" \
 ----|----
 status|connected表示正在推流，disconnected表示没有推流
 
+```shell
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
+-H "Content-Type: application/json" \
+-X GET
+```
+
+> 返回结果：
+
+```json
+{
+    "status": "disconnected"
+}
+```
+
+
 获取回放片段列表
 --------------
+
+本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。
+
+### HTTP请求
+
+`GET /v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
+
+### 认证方法
+
+使用[接口鉴权](#jie-kou-jian-quan)进行认证
+
+`Authorization: pili {access_key}:{encoded_sign}`
+
+### 请求参数
+
+参数|描述|是否可选|类型
+----|----|-----|----
+starttime|列表开始时间|可选|millisecond unix timestamp
+endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
@@ -401,42 +426,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 }
 ```
 
-本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。
-
-### HTTP请求
-
-`GET /v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
-
-### 认证方法
-
-使用[接口鉴权](#jie-kou-jian-quan)进行认证
-
-`Authorization: pili {access_key}:{encoded_sign}`
-
-### 请求参数
-
-参数|描述|是否可选|类型
-----|----|-----|----
-starttime|列表开始时间|可选|millisecond unix timestamp
-endtime|列表结束时间|可选|millisecond unix timestamp
 
 获取回放片段地址
 --------------
-
-```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
--H "Content-Type: application/json" \
--X GET
-```
-
-> 返回结果：
-
-```json
-{
-    "url": "http://115.238.155.183:49166/livestream/jnl617jk.m3u8"
-}
-```
 
 此接口获取回放片段的播放地址
 
@@ -457,17 +449,24 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/p
 starttime|开始时间|必选|millisecond unix timestamp
 endtime|结束时间|可选|millisecond unix timestamp
 
-删除片段
--------
-
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/play?starttime=1409926345158" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
--X DELETE
+-X GET
 ```
 
-> 返回结果为空
+> 返回结果：
+
+```json
+{
+    "url": "http://115.238.155.183:49166/livestream/jnl617jk.m3u8"
+}
+```
+
+
+删除片段
+-------
 
 此接口删除指定时间内的回放片段。
 
@@ -487,3 +486,12 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 ----|----|-----|----
 starttime|开始时间|必选|millisecond unix timestamp
 endtime|结束时间|必选|millisecond unix timestamp
+
+```shell
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
+-H "Authorization: pili {access_key}:{encoded_sign}" \
+-H "Content-Type: application/json" \
+-X DELETE
+```
+
+> 返回结果为空
