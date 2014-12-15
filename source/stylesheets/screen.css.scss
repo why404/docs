@@ -165,12 +165,12 @@ header{
 
 .tocify-wrapper {
   @include transition(left ease-in-out 0.3s);
-  overflow-y: auto;
-  overflow-x: hidden;
+  // overflow-y: auto;
+  // overflow-x: hidden;
   border-right: 1px solid #dee5e7;
   position: fixed;
   z-index: 30;
-  top: 45px;
+  top: 50px;
   left: 0;
   bottom: 0;
   width: $nav-width;
@@ -187,10 +187,13 @@ header{
     }
   }
 
-  // This is the logo at the top of the ToC
-  & >img { display: block; }
+  .tocify{ margin-top: 5px; }
 
-  & >.search {
+  // This is the logo at the top of the ToC
+  & > img { display: block; }
+
+  & > .search {
+    display: $enabled-search;
     position: relative;
 
     input {
@@ -214,6 +217,7 @@ header{
   }
 
   .search-results {
+    display: $enabled-search;
     margin-top: 0;
     @include box-sizing(border-box);
     height: 0;
@@ -262,7 +266,7 @@ header{
     word-break: break-all;
     @include transition-property('background');
     @include transition-timing-function('linear');
-    @include transition-duration(230ms);
+    @include transition-duration(130ms);
   }
 
   a{
@@ -273,6 +277,7 @@ header{
 
   // This is the currently selected ToC entry
   .tocify-focus {
+    margin-right: -1px;
     background-color: $tocify-focus;
 
     a{ color: #FFF; }
@@ -375,7 +380,7 @@ header{
 
 .content {
   // to place content above the dark box
-  padding: 2px 0;
+  padding: 0 0 20px 0;
   position: relative;
   z-index: 30;
 
