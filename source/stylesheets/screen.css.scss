@@ -206,7 +206,6 @@ header{
       position: absolute;
       top: 17px;
       left: $nav-padding;
-      // @extend %icon-search;
     }
   }
 
@@ -387,7 +386,6 @@ header{
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
-    margin-right: $examples-width;
     padding: 0 $main-padding;
     @include box-sizing(border-box);
     display: block;
@@ -411,29 +409,15 @@ header{
     border-bottom: 1px solid #dee5e7;
   }
 
-  // h1:first-child, div:first-child + h1 {
-  //   border-top-width: 0;
-  //   margin-top: 0;
-  // }
-
   h2 {
-    // font-size: 20px;
-    // margin-top: 4em;
-    // margin-bottom: 0;
-    // border-top: 1px solid #4e5d6c;
     margin: 0;
     padding-top: 65px;
-    // padding-bottom: 1.2em;
-    // @include background-image(
-    //   linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0))
-    // );
   }
 
   // h2s right after h1s should bump right up
   // against the h1s.
   h1 + h2, h1 + div + h2 {
-    // margin-top: $h1-margin-bottom * -1;
-    margin: 0;
+    margin: 0 0 10px 0;
     padding-top: 65px;
     border-top: none;
   }
@@ -487,7 +471,6 @@ header{
 
   p, li, dt, dd {
     line-height: 1.6;
-    margin-top: 0;
   }
 
   img { max-width: 100%; }
@@ -548,11 +531,7 @@ header{
     // background-color: $code-bg;
     // color: #fff;
 
-    margin: 0 15px 0 0;
-    width: $examples-width;
-
-    float:right;
-    clear:right;
+    margin: 0 15px;
 
     @include box-sizing(border-box);
 
