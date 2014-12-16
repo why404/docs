@@ -659,7 +659,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-liu-lie-biao'>查询流列表</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/streams/{id}</code></p>
+<p><code class="prettyprint">GET /v1/streams</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
@@ -1017,7 +1017,22 @@
 <p>返回格式参见不同接口的文档</p>
 <h2 id='204'>204</h2>
 <p>无返回内容</p>
-<h2 id='400'>400</h2>
+<h2 id='400'>400</h2><pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bad request"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400001</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid string"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"field2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400004</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid bool"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
 <p><code class="prettyprint">error</code>为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。<code class="prettyprint">message</code>主要用于客户端记录log，最好不用于输出。｀details`用于记录请求中具体某个字段的错误原因。</p>
 
 <table><thead>
@@ -1073,22 +1088,12 @@
 <td>需要给出endtime参数</td>
 </tr>
 </tbody></table>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bad request"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"field1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400001</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid string"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"field2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">400004</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid bool"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+<h2 id='401-404-500'>401/404/500</h2><pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">401001</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid authorization"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='401-404-500'>401/404/500</h2>
+
 <p><code class="prettyprint">error</code>为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。<code class="prettyprint">message</code>主要用于客户端记录log，最好不用于输出。</p>
 
 <table><thead>
@@ -1124,11 +1129,6 @@
 <td>服务内部错误，message为细节错误，用于记录log</td>
 </tr>
 </tbody></table>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">401001</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid authorization"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
 
       </div>
 
