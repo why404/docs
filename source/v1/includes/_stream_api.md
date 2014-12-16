@@ -143,7 +143,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ### HTTP请求
 
-`GET /v1/streams/{id}`
+`GET /v1/streams`
 
 ### 认证方法
 
