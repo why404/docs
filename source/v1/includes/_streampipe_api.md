@@ -9,6 +9,7 @@ Stream Gateway接口
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check" \
 -d '{
+    "name": "1080p",
     "query": "e=1414671959&token=rejwkq432jk4",
     "protocol": "HLS",
     "action": "push"
@@ -20,6 +21,7 @@ $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check" 
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check" \
 -d '{
+    "name": "1080p",
     "query": "e=1414671959&token=rejwkq432jk4",
     "protocol": "RTMP",
     "action": "push"
@@ -50,6 +52,7 @@ Streamer接到上传请求，直播请求，时移播放请求后，将地址中
 
 参数|描述
 ----|----
+name|与url相关联的profile的名字，如果没有指定profile，为空
 query|用户请求时所用地址的query部分。请不要改变query的原始顺序。
 protocol|用户请求的协议，RTMP或者是HLS
 action|对url的请求操作，如果是推流，为push，如果是直播或者时移回放，使用play

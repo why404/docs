@@ -64,7 +64,7 @@
 
 **这种算法生成的推流地址不会变化，一旦泄露，会被人利用推流，一方面资源会被占用，另一方面被盗用后视频内容无法保证。建议只在测试时使用，测试后更换`stream_key`。客户使用中发现流内容可能被盗用时，也请更换`stream_key`。**
 
-    `url = url + "&stream_key=" + {stream_key}`
+    `url = url + "?stream_key=" + {stream_key}`
 
 推流时，将`stream_key`加入到url地址的query最后一项，使用`rtmp://115.238.155.183:49166/livestream/4q5cdgn2?stream_key={stream_key}`的请求进行推流。
 
