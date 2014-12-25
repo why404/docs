@@ -124,7 +124,7 @@
 
 <p><strong>这种算法生成的推流地址不会变化，一旦泄露，会被人利用推流，一方面资源会被占用，另一方面被盗用后视频内容无法保证。建议只在测试时使用，测试后更换<code class="prettyprint">stream_key</code>。客户使用中发现流内容可能被盗用时，也请更换<code class="prettyprint">stream_key</code>。</strong></p>
 
-<p><code class="prettyprint">url = url + &quot;&amp;stream_key=&quot; + {stream_key}</code></p>
+<p><code class="prettyprint">url = url + &quot;?stream_key=&quot; + {stream_key}</code></p>
 
 <p>推流时，将<code class="prettyprint">stream_key</code>加入到url地址的query最后一项，使用<code class="prettyprint">rtmp://115.238.155.183:49166/livestream/4q5cdgn2?stream_key={stream_key}</code>的请求进行推流。</p>
 <h2 id='bo-fang-jian-quan'>播放鉴权</h2>

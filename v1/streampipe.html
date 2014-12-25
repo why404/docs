@@ -77,6 +77,7 @@
 </blockquote>
 <pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check"</span> <span class="se">\</span>
 -d <span class="s1">'{
+    "name": "1080p",
     "query": "e=1414671959&amp;token=rejwkq432jk4",
     "protocol": "HLS",
     "action": "push"
@@ -88,6 +89,7 @@
 </blockquote>
 <pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check"</span> <span class="se">\</span>
 -d <span class="s1">'{
+    "name": "1080p",
     "query": "e=1414671959&amp;token=rejwkq432jk4",
     "protocol": "RTMP",
     "action": "push"
@@ -118,6 +120,10 @@
 <th>描述</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>name</td>
+<td>与url相关联的profile的名字，如果没有指定profile，为空</td>
+</tr>
 <tr>
 <td>query</td>
 <td>用户请求时所用地址的query部分。请不要改变query的原始顺序。</td>
