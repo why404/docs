@@ -76,7 +76,7 @@
 
 <p><code class="prettyprint">Authorization: bearer {access_token}</code></p>
 <h2 id='tui-liu-jian-quan'>推流鉴权</h2>
-<p>客户在进行推流前，要先计算推流凭证，作为认证信息拼入推流地址，进行推流。客户利用流信息里的<code class="prettyprint">stream_key</code>，推流次数<code class="prettyprint">push_count</code>和从设备服务器请求到的推流地址，来生成推流凭证。</p>
+<p>客户在进行推流前，要先计算推流凭证，作为认证信息拼入推流地址，进行推流。客户利用流信息里的<code class="prettyprint">key</code>，推流次数<code class="prettyprint">push_count</code>和从设备服务器请求到的推流地址，来生成推流凭证。</p>
 
 <p>凭证算法：</p>
 
@@ -86,9 +86,9 @@
 <p>假设当前流的请求次数<code class="prettyprint">push_count</code>为<code class="prettyprint">1</code>（可通过<a href="#cha-xun-liu-xin-xi">查询流信息</a>接口查得），首先将请求次数递增为<code class="prettyprint">2</code>，推流地址为<code class="prettyprint">rtmp://115.238.155.183:49166/livestream/4q5cdgn2</code>，拼接后的推流地址是<code class="prettyprint">rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2</code></p>
 
 <p>请求次数务必在每次进行推流请求时都增加，为了保证推流地址不被盗用，已经用过的请求次数将不再接受推流。</p></li>
-<li><p>使用<code class="prettyprint">{stream_key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
+<li><p>使用<code class="prettyprint">{key}</code>对拼接后的推流地址进行HMAC-SHA1签名</p>
 
-<p><code class="prettyprint">sign = hmac_sha1(&quot;rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2&quot;, &quot;{stream_key}&quot;)</code></p></li>
+<p><code class="prettyprint">sign = hmac_sha1(&quot;rtmp://115.238.155.183:49166/livestream/4q5cdgn2?count=2&quot;, &quot;{key}&quot;)</code></p></li>
 <li><p>对签名进行URL安全的Base64编码，生成<code class="prettyprint">push_token</code></p>
 
 <p><code class="prettyprint">push_token = urlsafe_base64_encode(sign)</code></p></li>
@@ -725,9 +725,9 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>stream_key</td>
-<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
-<td>可选，如果不指定，则服务器会随机生成一串stream_key</td>
+<td>key</td>
+<td>由设备生成的字符串，标示设备，可以使用设备的MAC地址或者随机生成一个字符串</td>
+<td>可选，如果不指定，则服务器会随机生成一串key</td>
 </tr>
 <tr>
 <td>is_private</td>
@@ -745,7 +745,7 @@
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
     "comment": "custom comment"
 }'</span>
@@ -757,7 +757,7 @@
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom comment"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
@@ -808,7 +808,7 @@
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom comment"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
@@ -862,7 +862,7 @@
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="s2">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom comment"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
@@ -913,8 +913,8 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>stream_key</td>
-<td>由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串</td>
+<td>key</td>
+<td>由设备生成的字符串，标示设备，可以使用设备的MAC地址或者随机生成一个字符串</td>
 </tr>
 <tr>
 <td>is_private</td>
@@ -930,7 +930,7 @@
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
 }'</span>
 </pre>
@@ -941,7 +941,7 @@
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom comment"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
@@ -994,7 +994,7 @@
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"stream_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_stream_key"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom comment"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"push_url"</span><span class="p">:[</span><span class="w">
