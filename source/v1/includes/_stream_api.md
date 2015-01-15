@@ -20,7 +20,7 @@
 
 参数|描述|是否可选
 ----|----|------
-stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串stream_key
+key|由设备生成的字符串，标示设备，可以使用设备的MAC地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串key
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
 comment|关于流的注释，没有业务上的含义|可选，默认为空
 
@@ -30,7 +30,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
     "comment": "custom comment"
 }'
@@ -42,7 +42,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 {
     "id": "54068a9063b906000d000001",
     "application": "app_name",
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
     "comment": "custom comment",
     "push_url":[
@@ -103,7 +103,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 {
     "id": "54068a9063b906000d000001",
     "application": "app_name",
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
     "comment": "custom comment",
     "push_url":[
@@ -167,7 +167,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
         {
             "id": "54068a9063b906000d000001",
             "application": "app_name",
-            "stream_key": "random_stream_key",
+            "key": "random_key",
             "is_private": false,
             "comment": "custom comment",
             "push_url":[
@@ -223,7 +223,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 参数|描述
 ----|----
-stream_key|由设备生成的字符串，标示设备，可以使用设备的Qiniu地址或者随机生成一个字符串
+key|由设备生成的字符串，标示设备，可以使用设备的MAC地址或者随机生成一个字符串
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
 comment|关于流的注释，没有业务上的含义|可选，默认为空
 
@@ -233,7 +233,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
 }'
 ```
@@ -244,7 +244,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 {
     "id": "54068a9063b906000d000001",
     "application": "app_name",
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
     "comment": "custom comment",
     "push_url":[
@@ -309,7 +309,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 {
     "id": "54068a9063b906000d000001",
     "application": "app_name",
-    "stream_key": "random_stream_key",
+    "key": "random_key",
     "is_private": false,
     "comment": "custom comment",
     "push_url":[
