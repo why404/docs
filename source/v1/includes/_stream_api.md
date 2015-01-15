@@ -20,7 +20,7 @@
 
 参数|描述|是否可选
 ----|----|------
-key|由设备生成的字符串，标示设备，可以使用设备的MAC地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串key
+key|用于计算鉴权token的密钥，参见[推流鉴权](#tui-liu-jian-quan)和[播放鉴权](#bo-fang-jian-quan)，可以使用设备的MAC地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串key
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
 comment|关于流的注释，没有业务上的含义|可选，默认为空
 
@@ -223,9 +223,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 参数|描述
 ----|----
-key|由设备生成的字符串，标示设备，可以使用设备的MAC地址或者随机生成一个字符串
+key|用于计算鉴权token的密钥，参见[推流鉴权](#tui-liu-jian-quan)和[播放鉴权](#bo-fang-jian-quan)，可以使用设备的MAC地址或者随机生成一个字符串
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
-comment|关于流的注释，没有业务上的含义|可选，默认为空
+comment|关于流的注释，没有业务上的含义
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
