@@ -53,6 +53,34 @@ $ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/act
 }
 ```
 
+流状态更新
+---------
+
+此接口提供给rtmp balance用于更新流上传状态。balance需要对每个推流每隔10s调用一次此接口上报状态。如果超过10s没有请求，默认推流中断，状态变更为disconnected。
+
+### HTTP请求
+
+`POST /v1/_inner/streams/{id}/status`
+
+### 请求参数
+
+参数|描述
+----|----
+status|推流状态，connected表示正在推流，disconnected表示没有推流
+length|上次请求到这次请求之间，推流数据大小
+
+> 请求HLS协议的例子
+
+```shell
+$ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/status" \
+-d '{
+    "status": "connected",
+    "length": 1234
+}'
+```
+
+> 返回结果为空。如果返回码不是204，则balance需要断掉此流。
+
 上传ts索引
 ---------
 
@@ -79,4 +107,4 @@ $ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/ts"
 }'
 ```
 
-> 正常情况没有返回内容。
+> 返回结果为空。
