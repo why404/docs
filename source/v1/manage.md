@@ -11,6 +11,7 @@ includes:
   - user_api
   - application_api
   - stream_api
+  - inner_api
   - return
 
 search: true
