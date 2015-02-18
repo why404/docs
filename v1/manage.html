@@ -1061,6 +1061,40 @@
     </span><span class="s2">"upstreams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"10.30.22.42:1935"</span><span class="p">,</span><span class="w"> </span><span class="s2">"10.30.22.43:1935"</span><span class="p">],</span><span class="w">
 </span><span class="err">}</span><span class="w">
 </span></pre>
+<h2 id='liu-zhuang-tai-geng-xin'>流状态更新</h2>
+<p>此接口提供给rtmp balance用于更新流上传状态。balance需要对每个推流每隔10s调用一次此接口上报状态。如果超过10s没有请求，默认推流中断，状态变更为disconnected。</p>
+<h3 id='http-qing-qiu'>HTTP请求</h3>
+<p><code class="prettyprint">POST /v1/_inner/streams/{id}/status</code></p>
+<h3 id='qing-qiu-can-shu'>请求参数</h3>
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>推流状态，connected表示正在推流，disconnected表示没有推流</td>
+</tr>
+<tr>
+<td>length</td>
+<td>上次请求到这次请求之间，推流数据大小</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>请求HLS协议的例子</p>
+</blockquote>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/status"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "status": "connected",
+    "length": 1234
+}'</span>
+</pre>
+
+<blockquote>
+<p>返回结果为空。如果返回码不是204，则balance需要断掉此流。</p>
+</blockquote>
 <h2 id='shang-chuan-ts-suo-yin'>上传ts索引</h2>
 <p>此接口内部使用，用于保存ts索引信息。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
@@ -1094,7 +1128,7 @@
 </pre>
 
 <blockquote>
-<p>正常情况没有返回内容。</p>
+<p>返回结果为空。</p>
 </blockquote>
 
           <h1 id='jie-kou-fan-hui'>接口返回</h1>
