@@ -548,14 +548,12 @@
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='huo-qu-hui-fang-pian-duan-di-zhi'>获取回放片段地址</h2>
-<p>此接口获取回放片段的播放地址</p>
+<h2 id='huo-qu-hui-fang-pian-duan'>获取回放片段</h2>
+<p>此接口获取回放片段的m3u8</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
 <p><code class="prettyprint">GET /v1/streams/{id}/segments/play?starttime={starttime}&amp;endtime={endtime}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
-<p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
-
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p>使用<a href="#bo-fang-jian-quan">播放鉴权</a>进行认证</p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -578,9 +576,7 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/hls?starttime=1409926345158"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/hls?starttime=1409926345158&amp;endtime=1409926345160&amp;expiry=1412121600&amp;token=token"</span> <span class="se">\</span>
 -X GET
 </pre>
 
