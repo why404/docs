@@ -428,9 +428,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
 
 ### 认证方法
 
-使用[接口鉴权](#jie-kou-jian-quan)进行认证
-
-`Authorization: pili {access_key}:{encoded_sign}`
+使用[播放鉴权](#bo-fang-jian-quan)进行认证
 
 ### 请求参数
 
@@ -440,9 +438,7 @@ starttime|开始时间|必选|millisecond unix timestamp
 endtime|结束时间|可选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/hls?starttime=1409926345158" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
--H "Content-Type: application/json" \
+$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/hls?starttime=1409926345158&endtime=1409926345160&expiry=1412121600&token=token" \
 -X GET
 ```
 
