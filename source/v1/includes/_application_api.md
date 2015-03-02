@@ -51,7 +51,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "name": "default",
+    "id": "default",
     "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
     "has_secondary": true,
@@ -67,7 +67,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
 
 ```json
 {
-    "name": "default",
+    "id": "default",
     "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
     "has_secondary": true,
@@ -116,7 +116,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
 ```json
 [
     {
-        "name": "app1",
+        "id": "app1",
         "notify_url": "http://client.server/streams/notify",
         "storage_period": -1,
         "has_secondary": true,
@@ -149,7 +149,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
         }
     },
     {
-        "name": "app2",
+        "id": "app2",
         "notify_url": "http://client.server/streams/notify",
         "storage_period": -1,
         "has_secondary": true,
@@ -174,7 +174,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
 -----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
+$ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
@@ -184,7 +184,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
 
 ```json
 {
-    "name": "default",
+    "id": "default",
     "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
     "has_secondary": true,
@@ -222,7 +222,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
 -------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
+$ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X DELETE
@@ -232,7 +232,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
 
 ```json
 {
-    "name": "default",
+    "id": "default",
     "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
     "has_secondary": true,
@@ -266,38 +266,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/app" \
 }
 ```
 
-通知接口
--------
+流管理接口（注意）
+===============
 
-```shell
-$ curl "http://client.server/streams/notify" \
--H "Content-Type: application/json" \
--X POST
---binary-data '{
-    "cmd": "status",
-    "data": {
-        "status": "connected" // connected, disconnected
-    }
-}'
-```
-
-```shell
-$ curl "http://client.server/streams/notify" \
--H "Content-Type: application/json" \
--X POST
---binary-data '{
-    "cmd": "mark",
-    "data": {
-        "id": 1234,
-        "status": "pushed" // pushed, converted, downloaded, played
-    }
-}'
-```
-
-> 返回结果
-
-```json
-{
-    "result": "ok"
-}
-```
+流管理的url需要变动，由`/v1/streams`变为`/v1/_inner/applications/{application id}/streams/{stream id}`

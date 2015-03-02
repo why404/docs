@@ -50,23 +50,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
         }
     ],
     "play": {
-        "_origin_": {
-            "rtmp": "rtmp://domain/app_name/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/stream_name"
-        },
-        "1080p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "720p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "480p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        }
-    }
+        "rtmp": "rtmp://domain/app_name/stream_name",
+        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+    },
+    "formats": ["1080p", "720p", "480p"]
 }
 ```
 
@@ -105,23 +92,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
         }
     ],
     "play": {
-        "_origin_": {
-            "rtmp": "rtmp://domain/app_name/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/stream_name"
-        },
-        "1080p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "720p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "480p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        }
-    }
+        "rtmp": "rtmp://domain/app_name/stream_name",
+        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+    },
+    "formats": ["1080p", "720p", "480p"]
 }
 ```
 
@@ -163,23 +137,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
                 }
             ],
             "play": {
-                "_origin_": {
-                    "rtmp": "rtmp://domain/app_name/stream_name",
-                    "hls": "http://domain/v1/play/hls/app_name/stream_name"
-                },
-                "1080p": {
-                    "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-                    "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-                },
-                "720p": {
-                    "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-                    "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-                },
-                "480p": {
-                    "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-                    "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-                }
-            }
+                "rtmp": "rtmp://domain/app_name/stream_name",
+                "hls": "http://domain/v1/play/hls/app_name/stream_name"
+            },
+            "formats": ["1080p", "720p", "480p"]
         }
     ]
 }
@@ -233,23 +194,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
         }
     ],
     "play": {
-        "_origin_": {
-            "rtmp": "rtmp://domain/app_name/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/stream_name"
-        },
-        "1080p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "720p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "480p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        }
-    }
+        "rtmp": "rtmp://domain/app_name/stream_name",
+        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+    },
+    "formats": ["1080p", "720p", "480p"]
 }
 ```
 
@@ -292,23 +240,10 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
         }
     ],
     "play": {
-        "_origin_": {
-            "rtmp": "rtmp://domain/app_name/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/stream_name"
-        },
-        "1080p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "720p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        },
-        "480p": {
-            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
-            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
-        }
-    }
+        "rtmp": "rtmp://domain/app_name/stream_name",
+        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+    },
+    "formats": ["1080p", "720p", "480p"]
 }
 ```
 
