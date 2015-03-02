@@ -212,23 +212,10 @@
         </span><span class="err">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"_origin_"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
@@ -257,23 +244,10 @@
         </span><span class="err">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"_origin_"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-liu-lie-biao'>查询流列表</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
@@ -305,23 +279,10 @@
                 </span><span class="err">}</span><span class="w">
             </span><span class="p">],</span><span class="w">
             </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"_origin_"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
+                </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -374,23 +335,10 @@
         </span><span class="err">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"_origin_"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='shan-chu-liu'>删除流</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
@@ -421,23 +369,10 @@
         </span><span class="err">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"_origin_"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/1080p/stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/1080p/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='liu-zhuang-tai-tui-song-jie-kou'>流状态推送接口</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
