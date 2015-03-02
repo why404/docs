@@ -10,7 +10,7 @@
 
 ### HTTP请求
 
-`POST /v1/_inner/streams/{id}/actions/check`
+`POST /v1/_inner/applications/{application_name}/streams/{stream_name}/actions/check`
 
 ### 请求参数
 
@@ -24,24 +24,24 @@ action|对url的请求操作，如果是推流，为publish，如果是直播或
 > 请求HLS协议的例子
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/actions/check" \
+$ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check" \
 -d '{
-    "profile": "_origin_",
+    "profile": "",
     "query": "nonce=1412121600&token=rejwkq432jk4",
-    "protocol": "HLS",
-    "action": "publish"
+    "protocol": "hls",
+    "action": "play"
 }'
 ```
 
 > 请求RTMP协议的例子
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/actions/check" \
+$ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check" \
 -d '{
     "profile": "1080p",
     "query": "expiry=1412121600&token=rejwkq432jk4",
-    "protocol": "RTMP",
-    "action": "play"
+    "protocol": "rtmp",
+    "action": "publish"
 }'
 ```
 
@@ -49,7 +49,14 @@ $ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/act
 
 ```json
 {
-    "upstreams": ["10.30.22.42:1935", "10.30.22.43:1935"],
+    "upstreams": [
+        {
+            "host": "10.30.22.42:1935"
+        },
+        {
+            "host": "10.30.22.43:1935"
+        }
+    ]
 }
 ```
 
@@ -60,7 +67,7 @@ $ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/act
 
 ### HTTP请求
 
-`POST /v1/_inner/streams/{id}/status`
+`POST /v1/_inner/applications/{application_name}/streams/{stream_name}/status`
 
 ### 请求参数
 
@@ -72,7 +79,7 @@ length|上次请求到这次请求之间，推流数据大小
 > 请求HLS协议的例子
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/status" \
+$ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/status" \
 -d '{
     "status": "connected",
     "length": 1234
@@ -81,30 +88,69 @@ $ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/sta
 
 > 返回结果为空。如果返回码不是204，则balance需要断掉此流。
 
-上传ts索引
----------
 
-此接口内部使用，用于保存ts索引信息。
+
+获取回放片段列表
+--------------
+
+本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。
 
 ### HTTP请求
 
-`POST /v1/_inner/streams/{id}/ts`
+`GET /v1/_inner/applications/{application_name}/streams/{stream_name}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
-参数|描述
-----|----
-starttime|ts文件起始时间
-endtime|ts文件结束时间
-url|待保存文件地址
+参数|描述|是否可选|类型
+----|----|-----|----
+starttime|列表开始时间|可选|millisecond unix timestamp
+endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/streams/54068a9063b906000d000001/ts" \
--d '{
-    "starttime": 1409926345158,
-    "endtime": 1409926837567,
-    "url": "http://115.238.155.183:80/hls/3jo78i11/2014/0907/03/20140907032336.ts"
-}'
+$ curl "http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
+-H "Content-Type: application/json" \
+-X GET
 ```
 
-> 返回结果为空。
+> 返回结果：
+
+```json
+{
+    "total": 2,
+    "list": [
+        {
+            "starttime": 1409926345158,
+            "endtime": 1409926837567
+        },
+        {
+            "starttime": 1409929883546,
+            "endtime": 1409932087561
+        }
+    ]
+}
+```
+
+
+删除片段
+-------
+
+此接口删除指定时间内的回放片段。
+
+### HTTP请求
+
+`DELETE /v1/_inner/applications/{application_name}/streams/{stream_name}/segments?starttime={starttime}&endtime={endtime}`
+
+### 请求参数
+
+参数|描述|是否可选|类型
+----|----|-----|----
+starttime|开始时间|必选|millisecond unix timestamp
+endtime|结束时间|必选|millisecond unix timestamp
+
+```shell
+$ curl "http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
+-H "Content-Type: application/json" \
+-X DELETE
+```
+
+> 返回结果为空

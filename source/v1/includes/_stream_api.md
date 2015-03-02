@@ -22,7 +22,7 @@
 ----|----|------
 key|用于计算鉴权token的密钥，参见[推流鉴权](#tui-liu-jian-quan)和[播放鉴权](#bo-fang-jian-quan)，可以使用设备的MAC地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串key
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
-comment|关于流的注释，没有业务上的含义|可选，默认为空
+id|流名字，只允许字母数字和以下字符：`-_`|可选，默认会自动生成一个唯一ID
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/streams" \
@@ -32,7 +32,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 --data-binary '{
     "key": "random_key",
     "is_private": false,
-    "comment": "custom comment"
+    "id": "stream_name"
 }'
 ```
 
@@ -40,35 +40,31 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 ```json
 {
-    "id": "54068a9063b906000d000001",
+    "id": "stream_name",
     "application": "app_name",
     "key": "random_key",
     "is_private": false,
-    "comment": "custom comment",
-    "push_url":[
+    "publish":[
         {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/primary/54068a9063b906000d000001",
-        },
-        {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/secondary/54068a9063b906000d000001",
+            "rtmp": "rtmp://domain/app_name/stream_name",
         }
     ],
-    "live_url": {
+    "play": {
         "_origin_": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2"
+            "rtmp": "rtmp://domain/app_name/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/stream_name"
         },
         "1080p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_1080p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "720p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_720p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "480p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_480p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         }
     }
 }
@@ -89,7 +85,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 `Authorization: pili {access_key}:{encoded_sign}`
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
+$ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
@@ -99,35 +95,31 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ```json
 {
-    "id": "54068a9063b906000d000001",
+    "id": "stream_name",
     "application": "app_name",
     "key": "random_key",
     "is_private": false,
-    "comment": "custom comment",
-    "push_url":[
+    "publish":[
         {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/primary/54068a9063b906000d000001",
-        },
-        {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/secondary/54068a9063b906000d000001",
+            "rtmp": "rtmp://domain/app_name/stream_name",
         }
     ],
-    "live_url": {
+    "play": {
         "_origin_": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2"
+            "rtmp": "rtmp://domain/app_name/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/stream_name"
         },
         "1080p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_1080p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "720p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_720p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "480p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_480p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         }
     }
 }
@@ -161,35 +153,31 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
     "total": 1,
     "streams": [
         {
-            "id": "54068a9063b906000d000001",
+            "id": "stream_name",
             "application": "app_name",
             "key": "random_key",
             "is_private": false,
-            "comment": "custom comment",
-            "push_url":[
+            "publish":[
                 {
-                    "RTMP": "rtmp://pili-in.qiniu.com/app_name/primary/54068a9063b906000d000001",
-                },
-                {
-                    "RTMP": "rtmp://pili-in.qiniu.com/app_name/secondary/54068a9063b906000d000001",
+                    "rtmp": "rtmp://domain/app_name/stream_name",
                 }
             ],
-            "live_url": {
+            "play": {
                 "_origin_": {
-                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-                    "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2"
+                    "rtmp": "rtmp://domain/app_name/stream_name",
+                    "hls": "http://domain/v1/play/hls/app_name/stream_name"
                 },
                 "1080p": {
-                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-                    "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_1080p"
+                    "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+                    "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
                 },
                 "720p": {
-                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-                    "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_720p"
+                    "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+                    "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
                 },
                 "480p": {
-                    "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-                    "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_480p"
+                    "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+                    "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
                 }
             }
         }
@@ -219,10 +207,9 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 ----|----
 key|用于计算鉴权token的密钥，参见[推流鉴权](#tui-liu-jian-quan)和[播放鉴权](#bo-fang-jian-quan)，可以使用设备的MAC地址或者随机生成一个字符串
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
-comment|关于流的注释，没有业务上的含义
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
+$ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
@@ -236,35 +223,31 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ```json
 {
-    "id": "54068a9063b906000d000001",
+    "id": "stream_name",
     "application": "app_name",
     "key": "random_key",
     "is_private": false,
-    "comment": "custom comment",
-    "push_url":[
+    "publish":[
         {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/primary/54068a9063b906000d000001",
-        },
-        {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/secondary/54068a9063b906000d000001",
+            "rtmp": "rtmp://domain/app_name/stream_name",
         }
     ],
-    "live_url": {
+    "play": {
         "_origin_": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2"
+            "rtmp": "rtmp://domain/app_name/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/stream_name"
         },
         "1080p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_1080p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "720p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_720p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "480p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_480p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         }
     }
 }
@@ -289,7 +272,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 无
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
+$ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
@@ -299,35 +282,31 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 
 ```json
 {
-    "id": "54068a9063b906000d000001",
+    "id": "stream_name",
     "application": "app_name",
     "key": "random_key",
     "is_private": false,
-    "comment": "custom comment",
-    "push_url":[
+    "publish":[
         {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/primary/54068a9063b906000d000001",
-        },
-        {
-            "RTMP": "rtmp://pili-in.qiniu.com/app_name/secondary/54068a9063b906000d000001",
+            "rtmp": "rtmp://domain/app_name/stream_name",
         }
     ],
-    "live_url": {
+    "play": {
         "_origin_": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2"
+            "rtmp": "rtmp://domain/app_name/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/stream_name"
         },
         "1080p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_1080p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "720p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_720p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         },
         "480p": {
-            "HLS": "http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8",
-            "RTMP": "rtmp://cdn-rtmp.qbox.me/app_name/4q5cdgn2_480p"
+            "rtmp": "rtmp://domain/app_name/1080p/stream_name",
+            "hls": "http://domain/v1/play/hls/app_name/1080p/stream_name"
         }
     }
 }
@@ -354,7 +333,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001" \
 status|connected表示正在推流，disconnected表示没有推流
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/status" \
+$ curl "http://api.pili.qiniu.com/v1/streams/stream_name/status" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
@@ -392,7 +371,7 @@ starttime|列表开始时间|可选|millisecond unix timestamp
 endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
+$ curl "http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
@@ -414,38 +393,6 @@ $ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?s
         }
     ]
 }
-```
-
-
-获取回放片段
-----------
-
-此接口获取回放片段的m3u8
-
-### HTTP请求
-
-`GET /v1/streams/{id}/segments/play?starttime={starttime}&endtime={endtime}`
-
-### 认证方法
-
-使用[播放鉴权](#bo-fang-jian-quan)进行认证
-
-### 请求参数
-
-参数|描述|是否可选|类型
-----|----|-----|----
-starttime|开始时间|必选|millisecond unix timestamp
-endtime|结束时间|可选|millisecond unix timestamp
-
-```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments/hls?starttime=1409926345158&endtime=1409926345160&expiry=1412121600&token=token" \
--X GET
-```
-
-> 返回结果：
-
-```
-# m3u8 content
 ```
 
 
@@ -472,7 +419,7 @@ starttime|开始时间|必选|millisecond unix timestamp
 endtime|结束时间|必选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/54068a9063b906000d000001/segments?starttime=1409926345158&endtime=1409932087561" \
+$ curl "http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
 -H "Authorization: pili {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
