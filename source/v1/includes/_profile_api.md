@@ -3,11 +3,13 @@ Profile管理接口
 
 Profile定义了一个视频编码的格式标准。系统默认有一组可选的Profile。
 
+对Profile的修改操作需要使用具有管理员权限的token才能执行。
+
 创建Profile
 ----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_admin/profiles" \
+$ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
@@ -30,7 +32,7 @@ $ curl "http://api.pili.qiniu.com/v1/_admin/profiles" \
         "id": "54068a9063b906000d000001",
         "email": "name@domain.com",
         "max_applications": 10
-    }
+    },
     "name": "1080p",
     "width": 1920,
     "height": 1080,
@@ -45,7 +47,7 @@ $ curl "http://api.pili.qiniu.com/v1/_admin/profiles" \
 ----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_admin/profiles/54068a9063b906000d000002" \
+$ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
@@ -68,7 +70,7 @@ $ curl "http://api.pili.qiniu.com/v1/_admin/profiles/54068a9063b906000d000002" \
 --------------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_admin/profiles?user_id=54068a9063b906000d000002" \
+$ curl "http://api.pili.qiniu.com/v1/_management/profiles?user_id=54068a9063b906000d000002" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
@@ -114,7 +116,7 @@ $ curl "http://api.pili.qiniu.com/v1/_admin/profiles?user_id=54068a9063b906000d0
 -----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_admin/profiles/54068a9063b906000d000002" \
+$ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
@@ -149,7 +151,7 @@ $ curl "http://api.pili.qiniu.com/v1/_admin/profiles/54068a9063b906000d000002" \
 -----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_admin/profiles/1080p" \
+$ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002" \
 -H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X DELETE

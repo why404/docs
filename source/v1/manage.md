@@ -8,8 +8,11 @@ includes:
   - general
   - manage_auth
   - api_guideline
+  - upstream_api
   - user_api
+  - profile_api
   - application_api
+  - status_api
   - stream_api
   - inner_api
   - return

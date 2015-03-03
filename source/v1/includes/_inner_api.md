@@ -16,7 +16,6 @@
 
 参数|描述
 ----|----
-profile|与url相关联的profile的名字，如果没有指定profile，为`_origin_`
 query|用户请求时所用地址的query部分。请不要改变query的原始顺序。
 protocol|用户请求的协议，RTMP或者是HLS
 action|对url的请求操作，如果是推流，为publish，如果是直播或者时移回放，使用play
@@ -26,7 +25,6 @@ action|对url的请求操作，如果是推流，为publish，如果是直播或
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check" \
 -d '{
-    "profile": "",
     "query": "nonce=1412121600&token=rejwkq432jk4",
     "protocol": "hls",
     "action": "play"
@@ -38,7 +36,6 @@ $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream
 ```shell
 $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check" \
 -d '{
-    "profile": "1080p",
     "query": "expiry=1412121600&token=rejwkq432jk4",
     "protocol": "rtmp",
     "action": "publish"
@@ -56,7 +53,8 @@ $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream
         {
             "host": "10.30.22.43:1935"
         }
-    ]
+    ],
+    "status": "connected"
 }
 ```
 
