@@ -269,4 +269,4 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 流管理接口（注意）
 ===============
 
-流管理的url需要变动，由`/v1/streams`变为`/v1/_inner/applications/{application id}/streams/{stream id}`
+流管理的url需要变动，由`/v1/streams`变为`/v1/_management/applications/{application id}/streams/{stream id}`
