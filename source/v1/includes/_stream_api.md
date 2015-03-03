@@ -133,7 +133,7 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
             "is_private": false,
             "publish":[
                 {
-                    "rtmp": "rtmp://domain/app_name/stream_name",
+                    "rtmp": "rtmp://domain/app_name/stream_name"
                 }
             ],
             "play": {
