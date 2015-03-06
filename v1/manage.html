@@ -297,7 +297,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
-          <h1 id='yong-hu-jie-kou'>用户接口</h1><h2 id='yong-hu-deng-lu'>用户登录</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/actions/login"</span> <span class="se">\</span>
+          <h1 id='token-jie-kou'>Token接口</h1><h2 id='token-deng-lu'>Token登录</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/tokens/actions/login"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
@@ -313,13 +313,14 @@
     </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
     </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlm"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='qie-huan-yong-hu'>切换用户</h2>
-<p>只有具有管理员权限的access token，才能执行切换用户操作。切换用户后，客户端可以同时持有两个access token并根据不同需求使用不同的token操作api（比如为用户创建Application）。</p>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/actions/su"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+<h2 id='qie-huan-token'>切换Token</h2>
+<p>只有具有管理员权限的access token，才能执行切换Token操作。切换Token后，客户端可以同时持有两个access token并根据不同需求使用不同的token操作api（比如为Token创建Application）。</p>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/tokens/actions/su"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
@@ -334,11 +335,12 @@
     </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
     </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlm"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='yong-hu-token-shua-xin'>用户token刷新</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/actions/refresh"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+<h2 id='tokentoken-shua-xin'>Tokentoken刷新</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/tokens/actions/refresh"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
@@ -355,8 +357,8 @@
     </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZmUyNjA4ODktOGEzMS00NTYyLTgwMDItMDc0MWJmMDBlYjlf"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='yong-hu-deng-chu'>用户登出</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/actions/logout"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+<h2 id='token-deng-chu'>Token登出</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/tokens/actions/logout"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
@@ -368,16 +370,58 @@
 <p>无返回结果</p>
 </blockquote>
 
+          <h1 id='user-jie-kou'>User接口</h1><h2 id='user-xin-xi-cha-xun'>User信息查询</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/123"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@pili.io"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"access_key"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret_key"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+<h2 id='user-geng-xin'>User更新</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/users/123"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST <span class="se">\</span>
+--data-binary <span class="s1">'{
+    "email": "name@domain.com",
+    "key": {}
+}'</span>
+</pre>
+
+<blockquote>
+<p>返回结果</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_access_key"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_secret_key"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
           <h1 id='profile-guan-li-jie-kou'>Profile管理接口</h1>
 <p>Profile定义了一个视频编码的格式标准。系统默认有一组可选的Profile。</p>
 
 <p>对Profile的修改操作需要使用具有管理员权限的token才能执行。</p>
 <h2 id='chuang-jian-profile'>创建Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
-    "user_id": "54068a9063b906000d000001",
+    "user_id": 123,
     "name": "1080p",
     "width": 1920,
     "height": 1080,
@@ -391,11 +435,7 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
     </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
@@ -406,7 +446,7 @@
 
 <p>创建时可以不给出<code class="prettyprint">user_id</code>，不带<code class="prettyprint">user_id</code>的profile为预定义profile，所有用户可见。带有<code class="prettyprint">user_id</code>的profile，只有相应用户可见。</p>
 <h2 id='cha-xun-profile'>查询Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -424,7 +464,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='huo-qu-profile-lie-biao'>获取Profile列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles?user_id=54068a9063b906000d000002"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -435,11 +475,7 @@
 <pre class="highlight json"><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
         </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
@@ -465,7 +501,7 @@
 </span><span class="p">]</span><span class="w">
 </span></pre>
 <h2 id='geng-xin-profile'>更新Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
@@ -482,11 +518,7 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
     </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
@@ -495,7 +527,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='shan-chu-profile'>删除Profile</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
 </pre>
@@ -505,11 +537,7 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000001"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name@domain.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"max_applications"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
     </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1080p"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w">
     </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w">
@@ -519,7 +547,7 @@
 </span></pre>
 
           <h1 id='ying-yong-pei-zhi-jie-kou'>应用配置接口</h1><h2 id='huo-qu-profile-lie-biao'>获取Profile列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -555,14 +583,12 @@
 </span><span class="p">]</span><span class="w">
 </span></pre>
 <h2 id='chuang-jian-ying-yong'>创建应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
     "id": "default",
-    "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
-    "has_secondary": true,
     "profiles_id": [
         "54068a9063b906000d000002",
         "54068a9063b906000d000003",
@@ -576,9 +602,7 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
@@ -609,7 +633,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-ying-yong-lie-biao'>查询应用列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications?page=1&amp;size=10"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -620,9 +644,7 @@
 <pre class="highlight json"><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app1"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
@@ -673,7 +695,7 @@
 </span><span class="p">]</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-ying-yong-xi-jie'>查询应用细节</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/default"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -683,9 +705,7 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
@@ -716,7 +736,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='shan-chu-ying-yong'>删除应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/default"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
 </pre>
@@ -726,9 +746,7 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"notify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://client.server/streams/notify"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"storage_period"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"has_secondary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
@@ -759,14 +777,14 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h1 id='liu-guan-li-jie-kou--zhu-yi'>流管理接口（注意）</h1>
-<p>流管理的url需要变动，由<code class="prettyprint">/v1/streams</code>变为<code class="prettyprint">/v1/_management/applications/{application id}/streams/{stream id}</code></p>
+<p>流管理的url需要变动，由<code class="prettyprint">/v1/hubs/{hub_id}/streams...</code>变为<code class="prettyprint">/v1/_management/hubs/{hub id}/stream...</code></p>
 
           <h1 id='status-guan-li-jie-kou'>Status管理接口</h1>
 <p>Status定义了一个流的状态，比如是否在推流，已推流容量，对接upstream服务器等信息。</p>
 
 <p>对Status的修改操作需要使用具有管理员权限的token才能执行。</p>
-<h2 id='cha-xun-status'>查询Status</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/application_name/stream/stream_name/status"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+<h2 id='cha-xun-status'>查询Status</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/hubs/hub_test/stream/stream_name/status"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -790,11 +808,11 @@
           <h1 id='liu-guan-li-jie-kou'>流管理接口</h1><h2 id='chuang-jian-liu'>创建流</h2>
 <p>此接口返回注册后的流id和推流地址。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/streams</code></p>
+<p><code class="prettyprint">POST /v1/hubs/{hub_id}/streams</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -803,6 +821,11 @@
 <th>是否可选</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>id</td>
+<td>流名字，只允许字母数字和以下字符：<code class="prettyprint">-_</code></td>
+<td>可选，默认会自动生成一个唯一ID</td>
+</tr>
 <tr>
 <td>key</td>
 <td>用于计算鉴权token的密钥，参见<a href="#tui-liu-jian-quan">推流鉴权</a>和<a href="#bo-fang-jian-quan">播放鉴权</a>，可以使用设备的MAC地址或者随机生成一个字符串</td>
@@ -813,20 +836,15 @@
 <td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
 <td>可选，默认为false</td>
 </tr>
-<tr>
-<td>id</td>
-<td>流名字，只允许字母数字和以下字符：<code class="prettyprint">-_</code></td>
-<td>可选，默认会自动生成一个唯一ID</td>
-</tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
+    "id": "stream_name"
     "key": "random_key",
     "is_private": false,
-    "id": "stream_name"
 }'</span>
 </pre>
 
@@ -835,29 +853,27 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hub_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_hub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"publish"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"publish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/pla/test_hub/stream_name/hls.m3u8"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-liu-xin-xi'>查询流信息</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/streams/{id}</code></p>
+<p><code class="prettyprint">GET /v1/hubs/{hub_id}/streams/{stream_id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/stream_name"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -867,29 +883,27 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hub_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_hub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"publish"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"publish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/test_hub/stream_name/hls.m3u8"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='cha-xun-liu-lie-biao'>查询流列表</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/streams</code></p>
+<p><code class="prettyprint">GET /v1/hubs/{hub_id}/streams</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -902,17 +916,15 @@
     </span><span class="s2">"streams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream_name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"hub_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_hub"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"publish"</span><span class="p">:[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"publish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
             </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+                </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/test_hub/stream_name/hls.m3u8"</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -922,11 +934,11 @@
 <h2 id='geng-xin-liu'>更新流</h2>
 <p>此接口更新流的相关信息。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/streams/{id}</code></p>
+<p><code class="prettyprint">POST /v1/hubs/{hub_id}/streams/{id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -943,8 +955,8 @@
 <td>是否为私有流。如果值为true，播放时（直播和点播）需要有<a href="#bo-fang-jian-quan">播放鉴权</a>，值为false时，直接是用播放url播放即可</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/stream_name"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
 --data-binary <span class="s1">'{
@@ -958,31 +970,29 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hub_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_hub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"publish"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"publish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/test_hub/stream_name/hls.m3u8"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='shan-chu-liu'>删除流</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">DELETE /v1/streams/{id}</code></p>
+<p><code class="prettyprint">DELETE /v1/hubs/{hub_id}/streams/{id}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <p>无</p>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/stream_name"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
 </pre>
@@ -992,27 +1002,25 @@
 </blockquote>
 <pre class="highlight json"><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stream_name"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"application"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app_name"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hub_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_hub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random_key"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"is_private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"publish"</span><span class="p">:[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"publish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="s2">"play"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/app_name/stream_name"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/hls/app_name/stream_name"</span><span class="w">
+        </span><span class="s2">"rtmp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://domain/test_hub/stream_name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"hls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://domain/v1/play/test_hub/stream_name/hls.m3u8"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1080p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"720p"</span><span class="p">,</span><span class="w"> </span><span class="s2">"480p"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
 <h2 id='liu-zhuang-tai-tui-song-jie-kou'>流状态推送接口</h2><h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/streams/{id}/status</code></p>
+<p><code class="prettyprint">GET /v1/hubs/{hub_id}/streams/{id}/status</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1025,8 +1033,8 @@
 <td>connected表示正在推流，disconnected表示没有推流</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/stream_name/status"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name/status"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -1041,11 +1049,11 @@
 <h2 id='huo-qu-hui-fang-pian-duan-lie-biao'>获取回放片段列表</h2>
 <p>本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
+<p><code class="prettyprint">GET /v1/hubs/{hub_id}/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1068,8 +1076,8 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -1094,11 +1102,11 @@
 <h2 id='shan-chu-pian-duan'>删除片段</h2>
 <p>此接口删除指定时间内的回放片段。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">DELETE /v1/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
+<p><code class="prettyprint">DELETE /v1/hubs/{hub_id}/streams/{id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
 <h3 id='ren-zheng-fang-fa'>认证方法</h3>
 <p>使用<a href="#jie-kou-jian-quan">接口鉴权</a>进行认证</p>
 
-<p><code class="prettyprint">Authorization: pili {access_key}:{encoded_sign}</code></p>
+<p><code class="prettyprint">Authorization: Qiniu {access_key}:{encoded_sign}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1121,8 +1129,8 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: pili {access_key}:{encoded_sign}"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Qiniu {access_key}:{encoded_sign}"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
 </pre>
@@ -1136,7 +1144,7 @@
 
 <p>不要改变query的原始顺序。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/_inner/applications/{application_name}/streams/{stream_name}/actions/check</code></p>
+<p><code class="prettyprint">POST /v1/_inner/hubs/{hub_id}/streams/{stream_id}/actions/check</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1161,7 +1169,7 @@
 <blockquote>
 <p>请求HLS协议的例子</p>
 </blockquote>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/hubs/test_hub/streams/stream_id/actions/check"</span> <span class="se">\</span>
 -d <span class="s1">'{
     "query": "nonce=1412121600&amp;token=rejwkq432jk4",
     "protocol": "hls",
@@ -1172,7 +1180,7 @@
 <blockquote>
 <p>请求RTMP协议的例子</p>
 </blockquote>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/hubs/test_hub/streams/stream_id/actions/check"</span> <span class="se">\</span>
 -d <span class="s1">'{
     "query": "expiry=1412121600&amp;token=rejwkq432jk4",
     "protocol": "rtmp",
@@ -1198,7 +1206,7 @@
 <h2 id='liu-zhuang-tai-geng-xin'>流状态更新</h2>
 <p>此接口提供给rtmp balance用于更新流上传状态。balance需要对每个推流每隔10s调用一次此接口上报状态。如果超过10s没有请求，默认推流中断，状态变更为disconnected。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">POST /v1/_inner/applications/{application_name}/streams/{stream_name}/status</code></p>
+<p><code class="prettyprint">POST /v1/_inner/hubs/{hub_id}/streams/{stream_id}/status</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1219,7 +1227,7 @@
 <blockquote>
 <p>请求HLS协议的例子</p>
 </blockquote>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/status"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/hubs/test_hub/streams/stream_id/status"</span> <span class="se">\</span>
 -d <span class="s1">'{
     "status": "connected",
     "length": 1234
@@ -1232,7 +1240,7 @@
 <h2 id='huo-qu-hui-fang-pian-duan-lie-biao'>获取回放片段列表</h2>
 <p>本接口返回回放片段列表。列表的起始结束时间为unix timestamp，精确到millisecond。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">GET /v1/_inner/applications/{application_name}/streams/{stream_name}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
+<p><code class="prettyprint">GET /v1/_inner/hubs/{hub_id}/streams/{stream_id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1255,7 +1263,7 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream_name/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_inner/hubs/test_hub/streams/stream_id/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
 </pre>
@@ -1280,7 +1288,7 @@
 <h2 id='shan-chu-pian-duan'>删除片段</h2>
 <p>此接口删除指定时间内的回放片段。</p>
 <h3 id='http-qing-qiu'>HTTP请求</h3>
-<p><code class="prettyprint">DELETE /v1/_inner/applications/{application_name}/streams/{stream_name}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
+<p><code class="prettyprint">DELETE /v1/_inner/hubs/{hub_id}/streams/{stream_id}/segments?starttime={starttime}&amp;endtime={endtime}</code></p>
 <h3 id='qing-qiu-can-shu'>请求参数</h3>
 <table><thead>
 <tr>
@@ -1303,7 +1311,7 @@
 <td>millisecond unix timestamp</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream_name/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_inner/hubs/test_hub/streams/stream_id/segments?starttime=1409926345158&amp;endtime=1409932087561"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
 </pre>
