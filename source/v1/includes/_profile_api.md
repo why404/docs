@@ -10,11 +10,11 @@ Profile定义了一个视频编码的格式标准。系统默认有一组可选�
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
-    "user_id": "54068a9063b906000d000001",
+    "user_id": 123,
     "name": "1080p",
     "width": 1920,
     "height": 1080,
@@ -28,11 +28,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
 ```json
 {
     "id": "54068a9063b906000d000002",
-    "user": {
-        "id": "54068a9063b906000d000001",
-        "email": "name@domain.com",
-        "max_applications": 10
-    },
+    "user_id": 123,
     "name": "1080p",
     "width": 1920,
     "height": 1080,
@@ -48,7 +44,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -71,7 +67,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d0000
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/profiles?user_id=54068a9063b906000d000002" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -82,11 +78,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles?user_id=54068a9063b906
 [
     {
         "id": "54068a9063b906000d000002",
-        "user": {
-            "id": "54068a9063b906000d000001",
-            "email": "name@domain.com",
-            "max_applications": 10
-        },
+        "user_id": 123,
         "name": "1080p",
         "width": 1920,
         "height": 1080,
@@ -117,7 +109,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles?user_id=54068a9063b906
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -134,11 +126,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d0000
 ```json
 {
     "id": "54068a9063b906000d000002",
-    "user": {
-        "id": "54068a9063b906000d000001",
-        "email": "name@domain.com",
-        "max_applications": 10
-    },
+    "user_id": 123,
     "name": "1080p",
     "width": 1920,
     "height": 1080,
@@ -152,7 +140,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d0000
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d000002" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -162,11 +150,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles/54068a9063b906000d0000
 ```json
 {
     "id": "54068a9063b906000d000002",
-    "user": {
-        "id": "54068a9063b906000d000001",
-        "email": "name@domain.com",
-        "max_applications": 10
-    },
+    "user_id": 123,
     "name": "1080p",
     "width": 1920,
     "height": 1080,

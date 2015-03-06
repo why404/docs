@@ -9,8 +9,8 @@ Status定义了一个流的状态，比如是否在推流，已推流容量，�
 ----------
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_management/applications/application_name/stream/stream_name/status" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+$ curl "http://api.pili.qiniu.com/v1/_management/hubs/hub_test/stream/stream_name/status" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
 ```

@@ -8,31 +8,31 @@
 
 ### HTTP请求
 
-`POST /v1/streams`
+`POST /v1/hubs/{hub_id}/streams`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ### 请求参数
 
 参数|描述|是否可选
 ----|----|------
+id|流名字，只允许字母数字和以下字符：`-_`|可选，默认会自动生成一个唯一ID
 key|用于计算鉴权token的密钥，参见[推流鉴权](#tui-liu-jian-quan)和[播放鉴权](#bo-fang-jian-quan)，可以使用设备的MAC地址或者随机生成一个字符串|可选，如果不指定，则服务器会随机生成一串key
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可|可选，默认为false
-id|流名字，只允许字母数字和以下字符：`-_`|可选，默认会自动生成一个唯一ID
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
+    "id": "stream_name"
     "key": "random_key",
     "is_private": false,
-    "id": "stream_name"
 }'
 ```
 
@@ -41,17 +41,15 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 ```json
 {
     "id": "stream_name",
-    "application": "app_name",
+    "hub_id": "test_hub",
     "key": "random_key",
     "is_private": false,
-    "publish":[
-        {
-            "rtmp": "rtmp://domain/app_name/stream_name"
-        }
-    ],
+    "publish": {
+        "rtmp": "rtmp://domain/test_hub/stream_name"
+    },
     "play": {
-        "rtmp": "rtmp://domain/app_name/stream_name",
-        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+        "rtmp": "rtmp://domain/test_hub/stream_name",
+        "hls": "http://domain/v1/pla/test_hub/stream_name/hls.m3u8"
     },
     "formats": ["1080p", "720p", "480p"]
 }
@@ -63,17 +61,17 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 ### HTTP请求
 
-`GET /v1/streams/{id}`
+`GET /v1/hubs/{hub_id}/streams/{stream_id}`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -83,17 +81,15 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 ```json
 {
     "id": "stream_name",
-    "application": "app_name",
+    "hub_id": "test_hub",
     "key": "random_key",
     "is_private": false,
-    "publish":[
-        {
-            "rtmp": "rtmp://domain/app_name/stream_name"
-        }
-    ],
+    "publish": {
+        "rtmp": "rtmp://domain/test_hub/stream_name"
+    },
     "play": {
-        "rtmp": "rtmp://domain/app_name/stream_name",
-        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+        "rtmp": "rtmp://domain/test_hub/stream_name",
+        "hls": "http://domain/v1/play/test_hub/stream_name/hls.m3u8"
     },
     "formats": ["1080p", "720p", "480p"]
 }
@@ -105,17 +101,17 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 
 ### HTTP请求
 
-`GET /v1/streams`
+`GET /v1/hubs/{hub_id}/streams`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -128,17 +124,15 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
     "streams": [
         {
             "id": "stream_name",
-            "application": "app_name",
+            "hub_id": "test_hub",
             "key": "random_key",
             "is_private": false,
-            "publish":[
-                {
-                    "rtmp": "rtmp://domain/app_name/stream_name"
-                }
-            ],
+            "publish": {
+                "rtmp": "rtmp://domain/test_hub/stream_name"
+            },
             "play": {
-                "rtmp": "rtmp://domain/app_name/stream_name",
-                "hls": "http://domain/v1/play/hls/app_name/stream_name"
+                "rtmp": "rtmp://domain/test_hub/stream_name",
+                "hls": "http://domain/v1/play/test_hub/stream_name/hls.m3u8"
             },
             "formats": ["1080p", "720p", "480p"]
         }
@@ -154,13 +148,13 @@ $ curl "http://api.pili.qiniu.com/v1/streams" \
 
 ### HTTP请求
 
-`POST /v1/streams/{id}`
+`POST /v1/hubs/{hub_id}/streams/{id}`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -170,8 +164,8 @@ key|用于计算鉴权token的密钥，参见[推流鉴权](#tui-liu-jian-quan)�
 is_private|是否为私有流。如果值为true，播放时（直播和点播）需要有[播放鉴权](#bo-fang-jian-quan)，值为false时，直接是用播放url播放即可
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
@@ -185,17 +179,15 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 ```json
 {
     "id": "stream_name",
-    "application": "app_name",
+    "hub_id": "test_hub",
     "key": "random_key",
     "is_private": false,
-    "publish":[
-        {
-            "rtmp": "rtmp://domain/app_name/stream_name"
-        }
-    ],
+    "publish": {
+        "rtmp": "rtmp://domain/test_hub/stream_name"
+    },
     "play": {
-        "rtmp": "rtmp://domain/app_name/stream_name",
-        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+        "rtmp": "rtmp://domain/test_hub/stream_name",
+        "hls": "http://domain/v1/play/test_hub/stream_name/hls.m3u8"
     },
     "formats": ["1080p", "720p", "480p"]
 }
@@ -207,21 +199,21 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 
 ### HTTP请求
 
-`DELETE /v1/streams/{id}`
+`DELETE /v1/hubs/{hub_id}/streams/{id}`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ### 请求参数
 
 无
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -231,17 +223,15 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 ```json
 {
     "id": "stream_name",
-    "application": "app_name",
+    "hub_id": "test_hub",
     "key": "random_key",
     "is_private": false,
-    "publish":[
-        {
-            "rtmp": "rtmp://domain/app_name/stream_name"
-        }
-    ],
+    "publish": {
+        "rtmp": "rtmp://domain/test_hub/stream_name"
+    },
     "play": {
-        "rtmp": "rtmp://domain/app_name/stream_name",
-        "hls": "http://domain/v1/play/hls/app_name/stream_name"
+        "rtmp": "rtmp://domain/test_hub/stream_name",
+        "hls": "http://domain/v1/play/test_hub/stream_name/hls.m3u8"
     },
     "formats": ["1080p", "720p", "480p"]
 }
@@ -253,13 +243,13 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 
 ### HTTP请求
 
-`GET /v1/streams/{id}/status`
+`GET /v1/hubs/{hub_id}/streams/{id}/status`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -268,8 +258,8 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name" \
 status|connected表示正在推流，disconnected表示没有推流
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/stream_name/status" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name/status" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -290,13 +280,13 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name/status" \
 
 ### HTTP请求
 
-`GET /v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
+`GET /v1/hubs/{hub_id}/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -306,8 +296,8 @@ starttime|列表开始时间|可选|millisecond unix timestamp
 endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -338,13 +328,13 @@ $ curl "http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409
 
 ### HTTP请求
 
-`DELETE /v1/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
+`DELETE /v1/hubs/{hub_id}/streams/{id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 认证方法
 
 使用[接口鉴权](#jie-kou-jian-quan)进行认证
 
-`Authorization: pili {access_key}:{encoded_sign}`
+`Authorization: Qiniu {access_key}:{encoded_sign}`
 
 ### 请求参数
 
@@ -354,8 +344,8 @@ starttime|开始时间|必选|millisecond unix timestamp
 endtime|结束时间|必选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
--H "Authorization: pili {access_key}:{encoded_sign}" \
+$ curl "http://api.pili.qiniu.com/v1/hubs/test_hub/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
+-H "Authorization: Qiniu {access_key}:{encoded_sign}" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```

@@ -9,9 +9,10 @@ includes:
   - manage_auth
   - api_guideline
   - upstream_api
+  - token_api
   - user_api
   - profile_api
-  - application_api
+  - hub_api
   - status_api
   - stream_api
   - inner_api

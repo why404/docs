@@ -10,7 +10,7 @@
 
 ### HTTP请求
 
-`POST /v1/_inner/applications/{application_name}/streams/{stream_name}/actions/check`
+`POST /v1/_inner/hubs/{hub_id}/streams/{stream_id}/actions/check`
 
 ### 请求参数
 
@@ -23,7 +23,7 @@ action|对url的请求操作，如果是推流，为publish，如果是直播或
 > 请求HLS协议的例子
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check" \
+$ curl "http://api.stream.gateway/v1/_inner/hubs/test_hub/streams/stream_id/actions/check" \
 -d '{
     "query": "nonce=1412121600&token=rejwkq432jk4",
     "protocol": "hls",
@@ -34,7 +34,7 @@ $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream
 > 请求RTMP协议的例子
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/actions/check" \
+$ curl "http://api.stream.gateway/v1/_inner/hubs/test_hub/streams/stream_id/actions/check" \
 -d '{
     "query": "expiry=1412121600&token=rejwkq432jk4",
     "protocol": "rtmp",
@@ -65,7 +65,7 @@ $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream
 
 ### HTTP请求
 
-`POST /v1/_inner/applications/{application_name}/streams/{stream_name}/status`
+`POST /v1/_inner/hubs/{hub_id}/streams/{stream_id}/status`
 
 ### 请求参数
 
@@ -77,7 +77,7 @@ length|上次请求到这次请求之间，推流数据大小
 > 请求HLS协议的例子
 
 ```shell
-$ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream_name/status" \
+$ curl "http://api.stream.gateway/v1/_inner/hubs/test_hub/streams/stream_id/status" \
 -d '{
     "status": "connected",
     "length": 1234
@@ -95,7 +95,7 @@ $ curl "http://api.stream.gateway/v1/_inner/applications/app_name/streams/stream
 
 ### HTTP请求
 
-`GET /v1/_inner/applications/{application_name}/streams/{stream_name}/segments?starttime={starttime}&endtime={endtime}`
+`GET /v1/_inner/hubs/{hub_id}/streams/{stream_id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
@@ -105,7 +105,7 @@ starttime|列表开始时间|可选|millisecond unix timestamp
 endtime|列表结束时间|可选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
+$ curl "http://api.pili.qiniu.com/v1/_inner/hubs/test_hub/streams/stream_id/segments?starttime=1409926345158&endtime=1409932087561" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -136,7 +136,7 @@ $ curl "http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream
 
 ### HTTP请求
 
-`DELETE /v1/_inner/applications/{application_name}/streams/{stream_name}/segments?starttime={starttime}&endtime={endtime}`
+`DELETE /v1/_inner/hubs/{hub_id}/streams/{stream_id}/segments?starttime={starttime}&endtime={endtime}`
 
 ### 请求参数
 
@@ -146,7 +146,7 @@ starttime|开始时间|必选|millisecond unix timestamp
 endtime|结束时间|必选|millisecond unix timestamp
 
 ```shell
-$ curl "http://api.pili.qiniu.com/v1/_inner/applications/app_name/streams/stream_name/segments?starttime=1409926345158&endtime=1409932087561" \
+$ curl "http://api.pili.qiniu.com/v1/_inner/hubs/test_hub/streams/stream_id/segments?starttime=1409926345158&endtime=1409932087561" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```

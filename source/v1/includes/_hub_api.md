@@ -6,7 +6,7 @@
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -47,14 +47,12 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X POST \
 --data-binary '{
     "id": "default",
-    "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
-    "has_secondary": true,
     "profiles_id": [
         "54068a9063b906000d000002",
         "54068a9063b906000d000003",
@@ -68,9 +66,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
 ```json
 {
     "id": "default",
-    "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
-    "has_secondary": true,
     "profiles": [
         {
             "id": "54068a9063b906000d000002",
@@ -106,7 +102,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -117,9 +113,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
 [
     {
         "id": "app1",
-        "notify_url": "http://client.server/streams/notify",
         "storage_period": -1,
-        "has_secondary": true,
         "profiles": [
             {
                 "id": "54068a9063b906000d000002",
@@ -175,7 +169,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X GET
 ```
@@ -185,9 +179,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 ```json
 {
     "id": "default",
-    "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
-    "has_secondary": true,
     "profiles": [
         {
             "id": "54068a9063b906000d000002",
@@ -223,7 +215,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 
 ```shell
 $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
--H "Authorization: bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
+-H "Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw" \
 -H "Content-Type: application/json" \
 -X DELETE
 ```
@@ -233,9 +225,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 ```json
 {
     "id": "default",
-    "notify_url": "http://client.server/streams/notify",
     "storage_period": -1,
-    "has_secondary": true,
     "profiles": [
         {
             "id": "54068a9063b906000d000002",
@@ -269,4 +259,4 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 流管理接口（注意）
 ===============
 
-流管理的url需要变动，由`/v1/streams`变为`/v1/_management/applications/{application id}/streams/{stream id}`
+流管理的url需要变动，由`/v1/hubs/{hub_id}/streams...`变为`/v1/_management/hubs/{hub id}/stream...`
