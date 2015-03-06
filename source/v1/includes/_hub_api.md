@@ -1,4 +1,4 @@
-应用配置接口
+Hub配置接口
 ==========
 
 获取Profile列表
@@ -42,7 +42,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/profiles" \
 ]
 ```
 
-创建应用
+创建Hub
 -------
 
 ```shell
@@ -97,7 +97,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications" \
 }
 ```
 
-查询应用列表
+查询Hub列表
 ----------
 
 ```shell
@@ -164,7 +164,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications?page=1&size=10" \
 ]
 ```
 
-查询应用细节
+查询Hub细节
 -----------
 
 ```shell
@@ -210,7 +210,7 @@ $ curl "http://api.pili.qiniu.com/v1/_management/applications/default" \
 }
 ```
 
-删除应用
+删除Hub
 -------
 
 ```shell

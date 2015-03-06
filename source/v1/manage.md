@@ -13,8 +13,8 @@ includes:
   - user_api
   - profile_api
   - hub_api
-  - status_api
   - stream_api
+  - status_api
   - inner_api
   - return
 
