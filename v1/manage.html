@@ -546,7 +546,7 @@
 </span><span class="p">}</span><span class="w">
 </span></pre>
 
-          <h1 id='ying-yong-pei-zhi-jie-kou'>应用配置接口</h1><h2 id='huo-qu-profile-lie-biao'>获取Profile列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
+          <h1 id='hub-pei-zhi-jie-kou'>Hub配置接口</h1><h2 id='huo-qu-profile-lie-biao'>获取Profile列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/profiles"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -582,7 +582,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
-<h2 id='chuang-jian-ying-yong'>创建应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications"</span> <span class="se">\</span>
+<h2 id='chuang-jian-hub'>创建Hub</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST <span class="se">\</span>
@@ -632,7 +632,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='cha-xun-ying-yong-lie-biao'>查询应用列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications?page=1&amp;size=10"</span> <span class="se">\</span>
+<h2 id='cha-xun-hub-lie-biao'>查询Hub列表</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications?page=1&amp;size=10"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -694,7 +694,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></pre>
-<h2 id='cha-xun-ying-yong-xi-jie'>查询应用细节</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/default"</span> <span class="se">\</span>
+<h2 id='cha-xun-hub-xi-jie'>查询Hub细节</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/default"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X GET
@@ -735,7 +735,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></pre>
-<h2 id='shan-chu-ying-yong'>删除应用</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/default"</span> <span class="se">\</span>
+<h2 id='shan-chu-hub'>删除Hub</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/applications/default"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X DELETE
@@ -778,32 +778,6 @@
 </span></pre>
 <h1 id='liu-guan-li-jie-kou--zhu-yi'>流管理接口（注意）</h1>
 <p>流管理的url需要变动，由<code class="prettyprint">/v1/hubs/{hub_id}/streams...</code>变为<code class="prettyprint">/v1/_management/hubs/{hub id}/stream...</code></p>
-
-          <h1 id='status-guan-li-jie-kou'>Status管理接口</h1>
-<p>Status定义了一个流的状态，比如是否在推流，已推流容量，对接upstream服务器等信息。</p>
-
-<p>对Status的修改操作需要使用具有管理员权限的token才能执行。</p>
-<h2 id='cha-xun-status'>查询Status</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/hubs/hub_test/stream/stream_name/status"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET
-</pre>
-
-<blockquote>
-<p>返回结果：</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disconnected"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"upstreams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp.forward.com"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"forward"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
 
           <h1 id='liu-guan-li-jie-kou'>流管理接口</h1><h2 id='chuang-jian-liu'>创建流</h2>
 <p>此接口返回注册后的流id和推流地址。</p>
@@ -1138,6 +1112,32 @@
 <blockquote>
 <p>返回结果为空</p>
 </blockquote>
+
+          <h1 id='status-guan-li-jie-kou'>Status管理接口</h1>
+<p>Status定义了一个流的状态，比如是否在推流，已推流容量，对接upstream服务器等信息。</p>
+
+<p>对Status的修改操作需要使用具有管理员权限的token才能执行。</p>
+<h2 id='cha-xun-status'>查询Status</h2><pre class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.pili.qiniu.com/v1/_management/hubs/hub_test/stream/stream_name/status"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: Bearer YTBhNGUyMWQtZmRlYS00YTcwLThkMzAtNGY2MTI1OWU1MjIw"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X GET
+</pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"disconnected"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"upstreams"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54068a9063b906000d000002"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp.forward.com"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"forward"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 
           <h1 id='nei-bu-api-jie-kou'>内部API接口</h1><h2 id='yan-zheng-liu'>验证流</h2>
 <p>此接口提供给rtmp balance用于验证流有效性。</p>
