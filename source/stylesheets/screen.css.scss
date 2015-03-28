@@ -83,26 +83,6 @@ header.navbar{
 }
 
 
-.flag{
-  width: 200px;
-  line-height: 22px;
-  background: #46bee3;
-  color: #FFF;
-  position: fixed;
-  top: 20px;
-  right: -75px;
-  z-index: 1031;
-  text-align: center;
-  letter-spacing: 5px;
-
-  transform:rotate(45deg);
-  -ms-transform:rotate(45deg);   /* IE 9 */
-  -moz-transform:rotate(45deg);  /* Firefox */
-  -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
-  -o-transform:rotate(45deg);  /* Opera */
-}
-
-
 h3, .h3{
   font-size: 22px;
 }
@@ -113,6 +93,15 @@ pre{
 blockquote{
   font-size: 14px;
   border: none;
+}
+
+a{ color: #008cff; }
+
+footer{
+  margin-top: 30px;
+  padding: 10px;
+  border: none;
+  text-align: center;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -157,6 +146,7 @@ blockquote{
   & > img { display: block; }
 
   & > .search {
+    display: none;
     position: relative;
 
     input {
@@ -180,6 +170,7 @@ blockquote{
   }
 
   .search-results {
+    display: none;
     margin-top: 0;
     @include box-sizing(border-box);
     height: 0;
@@ -213,6 +204,8 @@ blockquote{
     text-overflow: ellipsis;
     font-weight: normal;
     color: #333;
+
+    &:hover{ color: #008cff; }
   }
 
   // The Table of Contents is composed of multiple nested
@@ -356,7 +349,7 @@ blockquote{
   strong{ color: #000; }
 
   .doc-focus{
-    padding-top: 65px;
+    padding-top: 85px;
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>ul, &>ol, &>aside, &>dl {
