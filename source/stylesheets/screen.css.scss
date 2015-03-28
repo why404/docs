@@ -313,7 +313,7 @@ blockquote{
 ////////////////////////////////////////////////////////////////////////////////
 
 .page-wrapper {
-  margin-left: 230px;
+  margin-left: $nav-width;
   position: relative;
   z-index: 10;
   min-height: 100%;
