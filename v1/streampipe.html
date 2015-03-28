@@ -1,0 +1,665 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="keywords" content="pili,霹雳流,直播,流媒体,RTMP,HLS,M3U8,HDS,DASH,H264,AAC,RTSP,FLV,MPEGTS" />
+    <meta name="description" content="霹雳流——直播流媒体云服务">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Streamer文档</title>
+
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+
+
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+
+      <script src="../javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell"]);
+        });
+      </script>
+  </head>
+
+  <body class="v1 v1_streampipe">
+
+    <header class="navbar navbar-default navbar-static-top navbar-fixed-top" role="banner">
+      <div class="container-full">
+
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse" ng-click="collapseToggle()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a id="logo" class="navbar-brand" ui-sref="public.main">
+            <img src="https://dn-pili-static.qbox.me/images/logo.png" />
+          </a>
+        </div>
+
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation" collapse="isCollapsed">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a ui-sref="public.main">首页</a></li>
+
+            <li dropdown>
+              <a href="javascript:;" class="dropdown-toggle clear" dropdown-toggle>解决方案</a>
+
+              <ul class="dropdown-menu" id="solutions-menu">
+                <li><a ui-sref="public.solution.game">游戏直播</a></li>
+                <li><a ui-sref="public.solution.live">现场直播</a></li>
+                <li><a ui-sref="public.solution.phone">手机直播</a></li>
+                <li><a ui-sref="public.solution.remote">监控直播</a></li>
+                <li><a ui-sref="public.solution.wearable">可穿戴式</a></li>
+                <li><a ui-sref="public.solution.education">教学直播</a></li>
+                <li><a ui-sref="public.solution.radio">电台直播</a></li>
+              </ul>
+            </li>
+            <li><a href="http://api.pili.qiniu.com/docs/" target="_blank">开发文档</a></li>
+          </ul>
+
+          <!--
+            <div class="lang-selector">
+                  <a href="#" data-language-name="shell">shell</a>
+            </div>
+          -->
+        </nav>
+      </div>
+    </header>
+
+    <!-- <div class="flag">Fork</div> -->
+
+    <a href="#" id="nav-button">
+      <span><i class="fa fa-bars"></i> NAV</span>
+    </a>
+
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+
+    <div class="page-wrapper">
+      <div class="content">
+        
+          <h1 id="综述">综述</h1>
+
+<p>本方案用于视频流服务结合云存储提供7x24小时在线视频直播和点播的方案。</p>
+
+          <h1 id="stream-gateway接口">Stream Gateway接口</h1>
+
+<h2 id="验证流">验证流</h2>
+
+<blockquote>
+<p>请求HLS协议的例子</p>
+</blockquote>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "name": "1080p",
+    "query": "e=1414671959&amp;token=rejwkq432jk4",
+    "protocol": "HLS",
+    "action": "push"
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>请求RTMP协议的例子</p>
+</blockquote>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/check"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "name": "1080p",
+    "query": "e=1414671959&amp;token=rejwkq432jk4",
+    "protocol": "RTMP",
+    "action": "push"
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口为Stream Gateway内部提供给Streamer检验推流有效性使用，不对外公开。</p>
+
+<p><a href="#shen-qing-shang-tui-liu-jie-kou">申请上推流接口</a>，<a href="#zhi-bo-jie-kou">直播接口</a>和<a href="#shi-yi-bo-fang-jie-kou">时移播放接口</a>返回的相关url中是不包含query参数的。设备拿到url后，需要自己计算凭证，然后将凭证放在url的query参数里，再做相应请求。比如设备拿到的推流地址是<code class="prettyprint">rtmp://115.238.155.183:49170/livestream/3jo78i11</code>，根据凭证算法算得推流时的凭证请求为<code class="prettyprint">e=1414671959&amp;token=rejwkq432jk4</code>，那么设备会使用<code class="prettyprint">rtmp://115.238.155.183:49170/livestream/3jo78i11?e=1414671959&amp;token=rejwkq432jk4</code>做上传推流。参见<a href="#liu-cheng">流程</a>描述。</p>
+
+<p>Streamer接到上传请求，直播请求，时移播放请求后，将地址中的query部分作为参数，请求Stream Gateway的本接口，进行验证。</p>
+
+<p>不要改变query的原始顺序。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/_inner/livestreams/{sid}/actions/check</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>与url相关联的profile的名字，如果没有指定profile，为空</td>
+</tr>
+<tr>
+<td>query</td>
+<td>用户请求时所用地址的query部分。请不要改变query的原始顺序。</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>用户请求的协议，RTMP或者是HLS</td>
+</tr>
+<tr>
+<td>action</td>
+<td>对url的请求操作，如果是推流，为push，如果是直播或者时移回放，使用play</td>
+</tr>
+</tbody></table>
+
+<h2 id="上传">上传</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/upload"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "url": "http://115.238.155.183:80/hls/3jo78i11/2014/0907/03/20140907032336.ts"
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxP"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口为Stream Gateway内部提供给Streamer上传文件使用，不对外公开</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/_inner/livestreams/{sid}/actions/upload</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>待保存文件地址</td>
+</tr>
+</tbody></table>
+
+<h2 id="删除">删除</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/actions/delete"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "url": [
+        "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxP",
+        "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxZ",
+        "http://public.qiniudn.com/Fg-EYlzoWtkTEjkuKxUeJI1YZwxD"
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口为Stream Gateway内部提供给Streamer删除文件使用，不对外公开</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/_inner/livestreams/{sid}/actions/delete</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>待删除文件地址</td>
+</tr>
+</tbody></table>
+
+<h2 id="状态更新">状态更新</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/status"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "status": "connect"
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>当livestreams某个流有状态变化时，调用此接口通知Stream Gateway删除对应切片存档。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/_inner/livestreams/{sid}/status</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>流当前的状态，状态参见<a href="#huo-qu-zhuang-tai-jie-kou">获取状态接口</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="标记通知">标记通知</h2>
+<pre><code class="highlight shell"><span class="nv">$curl</span> <span class="s2">"http://api.stream.gateway/v1/_inner/livestreams/3jo78i11/mark?id=1234&amp;adjust_ms=123&amp;status=pushed"</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>当livestreams的onTrack mark（包的封装参数onMetaData）流过不同的处理程序时，调用此接口通知Stream Gateway通过的状态。</p>
+
+<p>status含有pushed（接受了推流），converted（进行了转码），downloaded（发送给了客户端）</p>
+
+<h1 id="livestream接口">Livestream接口</h1>
+
+<h2 id="注册接口">注册接口</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "encrypt": 0,
+    "live_storage": "local",
+    "has_secondary": true,
+    "profiles": [
+        {
+            "name": "1080p",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": "4m"
+        },
+        {
+            "name": "720p",
+            "width": 1280,
+            "height": 720,
+            "bitrate": "1000k"
+        },
+        {
+            "name": "480p",
+            "width": 640,
+            "height": 480,
+            "bitrate": "500k"
+        }
+    ]
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3jo78i11"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"live_url"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口返回新注册的livestream。</p>
+
+<table><thead>
+<tr>
+<th>协议名</th>
+<th>协议</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RTMP</td>
+<td>Adobe Flash定义的实时多媒体流传输协议</td>
+</tr>
+<tr>
+<td>PFSP</td>
+<td>自定义传输协议</td>
+</tr>
+<tr>
+<td>HLS</td>
+<td>Apple定义的多媒体流传输协议</td>
+</tr>
+</tbody></table>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/livestreams</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>encrypt</td>
+<td>0表示不加密，1表示加密，默认为0</td>
+</tr>
+<tr>
+<td>live_storage</td>
+<td>local表示直播时使用streamer的上传作为直播地址，cloud表示直播时使用用户的云上传做直播地址，默认为local</td>
+</tr>
+</tbody></table>
+
+<h2 id="注销接口">注销接口</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "_action": "DELETE"
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口注销一个livestream。注销时应该调用<a href="#shan-chu">删除</a>接口删掉所有已有的存储。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/livestreams/{sid}</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>_action</td>
+<td>动作描述，删除动作为DELETE</td>
+</tr>
+</tbody></table>
+
+<h2 id="获取接口">获取接口</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11"</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3jo78i11"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"push_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_primary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_primary"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://115.238.155.183:49166/livestream/4q5cdgn2_secondary"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PFSP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pfsp://115.238.155.183:8000/4q5cdgn2_secondary"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+    </span><span class="s2">"live_url"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"1080p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_1080p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_1080p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"720p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_720p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_720p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"480p"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"HLS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/4q5cdgn2_480p.m3u8"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"RTMP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rtmp://cdn-rtmp.qbox.me/livestream/4q5cdgn2_480p"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口返回livestream的细节。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">GET /v1/livestreams/{sid}</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<p>无</p>
+
+<h2 id="获取状态接口">获取状态接口</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11/status"</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connect"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口返回livestream对应视频流的状态。</p>
+
+<ul>
+<li>register：已注册但没有推流</li>
+<li>connect：正在推流</li>
+<li>stop：推流停止</li>
+<li>nonexist：流不存在</li>
+<li>unknown：状态未知</li>
+</ul>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">GET /v1/livestreams/{sid}/status</code></p>
+
+<h2 id="时移列表接口">时移列表接口</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11/timeshift/list"</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926345158</span><span class="p">,</span><span class="w"> </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409926837567</span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="s2">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409929883546</span><span class="p">,</span><span class="w"> </span><span class="s2">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1409932087561</span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口返回livestream对应上传的视频流时移列表。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">GET /v1/livestreams/{sid}/timeshift/list?starttime={starttime}&amp;endtime={endtime}</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>类型</th>
+<th>是否可选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starttime</td>
+<td>列表内容开始时间</td>
+<td>timestamp，microsecond</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>endtime</td>
+<td>列表内容完结时间</td>
+<td>timestamp，microsecond</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+
+<h2 id="删除时移">删除时移</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11/timeshift/list"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "_action": "DELETE",
+    "starttime": 1409926345158,
+    "endtime": 1409926837567
+}'</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口删除指定时间内的时移片段。如果删除时移时有切片文件不再被索引，需要调用Stream Gateway的<a href="#shan-chu">删除</a>接口删除对应切片。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">POST /v1/livestreams/{sid}/timeshift/list</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>类型</th>
+<th>是否可选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starttime</td>
+<td>时移开始时间</td>
+<td>timestamp，microsecond</td>
+<td>必选</td>
+</tr>
+<tr>
+<td>endtime</td>
+<td>时移结束时间</td>
+<td>timestamp，microsecond</td>
+<td>必选</td>
+</tr>
+</tbody></table>
+
+<h2 id="时移播放接口">时移播放接口</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl <span class="s2">"http://api.streamer/v3/livestreams/3jo78i11/timeshift/play?starttime=1409926345158"</span>
+</code></pre>
+
+<blockquote>
+<p>返回结果：</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cdn-ts.qbox.me/api/v1/hls/3jo78i11/timeshift/play/aaif4meq.m3u8"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>此接口返回livestream时移的播放地址。</p>
+
+<h3 id="http请求">HTTP请求</h3>
+
+<p><code class="prettyprint">GET /v1/livestreams/{sid}/timeshift/play?starttime={starttime}&amp;endtime={endtime}</code></p>
+
+<h3 id="请求参数">请求参数</h3>
+
+<table><thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>类型</th>
+<th>是否可选</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starttime</td>
+<td>时移开始时间</td>
+<td>timestamp，microsecond</td>
+<td>必选</td>
+</tr>
+<tr>
+<td>endtime</td>
+<td>时移结束时间</td>
+<td>timestamp，microsecond</td>
+<td>可选</td>
+</tr>
+</tbody></table>
+
+<h1 id="错误返回">错误返回</h1>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">100001</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no auth"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p><code class="prettyprint">error</code>为唯一的错误标示码，客户端根据标示码来决定向用户输出的错误信息。<code class="prettyprint">message</code>主要用于客户端记录log，最好不用于输出。</p>
+
+      </div>
+
+      <footer>
+        <p>Copyright &copy; 2015 Pili Engineering, Qiniu Inc. All Rights Reserved.</p>
+      </footer>
+    </div>
+
+  </body>
+</html>
