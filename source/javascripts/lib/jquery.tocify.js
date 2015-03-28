@@ -1018,17 +1018,11 @@
             // Once all animations on the page are complete, this callback function will be called
             $("html, body").promise().done(function() {
 
-                $('.doc-focus').removeClass('doc-focus');
-
-                var target = $('div[data-unique="' + elem.attr("data-unique") + '"]');
-
-                target.next().addClass('doc-focus');
-
                 // Animates the html and body element scrolltops
                 $("html, body").animate({
 
                     // Sets the jQuery `scrollTop` to the top offset of the HTML div tag that matches the current list item's `data-unique` tag
-                    "scrollTop": target.next().offset().top - ($.isFunction(scrollTo) ? scrollTo.call() : scrollTo) + "px"
+                    "scrollTop": $('div[data-unique="' + elem.attr("data-unique") + '"]').next().offset().top - ($.isFunction(scrollTo) ? scrollTo.call() : scrollTo) + "px"
 
                 }, {
 
