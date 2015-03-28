@@ -51,10 +51,13 @@ body {
   }
 
   code {
+    display: inline-block;
     padding: 0.2em;
+    margin: 2px;
   }
 
   table {
+    margin-bottom: 2px;
     border: 1px solid $print-color;
     tr {
       border-bottom: 1px solid $print-color;
@@ -72,6 +75,8 @@ body {
     text-decoration: none;
     color: #000;
   }
+
+  pre code{ border: none;}
 
   h1 {
     @extend %header-font;
@@ -127,14 +132,14 @@ body {
   }
 
   aside.notice:before {
-    @extend %icon-info-sign;
+
   }
 
   aside.warning:before {
-    @extend %icon-exclamation-sign;
+
   }
 
   aside.success:before {
-    @extend %icon-ok-sign;
+
   }
 }
