@@ -68,7 +68,7 @@ header.navbar{
 
 #logo{
   padding: 0;
-  background-image: url(https://dn-pili-static.qbox.me/images/logo.png);
+  background-image: url(https://dn-pili-static.qbox.me/images/logo-web.png);
   background-repeat: no-repeat;
   background-color: transparent;
   -webkit-background-size: contain;
@@ -79,7 +79,7 @@ header.navbar{
   img{ width: 100%; opacity: 0; }
 }
 @media only screen and (-webkit-device-pixel-ratio: 2){
-  #logo{ background-image: url(https://dn-pili-static.qbox.me/images/logo@2x.png); }
+  #logo{ background-image: url(https://dn-pili-static.qbox.me/images/logo-web@2x.png); }
 }
 
 
